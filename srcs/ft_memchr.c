@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft.h                                             .::    .:/ .      .::   */
+/*   ft_memchr.c                                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: chamada <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/08/14 23:24:01 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/07 20:36:11 by chamada     ###    #+. /#+    ###.fr     */
+/*   Created: 2019/10/07 19:43:05 by chamada      #+#   ##    ##    #+#       */
+/*   Updated: 2019/10/07 20:42:03 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#ifndef FT_H
-# define FT_H
+void	*ft_memchr(const void *s, int c, unsigned long n)
+{
+	unsigned long i;
 
-void	*ft_memset(void *b, int c, unsigned long len);
-void	ft_bzero(void *s, unsigned long n);
-void
-	*ft_memcpy(void *restrict dst, const void *restrict src, unsigned long n);
-void*
-	ft_memccpy(void *restrict dst, const void *restrict src,
-	int c, unsigned long n);
-void	*ft_memmove(void *dst, const void *src, unsigned long len);
-void	*ft_memchr(const void *s, int c, unsigned long n);
-
-#endif
+	i = 0;
+	while (i < n && ((unsigned char*)s)[i] != c)
+		i++;
+	return (i == n ? 0 : (void*)s + i);
+}
