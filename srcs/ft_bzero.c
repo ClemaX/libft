@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft.h                                             .::    .:/ .      .::   */
+/*   ft_bzero.c                                       .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: chamada <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/08/14 23:24:01 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/07 16:31:39 by chamada     ###    #+. /#+    ###.fr     */
+/*   Created: 2019/10/07 15:47:01 by chamada      #+#   ##    ##    #+#       */
+/*   Updated: 2019/10/07 16:31:19 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#ifndef FT_H
-# define FT_H
+void	ft_bzero(void *s, unsigned long n)
+{
+	char *temp;
 
-void	*ft_memset(void *b, int c, unsigned long len);
-void	ft_bzero(void *s, unsigned long n);
-
-#endif
+	temp = s;
+	while (n--)
+		*(temp++) = 0;
+}
