@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft.h                                             .::    .:/ .      .::   */
+/*   ft_memccpy.c                                     .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: chamada <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/08/14 23:24:01 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/07 18:06:42 by chamada     ###    #+. /#+    ###.fr     */
+/*   Created: 2019/10/07 16:49:31 by chamada      #+#   ##    ##    #+#       */
+/*   Updated: 2019/10/07 18:49:19 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#ifndef FT_H
-# define FT_H
-
-void	*ft_memset(void *b, int c, unsigned long len);
-void	ft_bzero(void *s, unsigned long n);
-void
-	*ft_memcpy(void *restrict dst, const void *restrict src, unsigned long n);
 void*
 	ft_memccpy(void *restrict dst, const void *restrict src,
-	int c, unsigned long n);
+	int c, unsigned long n)
+{
+	char *restrict temp_dst;
+	char *restrict temp_src;
 
-#endif
+	temp_dst = (char*)dst;
+	temp_src = (char*)src;
+	while (--n && *temp_src != c)
+		*(temp_dst++) = *(temp_src++);
+	if (n == 0)
+		return (0);
+	*(temp_dst++) = c;
+	return (temp_dst);
+}
