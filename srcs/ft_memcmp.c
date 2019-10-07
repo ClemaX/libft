@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft.h                                             .::    .:/ .      .::   */
+/*   ft_memcmp.c                                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: chamada <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/08/14 23:24:01 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/07 20:55:48 by chamada     ###    #+. /#+    ###.fr     */
+/*   Created: 2019/10/07 20:47:48 by chamada      #+#   ##    ##    #+#       */
+/*   Updated: 2019/10/07 20:54:05 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#ifndef FT_H
-# define FT_H
+int	ft_memcmp(const void *s1, const void *s2, unsigned long n)
+{
+	unsigned long i;
 
-void	*ft_memset(void *b, int c, unsigned long len);
-void	ft_bzero(void *s, unsigned long n);
-void	*ft_memcpy(void *dst, const void *src, unsigned long n);
-void*	ft_memccpy(void *dst, const void *src, int c, unsigned long n);
-void	*ft_memmove(void *dst, const void *src, unsigned long len);
-void	*ft_memchr(const void *s, int c, unsigned long n);
-int		ft_memcmp(const void *s1, const void *s2, unsigned long n);
-
-#endif
+	i = 0;
+	while (i < n && ((unsigned char*)s1)[i] == ((unsigned char*)s2)[i])
+		i++;
+	return (i == n ? 0 : ((unsigned char*)s1)[i] - ((unsigned char*)s2)[i]);
+}
