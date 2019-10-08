@@ -6,14 +6,16 @@
 /*   By: chamada <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/07 18:53:59 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/07 19:40:32 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/08 12:37:13 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-void	*ft_memmove(void *dst, const void *src, unsigned long len)
+#include "types.h"
+
+void	*ft_memmove(void *dst, const void *src, t_size len)
 {
-	unsigned long i;
+	t_size i;
 
 	i = 0;
 	if (src < dst)

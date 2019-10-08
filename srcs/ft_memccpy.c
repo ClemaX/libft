@@ -6,14 +6,15 @@
 /*   By: chamada <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/07 16:49:31 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/07 18:49:19 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/08 12:35:34 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
+#include "types.h"
+
 void*
-	ft_memccpy(void *restrict dst, const void *restrict src,
-	int c, unsigned long n)
+	ft_memccpy(void *restrict dst, const void *restrict src, int c, t_size n)
 {
 	char *restrict temp_dst;
 	char *restrict temp_src;

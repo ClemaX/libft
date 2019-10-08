@@ -6,14 +6,16 @@
 /*   By: chamada <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/07 19:43:05 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/07 20:42:03 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/08 12:35:57 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-void	*ft_memchr(const void *s, int c, unsigned long n)
+#include "types.h"
+
+void	*ft_memchr(const void *s, int c, t_size n)
 {
-	unsigned long i;
+	t_size i;
 
 	i = 0;
 	while (i < n && ((unsigned char*)s)[i] != c)

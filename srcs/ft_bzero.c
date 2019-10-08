@@ -6,12 +6,14 @@
 /*   By: chamada <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/07 15:47:01 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/07 16:31:19 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/08 12:34:54 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-void	ft_bzero(void *s, unsigned long n)
+#include "types.h"
+
+void	ft_bzero(void *s, t_size n)
 {
 	char *temp;
 

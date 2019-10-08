@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_memset.c                                      .::    .:/ .      .::   */
+/*   types.h                                          .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: chamada <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/10/07 15:09:59 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/08 12:37:27 by chamada     ###    #+. /#+    ###.fr     */
+/*   Created: 2019/10/08 12:33:31 by chamada      #+#   ##    ##    #+#       */
+/*   Updated: 2019/10/08 12:34:15 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "types.h"
+#ifndef TYPES_H
+# define TYPES_H
 
-void	*ft_memset(void *b, int c, t_size len)
-{
-	unsigned char *temp;
+typedef unsigned long	t_size;
 
-	temp = b;
-	while (len--)
-		*(temp++) = c;
-	return (b);
-}
+#endif

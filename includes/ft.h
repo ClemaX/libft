@@ -6,21 +6,23 @@
 /*   By: chamada <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/14 23:24:01 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/08 12:20:59 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/08 12:41:06 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
+#include "types.h"
+
 #ifndef FT_H
 # define FT_H
 
-void	*ft_memset(void *b, int c, unsigned long len);
-void	ft_bzero(void *s, unsigned long n);
-void	*ft_memcpy(void *dst, const void *src, unsigned long n);
-void*	ft_memccpy(void *dst, const void *src, int c, unsigned long n);
-void	*ft_memmove(void *dst, const void *src, unsigned long len);
-void	*ft_memchr(const void *s, int c, unsigned long n);
-int		ft_memcmp(const void *s1, const void *s2, unsigned long n);
+void	*ft_memset(void *b, int c, t_size len);
+void	ft_bzero(void *s, t_size n);
+void	*ft_memcpy(void *dst, const void *src, t_size n);
+void*	ft_memccpy(void *dst, const void *src, int c, t_size n);
+void	*ft_memmove(void *dst, const void *src, t_size len);
+void	*ft_memchr(const void *s, int c, t_size n);
+int		ft_memcmp(const void *s1, const void *s2, t_size n);
 int		ft_strlen(const char *s);
 
 #endif
