@@ -6,14 +6,16 @@
 /*   By: chamada <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/08 12:17:23 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/08 12:21:08 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/08 21:25:00 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-int	ft_strlen(const char *s)
+#include "types.h"
+
+t_size	ft_strlen(const char *s)
 {
-	int	len;
+	t_size len;
 
 	len = 0;
 	while (s[len])
