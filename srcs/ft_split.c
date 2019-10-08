@@ -1,0 +1,74 @@
+/* ************************************************************************** */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   ft_split.c                                       .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: chamada <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2019/10/08 17:28:54 by chamada      #+#   ##    ##    #+#       */
+/*   Updated: 2019/10/08 19:45:56 by chamada     ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
+/* ************************************************************************** */
+
+#include "types.h"
+#include <stdlib.h>
+
+static int		splitcnt(const char *s1, const char c)
+{
+	t_size	count;
+
+	count = 0;
+	while (*s1)
+	{
+		while (*s1 == c)
+			s1++;
+		if (*s1)
+			count++;
+		while (*s1 && *s1 != c)
+			s1++;
+	}
+	return (count);
+}
+
+static t_size	splitlen(const char *s1, const char c)
+{
+	t_size	len;
+
+	len = 0;
+	while (*s1)
+	{
+		while (*s1 == c)
+			s1++;
+		if (*s1)
+			len++;
+		while (*s1 && *(s1++) != c)
+			len++;
+	}
+	return (len);
+}
+
+char			**ft_split(char const *s, char c)
+{
+	char			**strs;
+	char			*dest;
+	char			**temp;
+
+	strs = malloc(sizeof(strs) * (splitcnt(s, c) + 1));
+	dest = malloc(splitlen(s, c));
+	if (!(dest && (temp = strs)))
+		return (NULL);
+	while (*s)
+	{
+		while (*s == c)
+			s++;
+		*(temp++) = dest;
+		while (*s && *s != c)
+			*(dest++) = *(s++);
+		*(dest++) = 0;
+		while (*s == c)
+			s++;
+	}
+	*temp = NULL;
+	return (strs);
+}
