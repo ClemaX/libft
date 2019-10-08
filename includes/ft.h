@@ -6,7 +6,7 @@
 /*   By: chamada <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/14 23:24:01 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/08 14:48:57 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/08 21:00:26 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -30,5 +30,6 @@ char	*ft_substr(char const *s, unsigned int start, t_size len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char const *s1, char const *set);
 char	**ft_split(char const *s, char c);
+char	*ft_itoa(int n);
 
 #endif
