@@ -6,7 +6,7 @@
 /*   By: chamada <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/08 13:19:49 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/08 13:49:58 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/08 18:29:11 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,7 +14,7 @@
 #include "types.h"
 #include <stdlib.h>
 
-static char	in_str(const char *set, const char c)
+static char		in_str(const char *set, const char c)
 {
 	while (*set)
 		if (*(set++) == c)
@@ -22,7 +22,7 @@ static char	in_str(const char *set, const char c)
 	return (0);
 }
 
-static int	strtrimlen(const char *s1, const char *set)
+static t_size	strtrimlen(const char *s1, const char *set)
 {
 	t_size	len;
 
@@ -33,7 +33,7 @@ static int	strtrimlen(const char *s1, const char *set)
 	return (len);
 }
 
-char		*ft_strtrim(char const *s1, char const *set)
+char			*ft_strtrim(char const *s1, char const *set)
 {
 	const t_size	len = strtrimlen(s1, set);
 	char			*start;
