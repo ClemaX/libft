@@ -6,7 +6,7 @@
 /*   By: chamada <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/08 23:18:22 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/08 23:51:20 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/08 23:58:10 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,7 +14,7 @@
 #include "types.h"
 #include "ft.h"
 
-t_size	ft_strlcat(char *restrict dst, const char *restrict src, t_size size)
+t_size	ft_strlcat(char *dst, const char *src, t_size size)
 {
 	const t_size	len_dst = ft_strlen(dst);
 	const t_size	len_src = ft_strlen(src);

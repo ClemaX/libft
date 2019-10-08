@@ -2,7 +2,7 @@ NAME	= libft.a
 CC		= /usr/bin/gcc
 SRCDIR	= srcs
 INCDIR	= includes
-CFLAGS	= -Wall -Wextra -Werror -std=c99 -I$(INCDIR)
+CFLAGS	= -Wall -Wextra -Werror -I$(INCDIR)
 SRCS	= $(addprefix $(SRCDIR)/,ft_putchar.c ft_putstr.c ft_strcmp.c ft_strlen.c ft_swap.c)
 OBJS	= $(patsubst %.c,%.o,$(SRCS))
 
