@@ -6,7 +6,7 @@
 /*   By: chamada <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/14 23:24:01 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/08 21:57:56 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/08 22:31:48 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,6 +24,7 @@ void	*ft_memmove(void *dst, const void *src, t_size len);
 void	*ft_memchr(const void *s, int c, t_size n);
 int		ft_memcmp(const void *s1, const void *s2, t_size n);
 t_size	ft_strlen(const char *s);
+void	*ft_calloc(t_size count, t_size size);
 char	*ft_strdup(const char *s1);
 
 char	*ft_substr(char const *s, unsigned int start, t_size len);
