@@ -6,7 +6,7 @@
 /*   By: chamada <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/14 23:24:01 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/09 18:33:29 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/09 18:37:41 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -39,6 +39,7 @@ int		ft_isdigit(int c);
 int		ft_isalnum(int c);
 int		ft_isspace(int c);
 int		ft_isascii(int c);
+int		ft_isprint(int c);
 int		ft_atoi(const char *str);
 
 char	*ft_substr(char const *s, unsigned int start, t_size len);
