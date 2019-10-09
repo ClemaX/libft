@@ -6,12 +6,12 @@
 /*   By: chamada <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/07 18:53:59 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/08 12:37:13 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/09 19:41:00 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "types.h"
+#include "libft.h"
 
 void	*ft_memmove(void *dst, const void *src, t_size len)
 {

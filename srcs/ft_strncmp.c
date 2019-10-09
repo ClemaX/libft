@@ -6,12 +6,12 @@
 /*   By: chamada <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/09 17:20:47 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/09 17:37:38 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/09 19:41:35 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "types.h"
+#include "libft.h"
 
 int	ft_strncmp(const char *s1, const char *s2, t_size n)
 {

@@ -6,12 +6,12 @@
 /*   By: chamada <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/08 22:17:12 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/09 19:33:39 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/09 19:40:35 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "types.h"
+#include "libft.h"
 #include "libft.h"
 #include <stdlib.h>
 

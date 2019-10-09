@@ -6,12 +6,12 @@
 /*   By: chamada <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/08 13:19:49 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/08 18:29:11 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/09 19:41:50 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "types.h"
+#include "libft.h"
 #include <stdlib.h>
 
 static char		in_str(const char *set, const char c)

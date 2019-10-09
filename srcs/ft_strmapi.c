@@ -6,13 +6,12 @@
 /*   By: chamada <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/08 21:19:45 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/09 19:35:02 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/09 19:42:47 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "types.h"
 #include <stdlib.h>
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))

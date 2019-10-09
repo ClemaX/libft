@@ -6,12 +6,12 @@
 /*   By: chamada <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/08 12:39:22 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/08 12:54:50 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/09 19:41:45 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "types.h"
+#include "libft.h"
 #include <stdlib.h>
 
 char	*ft_substr(char const *s, unsigned int start, t_size len)

@@ -6,12 +6,12 @@
 /*   By: chamada <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/08 23:18:22 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/09 19:34:30 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/09 19:41:15 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "types.h"
+#include "libft.h"
 #include "libft.h"
 
 t_size	ft_strlcat(char *dst, const char *src, t_size size)

@@ -6,12 +6,12 @@
 /*   By: chamada <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/07 19:43:05 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/08 12:35:57 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/09 19:40:49 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "types.h"
+#include "libft.h"
 
 void	*ft_memchr(const void *s, int c, t_size n)
 {
