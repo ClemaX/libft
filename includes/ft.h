@@ -34,6 +34,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, t_size len);
 int		ft_strncmp(const char *s1, const char *s2, t_size n);
 int		ft_isupper(int c);
 int		ft_islower(int c);
+int		ft_isalpha(int c);
 
 char	*ft_substr(char const *s, unsigned int start, t_size len);
 char	*ft_strjoin(char const *s1, char const *s2);
