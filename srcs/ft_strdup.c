@@ -6,12 +6,12 @@
 /*   By: chamada <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/08 14:47:23 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/08 21:00:02 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/09 19:34:24 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "ft.h"
+#include "libft.h"
 #include <stdlib.h>
 
 char	*ft_strdup(const char *s1)

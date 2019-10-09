@@ -6,13 +6,13 @@
 /*   By: chamada <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/09 15:25:42 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/09 16:19:47 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/09 19:35:06 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "types.h"
-#include "ft.h"
+#include "libft.h"
 
 char	*ft_strnstr(const char *haystack, const char *needle, t_size len)
 {

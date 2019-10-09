@@ -6,12 +6,12 @@
 /*   By: chamada <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/08 21:54:54 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/08 21:55:22 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/09 19:34:08 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "ft.h"
+#include "libft.h"
 
 void	ft_putendl_fd(char *s, int fd)
 {

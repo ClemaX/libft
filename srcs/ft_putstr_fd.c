@@ -6,12 +6,12 @@
 /*   By: chamada <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/08 21:50:13 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/08 21:51:03 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/09 19:34:21 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "ft.h"
+#include "libft.h"
 #include <unistd.h>
 
 void	ft_putstr_fd(char *s, int fd)

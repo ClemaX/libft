@@ -6,12 +6,12 @@
 /*   By: chamada <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/09 17:41:40 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/09 18:56:48 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/09 19:33:30 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "ft.h"
+#include "libft.h"
 
 int	ft_atoi(const char *str)
 {

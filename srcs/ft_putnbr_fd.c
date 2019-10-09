@@ -6,12 +6,12 @@
 /*   By: chamada <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/08 21:57:59 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/08 22:04:40 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/09 19:34:16 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "ft.h"
+#include "libft.h"
 
 void				ft_putnbr_fd(int n, int fd)
 {
