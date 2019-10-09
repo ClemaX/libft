@@ -6,7 +6,7 @@
 /*   By: chamada <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/14 23:24:01 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/09 00:08:57 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/09 15:35:44 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -30,6 +30,7 @@ t_size	ft_strlcpy(char *dst, const char *src, t_size size);
 t_size	ft_strlcat(char *dst, const char *src, t_size size);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strrchr(const char *s, int c);
+char	*ft_strnstr(const char *haystack, const char *needle, t_size len);
 
 char	*ft_substr(char const *s, unsigned int start, t_size len);
 char	*ft_strjoin(char const *s1, char const *s2);
