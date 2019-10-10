@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   libft.h                                          .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: chamada <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/14 23:24:01 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/09 19:40:03 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/10 19:37:35 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,6 +15,12 @@
 # define FT_H
 
 typedef unsigned long	t_size;
+
+typedef struct      s_list
+{
+	void		    *content;
+	struct s_list	*next;
+}                   t_list;
 
 void	*ft_memset(void *b, int c, t_size len);
 void	ft_bzero(void *s, t_size n);
@@ -54,5 +60,7 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
+
+t_list  *ft_lstnew(void *content);
 
 #endif
