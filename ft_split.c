@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   ft_split.c                                       .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: chamada <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/08 17:28:54 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/09 19:41:12 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/10 18:56:24 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -50,12 +50,15 @@ static t_size	splitlen(const char *s1, const char c)
 
 char			**ft_split(char const *s, char c)
 {
+	const t_size	len_dest = splitlen(s, c);
 	char			**strs;
 	char			*dest;
 	char			**temp;
 
+	if (!len_dest)
+		return (calloc(1, 1));
+	dest = malloc(len_dest);
 	strs = malloc(sizeof(strs) * (splitcnt(s, c) + 1));
-	dest = malloc(splitlen(s, c));
 	if (!(dest && (temp = strs)))
 		return (NULL);
 	while (*s)
