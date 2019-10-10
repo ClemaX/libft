@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   ft_strnstr.c                                     .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: chamada <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/09 15:25:42 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/09 19:42:13 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/10 17:48:14 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,6 +20,8 @@ char	*ft_strnstr(const char *haystack, const char *needle, t_size len)
 
 	if (!len_n)
 		return ((char*)haystack);
+	if (!len)
+		return (0);
 	index = ft_strchr(haystack, *needle);
 	while (index && len - (index - haystack) >= len_n)
 	{
