@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/10 20:14:52 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/10 20:16:16 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/11 14:24:38 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,5 +15,5 @@
 
 void	ft_lstadd_back(t_list **alst, t_list *new)
 {
-	ft_lstlast(alst)->next = new;
+	ft_lstlast(*alst)->next = new;
 }
