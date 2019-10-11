@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   ft_strtrim.c                                     .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: chamada <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/08 13:19:49 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/09 19:41:50 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/11 17:47:56 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -22,32 +22,38 @@ static char		in_str(const char *set, const char c)
 	return (0);
 }
 
-static t_size	strtrimlen(const char *s1, const char *set)
+static t_size	trimlen(const char *s1, const char *set)
 {
+	char	*s;
 	t_size	len;
 
-	len = 0;
-	while (*s1)
-		if (!in_str(set, *(s1++)))
-			len++;
+	s = (char*)s1;
+	while (in_str(set, *s))
+		s++;
+	len = s - s1;
+	while (*s)
+		s++;
+	len = (s - s1) - len;
+	s--;
+	while (s >= s1 && in_str(set, *(s--)))
+		len--;
 	return (len);
 }
 
 char			*ft_strtrim(char const *s1, char const *set)
 {
-	const t_size	len = strtrimlen(s1, set);
+	t_size			len_trim;
 	char			*start;
 	char			*s;
 
-	start = malloc(len + 1);
+	len_trim = trimlen(s1, set);
+	start = malloc(len_trim + 1);
 	if (!(s = start))
 		return (NULL);
-	while (*s1)
-	{
-		if (!in_str(set, *s1))
-			*(s++) = *s1;
+	s[len_trim] = 0;
+	while (in_str(set, *s1))
 		s1++;
-	}
-	*s = 0;
+	while (len_trim--)
+		*(s++) = *(s1++);
 	return (start);
 }
