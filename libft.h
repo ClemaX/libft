@@ -11,8 +11,8 @@
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#ifndef FT_H
-# define FT_H
+#ifndef FTLIB_H
+# define FTLIB_H
 
 typedef unsigned long	t_size;
 
