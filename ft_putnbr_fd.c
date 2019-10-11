@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/08 21:57:59 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/11 13:30:39 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/11 14:31:28 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -27,7 +27,9 @@ static void	putdigits(unsigned int u_n, int fd)
 
 void		ft_putnbr_fd(int n, int fd)
 {
-	if (n < 0)
+	if (n == 0)
+		ft_putchar_fd('0', fd);
+	else if (n < 0)
 	{
 		ft_putchar_fd('-', fd);
 		putdigits(-n, fd);
