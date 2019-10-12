@@ -30,4 +30,4 @@ re: fclean all
 
 bonus: $(OBJDIR) $(OBJS) $(BNSO)
 	ar rcs $(NAME) $(OBJS) $(BNSO)
-.PHONY = all clean fclean re
+.PHONY = all clean fclean re bonus
