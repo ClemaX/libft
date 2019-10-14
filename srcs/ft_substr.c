@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   ft_substr.c                                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: chamada <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/08 12:39:22 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/09 19:41:45 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/14 15:36:14 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,7 +20,7 @@ char	*ft_substr(char const *s, unsigned int start, t_size len)
 	t_size	i;
 
 	i = start;
-	if (!(substr = malloc(len + 1)))
+	if (!s || !(substr = malloc(len + 1)))
 		return (NULL);
 	while (i - start < len)
 	{
