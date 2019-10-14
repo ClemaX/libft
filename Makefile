@@ -25,6 +25,7 @@ clean:
 
 fclean: clean
 	/bin/rm -f $(NAME)
+	/bin/rm -f test-bonus
 
 re: fclean all
 
