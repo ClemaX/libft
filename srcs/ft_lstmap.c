@@ -17,8 +17,8 @@ t_list	*ft_lstmap(t_list *lst, t_list *(*f)(void*))
 {
 	t_list *out;
 
-	out = f(lst);
+	out = f(lst->content);
 	while ((lst = lst->next))
-		ft_lstadd_back(&out, f(lst));
+		ft_lstadd_back(&out, f(lst->content));
 	return (out);
 }
