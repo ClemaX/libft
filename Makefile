@@ -12,7 +12,7 @@ BNSO	= $(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(BNSS))
 all: $(NAME)
 
 $(NAME): $(OBJDIR) $(OBJS)
-	ar rcs $(NAME) $(OBJS)
+	ar rcus $(NAME) $(OBJS)
 
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
@@ -30,10 +30,6 @@ fclean: clean
 re: fclean all
 
 bonus: $(OBJDIR) $(OBJS) $(BNSO)
-	ar rcs $(NAME) $(OBJS) $(BNSO)
-
-test-bonus: bonus
-	$(CC) $(CFLAGS) $(NAME) tests/bonus.c -o $@ 
-	./test-bonus
+	ar rcus $(NAME) $(OBJS) $(BNSO)
 
 .PHONY = all clean fclean re bonus
