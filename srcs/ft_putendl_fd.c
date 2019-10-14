@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   ft_putendl_fd.c                                  .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: chamada <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/08 21:54:54 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/09 19:34:08 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/14 15:02:18 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,6 +15,7 @@
 
 void	ft_putendl_fd(char *s, int fd)
 {
-	ft_putstr_fd(s, fd);
+	if (s)
+		ft_putstr_fd(s, fd);
 	ft_putchar_fd('\n', fd);
 }

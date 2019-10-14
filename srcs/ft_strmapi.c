@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/08 21:19:45 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/11 13:07:50 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/14 14:59:01 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,6 +19,8 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	t_size	len;
 	char	*out;
 
+	if (!s)
+		return (NULL);
 	len = ft_strlen(s);
 	if (!(out = malloc(len + 1)))
 		return (NULL);

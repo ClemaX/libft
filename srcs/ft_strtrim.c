@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/08 13:19:49 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/12 20:19:27 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/14 15:01:40 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -28,9 +28,11 @@ static t_size	trimlen(const char *s1, const char *set)
 
 char			*ft_strtrim(char const *s1, char const *set)
 {
-	t_size			len;
-	char			*out;
+	t_size	len;
+	char	*out;
 
+	if (!s1 || !set)
+		return (NULL);
 	while (*s1 && ft_strchr(set, *s1))
 		s1++;
 	len = trimlen(s1, set);
