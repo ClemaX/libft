@@ -1,5 +1,6 @@
 NAME	= libft.a
 CC		= /usr/bin/gcc
+SRCDIR	= srcs
 INCDIR	= includes
 OBJDIR	= obj
 CFLAGS	= -Wall -Wextra -Werror -I$(INCDIR)
@@ -29,4 +30,9 @@ re: fclean all
 
 bonus: $(OBJDIR) $(OBJS) $(BNSO)
 	ar rcs $(NAME) $(OBJS) $(BNSO)
+
+test-bonus: bonus
+	$(CC) $(CFLAGS) $(NAME) tests/bonus.c -o $@ 
+	./test-bonus
+
 .PHONY = all clean fclean re bonus
