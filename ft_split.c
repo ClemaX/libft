@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/08 17:28:54 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/16 13:23:51 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/16 16:20:31 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,7 +18,7 @@ static int		splitcnt(const char *s1, const char c)
 {
 	t_size	count;
 
-	count = 0;
+	count = 1;
 	while (*s1)
 	{
 		while (*s1 == c)
@@ -42,29 +42,27 @@ static t_size	splitlen(const char *s1, const char c)
 
 char			**ft_split(char const *s, char c)
 {
-	char			**strs;
-	char			*dest;
-	char			**temp;
+	const int	count = splitcnt(s, c);
+	char		**strs;
+	int			len;
 
-	if (!(s && (strs = malloc(sizeof(strs) * (splitcnt(s, c) + 1)))))
+	if (!(s && (strs = malloc(sizeof(strs) * (count + 1)))))
 		return (NULL);
-	temp = strs;
 	while (*s)
 	{
 		while (*s == c)
 			s++;
-		if (!*s || !(dest = malloc(splitlen(s, c) + 1)))
+		len = splitlen(s, c);
+		if (!(*strs = malloc(len + 1)))
 		{
 			free(strs);
 			return (NULL);
 		}
-		*temp++ = dest;
-		while (*s && *s != c)
-			*dest++ = *s++;
-		*dest++ = 0;
+		ft_strlcpy(*strs++, s, len + 1);
+		s += len;
 		while (*s == c)
 			s++;
 	}
-	*temp = NULL;
-	return (strs);
+	*strs = NULL;
+	return (strs - count + 1);
 }
