@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/08 22:32:49 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/14 15:03:25 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/16 13:24:11 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -23,7 +23,7 @@ t_size	ft_strlcpy(char *dst, const char *src, t_size size)
 	if (size)
 	{
 		while (--size && *src)
-			*(dst++) = *(src++);
+			*dst++ = *src++;
 		*dst = 0;
 	}
 	return (len_src);

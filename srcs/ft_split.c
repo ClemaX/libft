@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/08 17:28:54 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/16 12:49:33 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/16 13:23:51 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -58,10 +58,10 @@ char			**ft_split(char const *s, char c)
 			free(strs);
 			return (NULL);
 		}
-		*(temp++) = dest;
+		*temp++ = dest;
 		while (*s && *s != c)
-			*(dest++) = *(s++);
-		*(dest++) = 0;
+			*dest++ = *s++;
+		*dest++ = 0;
 		while (*s == c)
 			s++;
 	}

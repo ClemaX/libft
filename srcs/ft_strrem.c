@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/11 17:56:52 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/11 18:03:41 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/16 13:24:29 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,7 +20,7 @@ static t_size	strremlen(const char *s1, const char *set)
 
 	len = 0;
 	while (*s1)
-		if (!ft_strchr(set, *(s1++)))
+		if (!ft_strchr(set, *s1++))
 			len++;
 	return (len);
 }
@@ -37,7 +37,7 @@ char			*ft_strrem(char const *s1, char const *set)
 	while (*s1)
 	{
 		if (!ft_strchr(set, *s1))
-			*(s++) = *s1;
+			*s++ = *s1;
 		s1++;
 	}
 	*s = 0;

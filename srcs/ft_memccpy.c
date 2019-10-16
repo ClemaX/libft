@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   ft_memccpy.c                                     .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: chamada <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/07 16:49:31 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/09 20:11:18 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/16 13:23:16 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -23,11 +23,11 @@ void*
 	temp_src = (unsigned char*)src;
 	while (n && *temp_src != (unsigned char)c)
 	{
-		*(temp_dst++) = *(temp_src++);
+		*temp_dst++ = *temp_src++;
 		n--;
 	}
 	if (n == 0)
 		return (0);
-	*(temp_dst++) = c;
+	*temp_dst++ = c;
 	return (temp_dst);
 }

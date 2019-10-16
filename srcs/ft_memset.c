@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   ft_memset.c                                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: chamada <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/07 15:09:59 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/09 19:41:08 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/16 13:23:38 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,6 +19,6 @@ void	*ft_memset(void *b, int c, t_size len)
 
 	temp = b;
 	while (len--)
-		*(temp++) = c;
+		*temp++ = c;
 	return (b);
 }
