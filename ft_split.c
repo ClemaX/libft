@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/08 17:28:54 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/16 16:20:31 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/16 16:45:49 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -42,10 +42,12 @@ static t_size	splitlen(const char *s1, const char c)
 
 char			**ft_split(char const *s, char c)
 {
-	const int	count = splitcnt(s, c);
+	int			count;
 	char		**strs;
 	int			len;
 
+	if (s)
+		count = splitcnt(s, c);
 	if (!(s && (strs = malloc(sizeof(strs) * (count + 1)))))
 		return (NULL);
 	while (*s)
