@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/08 17:28:54 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/14 16:05:37 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/16 12:49:33 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -46,17 +46,18 @@ char			**ft_split(char const *s, char c)
 	char			*dest;
 	char			**temp;
 
-	if (!s)
+	if (!(s && (strs = malloc(sizeof(strs) * (splitcnt(s, c) + 1)))))
 		return (NULL);
-	strs = malloc(sizeof(strs) * (splitcnt(s, c) + 1));
-	if (!(temp = strs))
-		return (NULL);
+	temp = strs;
 	while (*s)
 	{
 		while (*s == c)
 			s++;
-		if (!*s || !(dest = malloc(splitlen(s, c))))
+		if (!*s || !(dest = malloc(splitlen(s, c) + 1)))
+		{
+			free(strs);
 			return (NULL);
+		}
 		*(temp++) = dest;
 		while (*s && *s != c)
 			*(dest++) = *(s++);
