@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_lstlast.c                                     .::    .:/ .      .::   */
+/*   ft_lstadd_back_bonus.c                           .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/10/10 20:11:57 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/10 20:16:09 by chamada     ###    #+. /#+    ###.fr     */
+/*   Created: 2019/10/10 20:14:52 by chamada      #+#   ##    ##    #+#       */
+/*   Updated: 2019/10/16 13:10:45 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstlast(t_list *lst)
+void	ft_lstadd_back(t_list **alst, t_list *new)
 {
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
+	if (new)
+		ft_lstlast(*alst)->next = new;
 }
