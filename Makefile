@@ -33,7 +33,7 @@ all:		$(NAME)
 $(NAME):	$(OBJS)
 	$(AR) $(AFLAGS) $(NAME) $(OBJS)
 
-%.o:		%.c $(HEADER)
+%.o:		%.c $(HEADER) Makefile
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 clean:
