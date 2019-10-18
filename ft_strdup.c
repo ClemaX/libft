@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   ft_strdup.c                                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: chamada <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/08 14:47:23 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/09 19:34:24 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/18 16:47:36 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -23,11 +23,7 @@ char	*ft_strdup(const char *s1)
 	if (!(start = dup))
 		return (NULL);
 	while (*s1)
-	{
-		*dup = *s1;
-		s1++;
-		dup++;
-	}
+		*dup++ = *s1++;
 	*dup = 0;
 	return (start);
 }
