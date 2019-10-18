@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/07 15:09:59 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/16 13:23:38 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/18 16:27:05 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,10 +15,10 @@
 
 void	*ft_memset(void *b, int c, t_size len)
 {
-	unsigned char *temp;
+	unsigned char *u_b;
 
-	temp = b;
+	u_b = b;
 	while (len--)
-		*temp++ = c;
+		*u_b++ = c;
 	return (b);
 }
