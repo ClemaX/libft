@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   ft_strchr.c                                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: chamada <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/09 00:02:17 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/09 00:07:07 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/18 16:47:15 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,5 +15,5 @@ char	*ft_strchr(const char *s, int c)
 {
 	while (*s && *s != c)
 		s++;
-	return (*s == c ? (char*)s : 0);
+	return ((*s == c) ? (char*)s : 0);
 }
