@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/09 00:08:49 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/16 13:24:17 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/18 17:32:36 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,5 +20,5 @@ char	*ft_strrchr(const char *s, int c)
 	end = (char*)s + ft_strlen(s);
 	while (*s++ && *end != c)
 		end--;
-	return (*end == c ? end : 0);
+	return ((*end == c) ? end : 0);
 }

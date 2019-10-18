@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/09 18:40:18 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/18 17:31:19 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/18 17:32:59 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,5 +15,5 @@
 
 int	ft_toupper(int c)
 {
-	return (ft_islower(c) ? c - ('a' - 'A') : c);
+	return ((ft_islower(c)) ? c - ('a' - 'A') : c);
 }
