@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   ft_itoa.c                                        .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: chamada <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/08 20:37:08 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/08 21:12:59 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/18 16:44:27 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -30,8 +30,8 @@ char		*ft_itoa(int n)
 	char			sign;
 	char			*a;
 
-	sign = n < 0;
-	u_n = sign ? -n : n;
+	sign = (n < 0);
+	u_n = (sign) ? -n : n;
 	len = uintlen(u_n) + sign;
 	if (!(a = malloc(len + 1)))
 		return (NULL);
