@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/09 17:41:40 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/16 13:23:07 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/18 16:11:27 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -21,13 +21,13 @@ int	ft_atoi(const char *str)
 
 	while (ft_isspace(*str))
 		str++;
-	factor = *str == '-' ? -1 : 1;
-	str += *str == '-' || *str == '+';
-	max = factor < 0 ? 9223372036854775808UL : 9223372036854775807L;
+	factor = (*str == '-') ? -1 : 1;
+	str += (*str == '-' || *str == '+');
+	max = (factor < 0) ? 0x8000000000000000UL : 0x7FFFFFFFFFFFFFFFL;
 	i = 0;
 	while (ft_isdigit(*str) && i < max)
 		i = i * 10 + (*str++ - '0');
 	if (i >= max)
-		return (factor < 0 ? 0 : -1);
+		return ((factor < 0) ? 0 : -1);
 	return (i * factor);
 }
