@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/11 14:51:55 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/18 12:53:22 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 14:02:15 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,16 +16,21 @@
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list *out;
-	t_list *current;
+	t_list	*out;
+	t_list	*current;
+	t_list	*new;
 
 	out = NULL;
 	while ((current = lst))
 	{
-		ft_lstadd_back(&out, ft_lstnew(f(lst->content)));
+		if (!(new = ft_lstnew(f(lst->content))))
+		{
+			ft_lstclear(&out, del);
+			return (NULL);
+		}
+		ft_lstadd_back(&out, new);
 		lst = lst->next;
-		if (current->content)
-			del(current->content);
+		del(current->content);
 		free(current);
 	}
 	return (out);
