@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/21 21:47:21 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/09 15:52:11 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 16:51:50 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,9 +14,9 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <libft.h>
-#include <pf_specs.h>
-#include <pf_line.h>
-#include <pf_numbers.h>
+#include <printf/specs.h>
+#include <printf/line.h>
+#include <printf/numbers.h>
 
 static int	fmt_char(t_line **line, t_spec spec, va_list ap)
 {

@@ -6,15 +6,15 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/10 23:35:12 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/09 15:52:31 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 16:52:10 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include <libft.h>
-#include <pf_specs.h>
-#include <pf_numbers.h>
+#include <printf/specs.h>
+#include <printf/numbers.h>
 
 /*
 **	fmt:	The format string

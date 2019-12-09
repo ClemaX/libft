@@ -6,12 +6,12 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/25 00:52:00 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/09 15:52:03 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 16:51:43 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include <pf_numbers.h>
+#include <printf/numbers.h>
 #include <libft.h>
 
 t_numsize	parse_size(const char **fmt)

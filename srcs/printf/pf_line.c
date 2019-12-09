@@ -6,14 +6,14 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/21 21:25:00 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/09 15:53:00 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 16:52:03 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <libft.h>
-#include <pf_line.h>
+#include <printf/line.h>
 
 /*
 **	line:		The line to add content on

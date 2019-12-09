@@ -6,14 +6,14 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/23 17:08:17 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/09 15:53:52 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 16:51:59 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include <libft.h>
-#include <pf_numbers.h>
-#include <pf_specs.h>
+#include <printf/numbers.h>
+#include <printf/specs.h>
 
 /*
 **	n:	The number

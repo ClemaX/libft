@@ -7,7 +7,7 @@ AR		=		/usr/bin/ar
 RM		=		/bin/rm
 AFLAGS	=		rcus
 CFLAGS	=		-Wall -Wextra -Werror
-IFLAGS	=		-I$(INCDIR) -I$(INCDIR)/printf
+IFLAGS	=		-I$(INCDIR)
 HEADER	=		libft.h
 SRCS	=		$(addprefix $(SRCDIR)/,											\
 				$(addprefix	io/ft_,												\

@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/21 18:22:46 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/09 15:53:13 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 16:52:21 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,9 +14,9 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <libft.h>
-#include <pf_specs.h>
-#include <pf_line.h>
-#include <pf_format.h>
+#include <printf/specs.h>
+#include <printf/line.h>
+#include <printf/format.h>
 
 /*
 **	fmt:	The format string
