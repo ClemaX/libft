@@ -6,12 +6,12 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/11 17:56:52 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/16 13:24:29 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 14:41:00 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft.h>
 #include <stdlib.h>
 
 static t_size	strremlen(const char *s1, const char *set)

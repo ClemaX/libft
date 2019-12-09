@@ -6,12 +6,12 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/22 18:03:32 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/22 18:39:13 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 14:41:00 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft.h>
 
 int	ft_strpos(const char *s, int c)
 {

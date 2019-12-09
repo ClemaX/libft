@@ -6,12 +6,12 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/11 14:51:55 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/09 14:39:00 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 14:41:00 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft.h>
 #include <stdlib.h>
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))

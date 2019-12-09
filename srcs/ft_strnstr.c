@@ -6,12 +6,12 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/09 15:25:42 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/10 17:48:14 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 14:41:00 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft.h>
 
 char	*ft_strnstr(const char *haystack, const char *needle, t_size len)
 {

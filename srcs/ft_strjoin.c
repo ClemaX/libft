@@ -6,12 +6,12 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/08 13:02:47 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/16 16:48:58 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 14:41:00 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft.h>
 #include <stdlib.h>
 
 char	*ft_strjoin(char const *s1, char const *s2)

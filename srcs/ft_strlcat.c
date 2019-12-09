@@ -6,13 +6,13 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/08 23:18:22 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/10 17:44:25 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 14:41:00 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "libft.h"
+#include <libft.h>
+#include <libft.h>
 
 t_size	ft_strlcat(char *dst, const char *src, t_size size)
 {
