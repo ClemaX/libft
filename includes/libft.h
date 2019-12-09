@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/14 23:24:01 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/09 17:07:21 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 17:13:36 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -77,10 +77,12 @@ void					ft_lstadd_back(t_list **alst, t_list *new);
 void					ft_lstdelone(t_list *lst, void (*del)(void*));
 void					ft_lstiter(t_list *lst, void (*f)(void *));
 void					ft_lstclear(t_list **lst, void (*del)(void*));
-t_list					*ft_lstmap(t_list *lst, void *(*f)(void*),
-	void (*del)(void*));
+t_list					*ft_lstmap
+	(t_list *lst, void *(*f)(void*), void (*del)(void*));
+int						get_next_line(int fd, char **line);
 int						ft_printf
 	(const char *fmt, ...) __attribute__((format(printf,1,2)));
 int						ft_sscanf
 	(const char *src, const char *fmt, ...) __attribute__((format(scanf,2,3)));
+
 #endif
