@@ -29,9 +29,11 @@ SRCS	=		$(addprefix $(SRCDIR)/,											\
 				islower.c isprint.c issign.c isspace.c isupper.c tolower.c		\
 				toupper.c)														\
 				$(addprefix printf/, ft_printf.c pf_convert.c pf_format.c		\
-				pf_line.c pf_numbers.c pf_specs.c))
-OBJDS	=		$(addprefix $(OBJDIR)/, io lists memory numbers strings types	\
-				printf)
+				pf_line.c pf_numbers.c pf_specs.c)								\
+				$(addprefix scanf/,												\
+				ft_sscanf.c sf_convert.c sf_specs.c))
+OBJDS	=		$(addprefix $(OBJDIR)/,											\
+				io lists memory numbers strings types printf scanf)
 OBJS	=		$(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
 
 all:			$(NAME)

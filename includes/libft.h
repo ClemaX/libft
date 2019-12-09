@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/14 23:24:01 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/09 15:58:43 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 17:05:17 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -79,7 +79,8 @@ void					ft_lstiter(t_list *lst, void (*f)(void *));
 void					ft_lstclear(t_list **lst, void (*del)(void*));
 t_list					*ft_lstmap(t_list *lst, void *(*f)(void*),
 	void (*del)(void*));
-int						ft_printf(const char *fmt, ...)
-	__attribute__((format(printf,1,0)));
-
+int						ft_printf
+	(const char *fmt, ...) __attribute__((format(printf,1,2)));
+int						ft_sscanf
+	(const char *src, const char *fmt, ...) __attribute__((format(scanf,2,3)));
 #endif
