@@ -9,38 +9,34 @@ AFLAGS	=		rcus
 CFLAGS	=		-Wall -Wextra -Werror
 IFLAGS	=		-I$(INCDIR)
 HEADER	=		libft.h
-SRCS	=		$(addprefix $(SRCDIR)/,					\
-				ft_memset.c ft_bzero.c ft_calloc.c		\
-				ft_memcpy.c ft_memmove.c ft_memccpy.c	\
-				ft_memchr.c ft_memcmp.c					\
-				ft_strlen.c ft_strmapi.c				\
-				ft_strdup.c ft_strlcpy.c ft_strlcat.c	\
-				ft_strchr.c ft_strrchr.c ft_strpos.c	\
-				ft_strncmp.c ft_strnstr.c ft_substr.c	\
-				ft_strrem.c ft_strtrim.c				\
-				ft_isascii.c ft_isprint.c ft_isspace.c	\
-				ft_islower.c ft_isupper.c ft_isalpha.c	\
-				ft_isdigit.c ft_isalnum.c ft_issign.c	\
-				ft_tolower.c ft_toupper.c				\
-				ft_atoi.c ft_itoa.c						\
-				ft_pow.c ft_numlen.c					\
-				ft_putchar_fd.c ft_putendl_fd.c			\
-				ft_putnbr_fd.c ft_putstr_fd.c			\
-				ft_split.c ft_strjoin.c					\
-				ft_lstnew.c								\
-				ft_lstsize.c							\
-				ft_lstlast.c							\
-				ft_lstadd_back.c ft_lstadd_front.c		\
-				ft_lstclear.c ft_lstdelone.c			\
-				ft_lstiter.c ft_lstmap.c				)
-OBJS	=		$(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o, $(SRCS))
+SRCS	=		$(addprefix $(SRCDIR)/,											\
+				$(addprefix	io/ft_,												\
+				putchar_fd.c putendl_fd.c putnbr_fd.c putstr_fd.c)				\
+				$(addprefix lists/ft_,											\
+				lstadd_back.c lstadd_front.c lstclear.c lstdelone.c lstiter.c	\
+				lstlast.c lstmap.c lstnew.c lstsize.c)							\
+				$(addprefix memory/ft_,											\
+				bzero.c calloc.c memccpy.c memchr.c memcmp.c memcpy.c			\
+				memmove.c memset.c)												\
+				$(addprefix numbers/ft_,										\
+				atoi.c itoa.c numlen.c pow.c)									\
+				$(addprefix strings/ft_,										\
+				split.c strchr.c strdup.c strjoin.c strlcat.c strlcpy.c			\
+				strlen.c strmapi.c strncmp.c strnstr.c strpos.c strrchr.c		\
+				strrem.c strtrim.c substr.c)									\
+				$(addprefix types/ft_,											\
+				isalnum.c isalpha.c isascii.c isdigit.c							\
+				islower.c isprint.c issign.c isspace.c isupper.c tolower.c		\
+				toupper.c))
+OBJDS	=		$(addprefix $(OBJDIR)/, io lists memory numbers strings types)
+OBJS	=		$(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
 
 all:			$(NAME)
 
-$(NAME):		$(OBJDIR) $(OBJS)
+$(NAME):		$(OBJDS) $(OBJS)
 	$(AR) $(AFLAGS) $@ $(OBJS)
 
-$(OBJDIR):
+$(OBJDS):
 		mkdir -p $@
 
 $(OBJDIR)/%.o:	$(SRCDIR)/%.c $(INCDIR)/$(HEADER) Makefile
