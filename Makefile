@@ -10,7 +10,7 @@ SRCS	=	ft_memset.c ft_bzero.c ft_calloc.c \
 			ft_memchr.c ft_memcmp.c \
 			ft_strlen.c ft_strmapi.c \
 			ft_strdup.c ft_strlcpy.c ft_strlcat.c \
-			ft_strchr.c ft_strrchr.c \
+			ft_strchr.c ft_strrchr.c ft_strpos.c \
 			ft_strncmp.c ft_strnstr.c ft_substr.c \
 			ft_strrem.c ft_strtrim.c \
 			ft_isascii.c ft_isprint.c ft_isspace.c ft_issign.c \
