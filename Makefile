@@ -7,7 +7,7 @@ AR		=		/usr/bin/ar
 RM		=		/bin/rm
 AFLAGS	=		rcus
 CFLAGS	=		-Wall -Wextra -Werror
-IFLAGS	=		-I$(INCDIR)
+IFLAGS	=		-I$(INCDIR) -I$(INCDIR)/printf
 HEADER	=		libft.h
 SRCS	=		$(addprefix $(SRCDIR)/,											\
 				$(addprefix	io/ft_,												\
@@ -27,8 +27,11 @@ SRCS	=		$(addprefix $(SRCDIR)/,											\
 				$(addprefix types/ft_,											\
 				isalnum.c isalpha.c isascii.c isdigit.c							\
 				islower.c isprint.c issign.c isspace.c isupper.c tolower.c		\
-				toupper.c))
-OBJDS	=		$(addprefix $(OBJDIR)/, io lists memory numbers strings types)
+				toupper.c)														\
+				$(addprefix printf/, ft_printf.c pf_convert.c pf_format.c		\
+				pf_line.c pf_numbers.c pf_specs.c))
+OBJDS	=		$(addprefix $(OBJDIR)/, io lists memory numbers strings types	\
+				printf)
 OBJS	=		$(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
 
 all:			$(NAME)
