@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/14 23:24:01 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/18 17:05:23 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 15:58:43 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -37,6 +37,7 @@ t_size					ft_strlcpy(char *dst, const char *src, t_size size);
 t_size					ft_strlcat(char *dst, const char *src, t_size size);
 char					*ft_strchr(const char *s, int c);
 char					*ft_strrchr(const char *s, int c);
+int						ft_strpos(const char *s, int c);
 char					*ft_strnstr(const char *haystack, const char *needle,
 	t_size len);
 int						ft_strncmp(const char *s1, const char *s2, t_size n);
@@ -48,6 +49,7 @@ int						ft_isalnum(int c);
 int						ft_isspace(int c);
 int						ft_isascii(int c);
 int						ft_isprint(int c);
+int						ft_issign(int c);
 int						ft_atoi(const char *str);
 int						ft_toupper(int c);
 int						ft_tolower(int c);
@@ -64,6 +66,8 @@ void					ft_putchar_fd(char c, int fd);
 void					ft_putstr_fd(char *s, int fd);
 void					ft_putendl_fd(char *s, int fd);
 void					ft_putnbr_fd(int n, int fd);
+int						ft_numlen(unsigned long long n, unsigned base);
+long double				ft_pow(int nb, int pow);
 
 t_list					*ft_lstnew(void *content);
 void					ft_lstadd_front(t_list **alst, t_list *new);
@@ -75,5 +79,7 @@ void					ft_lstiter(t_list *lst, void (*f)(void *));
 void					ft_lstclear(t_list **lst, void (*del)(void*));
 t_list					*ft_lstmap(t_list *lst, void *(*f)(void*),
 	void (*del)(void*));
+int						ft_printf(const char *fmt, ...)
+	__attribute__((format(printf,1,0)));
 
 #endif
