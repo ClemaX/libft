@@ -1,51 +1,57 @@
-NAME	=	libft.a
-CC		=	/usr/bin/clang
-AR		=	/usr/bin/ar
-RM		=	/bin/rm
-AFLAGS	=	rcus
-CFLAGS	=	-Wall -Wextra -Werror
-HEADER	=	libft.h
-SRCS	=	ft_memset.c ft_bzero.c ft_calloc.c \
-			ft_memcpy.c ft_memmove.c ft_memccpy.c \
-			ft_memchr.c ft_memcmp.c \
-			ft_strlen.c ft_strmapi.c \
-			ft_strdup.c ft_strlcpy.c ft_strlcat.c \
-			ft_strchr.c ft_strrchr.c ft_strpos.c \
-			ft_strncmp.c ft_strnstr.c ft_substr.c \
-			ft_strrem.c ft_strtrim.c \
-			ft_isascii.c ft_isprint.c ft_isspace.c ft_issign.c \
-			ft_islower.c ft_isupper.c ft_isalpha.c ft_isdigit.c ft_isalnum.c \
-			ft_tolower.c ft_toupper.c\
-			ft_atoi.c ft_itoa.c \
-			ft_pow.c ft_numlen.c \
-			ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c \
-			ft_split.c ft_strjoin.c
-BNSS	=	ft_lstnew_bonus.c \
-			ft_lstsize_bonus.c \
-			ft_lstlast_bonus.c \
-			ft_lstadd_back_bonus.c ft_lstadd_front_bonus.c \
-			ft_lstclear_bonus.c ft_lstdelone_bonus.c \
-			ft_lstiter_bonus.c ft_lstmap_bonus.c
-OBJS	=	$(patsubst %.c,%.o,$(SRCS))
-BNSO	=	$(patsubst %.c,%.o,$(BNSS))
+NAME	=		libft.a
+SRCDIR	=		srcs
+INCDIR	=		includes
+OBJDIR	=		objs
+CC		=		/usr/bin/clang
+AR		=		/usr/bin/ar
+RM		=		/bin/rm
+AFLAGS	=		rcus
+CFLAGS	=		-Wall -Wextra -Werror
+IFLAGS	=		-I$(INCDIR)
+HEADER	=		libft.h
+SRCS	=		$(addprefix $(SRCDIR)/,					\
+				ft_memset.c ft_bzero.c ft_calloc.c		\
+				ft_memcpy.c ft_memmove.c ft_memccpy.c	\
+				ft_memchr.c ft_memcmp.c					\
+				ft_strlen.c ft_strmapi.c				\
+				ft_strdup.c ft_strlcpy.c ft_strlcat.c	\
+				ft_strchr.c ft_strrchr.c ft_strpos.c	\
+				ft_strncmp.c ft_strnstr.c ft_substr.c	\
+				ft_strrem.c ft_strtrim.c				\
+				ft_isascii.c ft_isprint.c ft_isspace.c	\
+				ft_islower.c ft_isupper.c ft_isalpha.c	\
+				ft_isdigit.c ft_isalnum.c ft_issign.c	\
+				ft_tolower.c ft_toupper.c				\
+				ft_atoi.c ft_itoa.c						\
+				ft_pow.c ft_numlen.c					\
+				ft_putchar_fd.c ft_putendl_fd.c			\
+				ft_putnbr_fd.c ft_putstr_fd.c			\
+				ft_split.c ft_strjoin.c					\
+				ft_lstnew.c								\
+				ft_lstsize.c							\
+				ft_lstlast.c							\
+				ft_lstadd_back.c ft_lstadd_front.c		\
+				ft_lstclear.c ft_lstdelone.c			\
+				ft_lstiter.c ft_lstmap.c				)
+OBJS	=		$(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o, $(SRCS))
 
-all:		$(NAME)
+all:			$(NAME)
 
-$(NAME):	$(OBJS)
-	$(AR) $(AFLAGS) $(NAME) $(OBJS)
+$(NAME):		$(OBJDIR) $(OBJS)
+	$(AR) $(AFLAGS) $@ $(OBJS)
 
-%.o:		%.c $(HEADER) Makefile
-	$(CC) $(CFLAGS) -c -o $@ $<
+$(OBJDIR):
+		mkdir -p $@
+
+$(OBJDIR)/%.o:	$(SRCDIR)/%.c $(INCDIR)/$(HEADER) Makefile
+	$(CC) $(CFLAGS) $(IFLAGS) -c -o $@ $<
 
 clean:
-	$(RM) -f $(OBJS) $(BNSO)
+	$(RM) -rf $(OBJDIR)
 
-fclean:		clean
+fclean:			clean
 	$(RM) -f $(NAME)
 
-re:			fclean all
+re:				fclean all
 
-bonus: 		$(OBJS) $(BNSO)
-	$(AR) $(AFLAGS) $(NAME) $(OBJS) $(BNSO)
-
-.PHONY	=	all clean fclean re bonus
+.PHONY	=		all clean fclean re bonus
