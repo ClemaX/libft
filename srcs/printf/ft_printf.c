@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/21 18:22:46 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/09 16:52:21 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 17:18:24 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -62,7 +62,7 @@ static t_line	*parse_fmt(const char *fmt, va_list ap)
 	line = NULL;
 	while (parse_txt(&fmt, &line) && *fmt)
 	{
-		if ((spec = parse_spec(&fmt, ap)).type == ERR)
+		if ((spec = pf_parse_spec(&fmt, ap)).type == ERR)
 			return (line_clr(&line));
 		else if (spec.type == CNT)
 		{

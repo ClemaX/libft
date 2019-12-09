@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/30 17:53:06 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/09 16:51:01 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 17:18:11 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -39,7 +39,7 @@ static int	parse_fmt(const char *src, const char *fmt, va_list ap)
 	count = 0;
 	while (parse_txt(&src, &fmt) && *fmt)
 	{
-		if ((spec = parse_spec(&fmt, ap)).type == ERR)
+		if ((spec = sf_parse_spec(&fmt, ap)).type == ERR)
 			return (0);
 		else if (spec.type == CNT)
 			*(va_arg(ap, int*)) = src - start;

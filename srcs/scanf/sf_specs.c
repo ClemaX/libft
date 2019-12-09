@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/10 23:35:12 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/09 16:49:33 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 17:17:49 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -116,7 +116,7 @@ static int			parse_precision(const char **fmt, va_list ap)
 **	Parse the format string and initialize a new spec
 */
 
-t_spec				parse_spec(const char **fmt, va_list ap)
+t_spec				sf_parse_spec(const char **fmt, va_list ap)
 {
 	t_spec	spec;
 

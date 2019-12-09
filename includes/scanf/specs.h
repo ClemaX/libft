@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/08 04:45:20 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/02 08:45:18 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 17:18:00 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -48,6 +48,6 @@ typedef struct			s_spec
 	t_numsize	size;
 }						t_spec;
 
-t_spec					parse_spec(const char **fmt, va_list ap);
+t_spec					sf_parse_spec(const char **fmt, va_list ap);
 
 #endif
