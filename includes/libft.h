@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/14 23:24:01 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/09 17:13:36 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/22 23:39:04 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -84,5 +84,7 @@ int						ft_printf
 	(const char *fmt, ...) __attribute__((format(printf,1,2)));
 int						ft_sscanf
 	(const char *src, const char *fmt, ...) __attribute__((format(scanf,2,3)));
+int						write_bmp(const char *path, const char *buffer,
+	int w, int h);
 
 #endif
