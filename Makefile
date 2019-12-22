@@ -15,6 +15,8 @@ SRCS	=		$(addprefix $(SRCDIR)/,											\
 				$(addprefix lists/ft_,											\
 				lstadd_back.c lstadd_front.c lstclear.c lstdelone.c lstiter.c	\
 				lstlast.c lstmap.c lstnew.c lstsize.c)							\
+				$(addprefix images/,											\
+				write_bmp.c)													\
 				$(addprefix memory/ft_,											\
 				bzero.c calloc.c memccpy.c memchr.c memcmp.c memcpy.c			\
 				memmove.c memset.c)												\
@@ -35,7 +37,7 @@ SRCS	=		$(addprefix $(SRCDIR)/,											\
 				$(addprefix scanf/,												\
 				ft_sscanf.c sf_convert.c sf_specs.c))
 OBJDS	=		$(addprefix $(OBJDIR)/,											\
-				io lists memory numbers strings types gnl printf scanf)
+				io lists images memory numbers strings types gnl printf scanf)
 OBJS	=		$(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
 
 all:			$(NAME)
