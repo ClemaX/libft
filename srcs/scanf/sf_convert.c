@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/21 21:47:21 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/09 16:53:19 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/09 18:19:54 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -39,7 +39,7 @@ static int	cvt_str(const char **src, t_spec spec, va_list ap)
 		len = (next) ? next - *src : ft_strlen(*src);
 		if (spec.width != -1 && spec.width < len)
 			len = spec.width;
-		if (spec.type == MSTR)
+		if (spec.flags & ALLOC)
 		{
 			if (!(dest = malloc(sizeof(*dest) * (len + 1))))
 				return (0);
@@ -85,6 +85,5 @@ int			(*g_convert[11])(const char**, t_spec, va_list) = {
 	cvt_num,
 	cvt_num,
 	cvt_num,
-	cvt_num,
-	cvt_str
+	cvt_num
 };

@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/22 03:02:45 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/09 17:12:40 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/16 22:05:25 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -70,19 +70,19 @@ static int	add_words(t_words **words, char *content, size_t size)
 	t_words *new;
 
 	if (!size)
-		return (CONTINUE);
+		return (1);
 	if (!(new = malloc(sizeof(*new))))
-		return (ERROR);
+		return (-1);
 	if (!(new->content = malloc(size)))
 	{
 		free(new);
-		return (ERROR);
+		return (-1);
 	}
 	new->size = size;
 	ft_memcpy(new->content, content, size);
 	new->next = *words;
 	*words = new;
-	return (CONTINUE);
+	return (1);
 }
 
 static int	gnl_parse(t_fd *fd, t_words **words, size_t size)
@@ -96,13 +96,13 @@ static int	gnl_parse(t_fd *fd, t_words **words, size_t size)
 	buffer = fd->buffer + fd->position;
 	size -= fd->position;
 	fd->position = 0;
-	if ((state = search_end(buffer, size, &end)) != CONTINUE)
+	if ((state = search_end(buffer, size, &end)) != 1)
 	{
 		size = end - buffer;
 		if (size < BUFFER_SIZE - 1 && fd->buffer[size + 1] != '\0')
 			fd->position = end - fd->buffer + 1;
 	}
-	return (add_words(words, buffer, size) != ERROR ? state : ERROR);
+	return (add_words(words, buffer, size) != -1 ? state : -1);
 }
 
 int			get_next_line(int fd, char **line)
@@ -114,22 +114,22 @@ int			get_next_line(int fd, char **line)
 	int			state;
 
 	if (!line || fd < 0)
-		return (ERROR);
+		return (-1);
 	words = NULL;
 	curr_fd = get_fd(&fd_list, fd);
-	state = (curr_fd) ? CONTINUE : ERROR;
-	if (state == CONTINUE && curr_fd->position)
+	state = (curr_fd) ? 1 : -1;
+	if (state == 1 && curr_fd->position)
 		state = gnl_parse(curr_fd, &words, BUFFER_SIZE);
-	while (state == CONTINUE
-	&& (size = read(fd, curr_fd->buffer, BUFFER_SIZE)) > 0)
+	size = 0;
+	while (state == 1 && (size = read(fd, curr_fd->buffer, BUFFER_SIZE)) > 0)
 		state = gnl_parse(curr_fd, &words, size);
-	if (size == ERROR || state == ERROR || !(*line = get_line(words)))
+	if (size == -1 || state == -1 || !(*line = get_line(words)))
 	{
 		clear_fds(&fd_list);
 		clear_words(words);
-		return (ERROR);
+		return (-1);
 	}
-	if (state != NEW_LINE)
+	if (state != 2)
 		fd_list = del_fd(fd_list, fd);
-	return ((state == NEW_LINE) ? CONTINUE : END);
+	return (state == 2);
 }
