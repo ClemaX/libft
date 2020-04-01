@@ -1,5 +1,7 @@
 #include <unistd.h>
+#include <stdint.h>
 #include <fcntl.h>
+#include <sys/stat.h>
 
 static unsigned char	*get_file_header(int w, int h)
 {
