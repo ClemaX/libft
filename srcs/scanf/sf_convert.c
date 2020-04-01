@@ -36,7 +36,7 @@ static int	cvt_str(const char **src, t_spec spec, va_list ap)
 	if (spec.size == S_DEF)
 	{
 		next = ft_strchr(*src, ' ');
-		len = (next) ? next - *src : ft_strlen(*src);
+		len = (next) ? (t_size)(next - *src) : ft_strlen(*src);
 		if (spec.width != -1 && spec.width < len)
 			len = spec.width;
 		if (spec.flags & ALLOC)
