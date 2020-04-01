@@ -15,10 +15,10 @@
 #include <libft.h>
 #include <stdlib.h>
 
-void	*ft_calloc(t_size count, t_size size)
+void	*ft_calloc(size_t count, size_t size)
 {
 	void			*buf;
-	const t_size	n_bytes = count * size;
+	const size_t	n_bytes = count * size;
 
 	if (!(buf = malloc(n_bytes)))
 		return (NULL);

@@ -14,7 +14,7 @@
 #include <libft.h>
 #include <stdlib.h>
 
-static t_size	trimlen(const char *s1, const char *set)
+static size_t	trimlen(const char *s1, const char *set)
 {
 	char	*s;
 
@@ -28,7 +28,7 @@ static t_size	trimlen(const char *s1, const char *set)
 
 char			*ft_strtrim(char const *s1, char const *set)
 {
-	t_size	len;
+	size_t	len;
 	char	*out;
 
 	if (!s1 || !set)

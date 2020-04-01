@@ -13,9 +13,9 @@
 
 #include <libft.h>
 
-char	*ft_strnstr(const char *haystack, const char *needle, t_size len)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	const t_size	len_n = ft_strlen(needle);
+	const size_t	len_n = ft_strlen(needle);
 	char			*index;
 
 	if (!len_n)

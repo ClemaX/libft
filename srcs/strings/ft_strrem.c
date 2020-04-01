@@ -14,9 +14,9 @@
 #include <libft.h>
 #include <stdlib.h>
 
-static t_size	strremlen(const char *s1, const char *set)
+static size_t	strremlen(const char *s1, const char *set)
 {
-	t_size	len;
+	size_t	len;
 
 	len = 0;
 	while (*s1)
@@ -27,7 +27,7 @@ static t_size	strremlen(const char *s1, const char *set)
 
 char			*ft_strrem(char const *s1, char const *set)
 {
-	const t_size	len = strremlen(s1, set);
+	const size_t	len = strremlen(s1, set);
 	char			*start;
 	char			*s;
 

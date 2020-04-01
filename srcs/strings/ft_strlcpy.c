@@ -13,9 +13,9 @@
 
 #include <libft.h>
 
-t_size	ft_strlcpy(char *dst, const char *src, t_size size)
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	t_size len_src;
+	size_t len_src;
 
 	if (!(src && dst))
 		return (0);

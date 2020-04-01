@@ -14,9 +14,9 @@
 #include <libft.h>
 #include <stdlib.h>
 
-static t_size	splitcnt(const char *s1, const char c)
+static size_t	splitcnt(const char *s1, const char c)
 {
-	t_size	count;
+	size_t	count;
 
 	count = 0;
 	while (s1 && *s1)
@@ -30,7 +30,7 @@ static t_size	splitcnt(const char *s1, const char c)
 	return (count);
 }
 
-static t_size	splitlen(const char *s1, const char c)
+static size_t	splitlen(const char *s1, const char c)
 {
 	const char	*s = s1;
 
@@ -49,10 +49,10 @@ static void		*unload_strs(char **strs, int i)
 
 char			**ft_split(char const *s, char c)
 {
-	const t_size	count = splitcnt(s, c);
+	const size_t	count = splitcnt(s, c);
 	char			**strs;
-	t_size			len;
-	t_size			i;
+	size_t			len;
+	size_t			i;
 
 	if (!(strs = ft_calloc(count + 1, sizeof(strs))))
 		return (NULL);
