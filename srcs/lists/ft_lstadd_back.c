@@ -6,20 +6,20 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/10 20:14:52 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/09 14:41:00 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/01 04:51:24 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-void	ft_lstadd_back(t_list **alst, t_list *new)
+void	ft_lstadd_back(t_list **list, t_list *element)
 {
-	if (alst)
+	if (list)
 	{
-		if (!*alst)
-			*alst = new;
+		if (!*list)
+			*list = element;
 		else
-			ft_lstlast(*alst)->next = new;
+			ft_lstlast(*list)->next = element;
 	}
 }
