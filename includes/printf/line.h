@@ -26,6 +26,6 @@ typedef struct	s_line
 t_line			*line_add(t_line **line, char *content, int size);
 t_line			*line_clr(t_line **line);
 int				line_len(t_line *line);
-int				line_put(char **dest, t_line **line);
+int				line_put(char **dest, t_line **line, char alloc);
 
 #endif

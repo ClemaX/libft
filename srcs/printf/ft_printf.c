@@ -85,9 +85,40 @@ int				ft_printf(const char *fmt, ...)
 	va_start(ap, fmt);
 	line = parse_fmt(fmt, ap);
 	va_end(ap);
-	if ((!line || (len = line_put(&str, &line)) < 0))
+	if ((!line || (len = line_put(&str, &line, 1)) < 0))
 		return (-1);
 	write(1, str, len);
 	free(str);
+	return (len);
+}
+
+int				ft_asprintf(char **ret, char *fmt, ...)
+{
+	va_list	ap;
+	t_line	*line;
+	int		len;
+
+	va_start(ap, fmt);
+	line = parse_fmt(fmt, ap);
+	va_end(ap);
+	if ((!line || (len = line_put(ret, &line, 1)) < 0))
+	{
+		*ret = NULL;
+		return (-1);
+	}
+	return (len);
+}
+
+int				ft_sprintf(char *str, char *fmt, ...)
+{
+	va_list	ap;
+	t_line	*line;
+	int		len;
+
+	va_start(ap, fmt);
+	line = parse_fmt(fmt, ap);
+	va_end(ap);
+	if ((!line || (len = line_put(&str, &line, 0)) < 0))
+		return (-1);
 	return (len);
 }

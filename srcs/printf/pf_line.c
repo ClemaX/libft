@@ -79,17 +79,18 @@ int		line_len(t_line *line)
 /*
 **	dest:		The destination string
 **	line:		The line to copy
+**	alloc:		Boolean flag to allocate the string
 **
 **	Copy a line into a string, clearing it's content and returning it's length
 **	Note: Returns -1 in case of error
 */
 
-int		line_put(char **dest, t_line **line)
+int		line_put(char **dest, t_line **line, char alloc)
 {
 	const int	len = line_len(*line);
 	t_line		*curr;
 
-	if (!(*dest = malloc(sizeof(*dest) * (len + 1))))
+	if (alloc && !(*dest = malloc(sizeof(*dest) * (len + 1))))
 	{
 		line_clr(line);
 		return (-1);
