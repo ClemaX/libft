@@ -18,10 +18,10 @@ static unsigned char	*get_file_header(int w, int h)
 static unsigned char	*get_dib_header(int w, int h)
 {
 	static unsigned char	dib_header[40] = {
-		40,0,0,0,
-		0,0,0,0,
-		0,0,0,0,
-		1,0, 32,0
+		40, 0, 0, 0,
+		0, 0, 0, 0,
+		0, 0, 0, 0,
+		1, 0, 32, 0
 	};
 
 	h = -h;
@@ -41,18 +41,10 @@ int					write_bmp(const char *path, const char *buffer,
 {
 	int	fd;
 
-	if ((fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, S_IWUSR | S_IRUSR)) < 0)
-	{
-		close(fd);
-		return (-1);
-	}
-	if (write(fd, get_file_header(w, h), 14) == -1
-	|| write(fd, get_dib_header(w, h), 40) == -1)
-	{
-		close(fd);
-		return (-1);
-	}
-	if (write(fd, buffer, 4 * w * h) == -1)
+	if ((fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, S_IWUSR | S_IRUSR)) < 0
+	|| write(fd, get_file_header(w, h), 14) == -1
+	|| write(fd, get_dib_header(w, h), 40) == -1
+	|| write(fd, buffer, 4 * w * h) == -1)
 	{
 		close(fd);
 		return (-1);
