@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/08 04:45:20 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/09 17:18:20 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/12 05:40:04 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,11 +18,11 @@
 
 # define FLAGS	"-+ 0#"
 
-# define MINUS	(1 << 0)
-# define PLUS	(1 << 1)
-# define SPACE	(1 << 2)
-# define ZERO	(1 << 3)
-# define HASH	(1 << 4)
+# define MINUS	0b00000001
+# define PLUS	0b00000010
+# define SPACE	0b00000100
+# define ZERO	0b00001000
+# define HASH	0b00010000
 
 # define TYPES	"cs%pdiuxXon"
 
