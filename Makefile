@@ -14,7 +14,7 @@ SRCS	=		$(addprefix $(SRCDIR)/,											\
 				putchar_fd.c putendl_fd.c putnbr_fd.c putstr_fd.c)				\
 				$(addprefix lists/ft_,											\
 				lstadd_back.c lstadd_front.c lstclear.c lstdelone.c lstiter.c	\
-				lstlast.c lstmap.c lstnew.c lstsize.c)							\
+				lstlast.c lstmap.c lstnew.c lstsize.c lstsort.c)							\
 				$(addprefix images/,											\
 				write_bmp.c)													\
 				$(addprefix memory/ft_,											\

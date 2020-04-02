@@ -80,6 +80,8 @@ void					ft_lstiter(t_list *lst, void (*f)(void *));
 void					ft_lstclear(t_list **lst, void (*del)(void*));
 t_list					*ft_lstmap
 	(t_list *lst, void *(*f)(void*), void (*del)(void*));
+void					ft_lstsort(t_list **lst, int (*cmp)(void*, void*));
+
 int						get_next_line(int fd, char **line);
 int						ft_printf
 	(const char *fmt, ...) __attribute__((format(printf,1,2)));
