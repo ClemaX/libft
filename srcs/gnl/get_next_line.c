@@ -131,5 +131,5 @@ int			get_next_line(int fd, char **line)
 	}
 	if (state != 2)
 		fd_list = del_fd(fd_list, fd);
-	return (state == 2);
+	return (state == 2 || (state == 0 && !size));
 }
