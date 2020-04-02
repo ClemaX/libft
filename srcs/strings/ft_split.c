@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/08 17:28:54 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/09 14:41:00 by chamada     ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/16 21:48:40 by chamada     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -42,7 +42,7 @@ static size_t	splitlen(const char *s1, const char c)
 static void		*unload_strs(char **strs, int i)
 {
 	while (i)
-		free(strs[i--]);
+		free(strs[--i]);
 	free(strs);
 	return (NULL);
 }
