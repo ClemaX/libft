@@ -25,7 +25,7 @@ SRCS	=		$(addprefix $(SRCDIR)/,											\
 				$(addprefix strings/ft_,										\
 				split.c strchr.c strdup.c strjoin.c strlcat.c strlcpy.c			\
 				strlen.c strmapi.c strncmp.c strnstr.c strpos.c strrchr.c		\
-				strrem.c strtrim.c substr.c)									\
+				strrem.c strtrim.c substr.c striter.c)									\
 				$(addprefix types/ft_,											\
 				isalnum.c isalpha.c isascii.c isdigit.c							\
 				islower.c isprint.c issign.c isspace.c isupper.c tolower.c		\
