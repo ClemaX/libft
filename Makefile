@@ -14,7 +14,9 @@ SRCS	=		$(addprefix $(SRCDIR)/,											\
 				putchar_fd.c putendl_fd.c putnbr_fd.c putstr_fd.c)				\
 				$(addprefix lists/ft_,											\
 				lstadd_back.c lstadd_front.c lstclear.c lstdelone.c lstiter.c	\
-				lstlast.c lstmap.c lstnew.c lstsize.c lstsort.c)							\
+				lstlast.c lstmap.c lstnew.c lstsize.c lstsort.c)				\
+				$(addprefix map/map,											\
+				.c _utils.c _sort.c)											\
 				$(addprefix images/,											\
 				write_bmp.c)													\
 				$(addprefix memory/ft_,											\
@@ -25,7 +27,7 @@ SRCS	=		$(addprefix $(SRCDIR)/,											\
 				$(addprefix strings/ft_,										\
 				split.c strchr.c strdup.c strjoin.c strlcat.c strlcpy.c			\
 				strlen.c strmapi.c strncmp.c strnstr.c strpos.c strrchr.c		\
-				strrem.c strtrim.c substr.c striter.c)									\
+				strrem.c strtrim.c substr.c striter.c)							\
 				$(addprefix types/ft_,											\
 				isalnum.c isalpha.c isascii.c isdigit.c							\
 				islower.c isprint.c issign.c isspace.c isupper.c tolower.c		\
@@ -37,7 +39,7 @@ SRCS	=		$(addprefix $(SRCDIR)/,											\
 				$(addprefix scanf/,												\
 				ft_sscanf.c sf_convert.c sf_specs.c))
 OBJDS	=		$(addprefix $(OBJDIR)/,											\
-				io lists images memory numbers strings types gnl printf scanf)
+				io lists map images memory numbers strings types gnl printf scanf)
 OBJS	=		$(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
 
 all:			$(NAME)
