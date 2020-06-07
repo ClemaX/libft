@@ -11,7 +11,6 @@
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include <stdarg.h>
 #include <stdlib.h>
 #include <libft.h>
 #include <printf/specs.h>

@@ -34,8 +34,8 @@ SRCS	=		$(addprefix $(SRCDIR)/,											\
 				toupper.c)														\
 				$(addprefix gnl/,												\
 				get_next_line.c get_next_line_utils.c)							\
-				$(addprefix printf/, ft_printf.c pf_convert.c pf_format.c		\
-				pf_line.c pf_numbers.c pf_specs.c)								\
+				$(addprefix printf/, ft_printf.c pf_parse.c pf_convert.c		\
+				pf_format.c pf_line.c pf_numbers.c pf_specs.c)					\
 				$(addprefix scanf/,												\
 				ft_sscanf.c sf_convert.c sf_specs.c))
 OBJDS	=		$(addprefix $(OBJDIR)/,											\

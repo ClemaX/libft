@@ -104,6 +104,8 @@ int				map_cmp(t_map *a, t_map *b);
 int				get_next_line(int fd, char **line);
 int				ft_printf
 	(const char *fmt, ...) __attribute__((format(printf,1,2)));
+int				ft_dprintf
+	(int fd, const char *fmt, ...) __attribute__((format(printf,2,3)));
 int				ft_sscanf
 	(const char *src, const char *fmt, ...) __attribute__((format(scanf,2,3)));
 int				write_bmp(const char *path, const char *buffer,
