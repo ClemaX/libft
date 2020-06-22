@@ -49,21 +49,23 @@ OBJS	=		$(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
 all:			$(NAME)
 
 $(NAME):		$(OBJDS) $(OBJS)
-	@echo "AR $(NAME)"
+	@echo AR $(NAME)
 	@$(AR) $(AFLAGS) $@ $(OBJS)
 
 $(OBJDS):
 		mkdir -p $@
 
 $(OBJDIR)/%.o:	$(SRCDIR)/%.c $(INCDIR)/$(HEADER) Makefile
-	@echo "CC $<"
+	@echo CC $<
 	@$(CC) $(CFLAGS) $(IFLAGS) -c -o $@ $<
 
 clean:
-	$(RM) -rf $(OBJDIR)
+	@echo RM $(OBJDIR)
+	@$(RM) -rf $(OBJDIR)
 
 fclean:			clean
-	$(RM) -f $(NAME)
+	@echo RM $(NAME)
+	@$(RM) -f $(NAME)
 
 re:				fclean all
 
