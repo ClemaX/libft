@@ -1,15 +1,15 @@
 /* ************************************************************************** */
-/*                                                          LE - /            */
-/*                                                              /             */
-/*   ft_split.c                                       .::    .:/ .      .::   */
-/*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
-/*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/10/08 17:28:54 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/16 21:48:40 by chamada     ###    #+. /#+    ###.fr     */
-/*                                                         /                  */
-/*                                                        /                   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: chamada <chamada@student.le-101.fr>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/08 17:28:54 by chamada           #+#    #+#             */
+/*   Updated: 2020/08/06 02:27:35 by chamada          ###   ########lyon.fr   */
+/*                                                                            */
 /* ************************************************************************** */
+
 
 #include <libft.h>
 #include <stdlib.h>
@@ -39,10 +39,21 @@ static size_t	splitlen(const char *s1, const char c)
 	return (s - s1);
 }
 
-static void		*unload_strs(char **strs, int i)
+void			*strs_unload_n(char **strs, int n)
 {
-	while (i)
-		free(strs[--i]);
+	while (n)
+		free(strs[--n]);
+	free(strs);
+	return (NULL);
+}
+
+void			*strs_unload(char **strs)
+{
+	int	i;
+
+	i = 0;
+	while (strs[i])
+		free(strs[i++]);
 	free(strs);
 	return (NULL);
 }
@@ -63,7 +74,7 @@ char			**ft_split(char const *s, char c)
 			s++;
 		len = splitlen(s, c);
 		if (!(strs[i] = ft_calloc(len + 1, sizeof(*strs))))
-			return (unload_strs(strs, i));
+			return (strs_unload_n(strs, i));
 		ft_strlcpy(strs[i++], s, len + 1);
 		s += len;
 	}

@@ -1,26 +1,19 @@
 /* ************************************************************************** */
-/*                                                          LE - /            */
-/*                                                              /             */
-/*   map_utils.c                                      .::    .:/ .      .::   */
-/*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
-/*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/01/14 08:35:14 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/26 21:01:35 by chamada     ###    #+. /#+    ###.fr     */
-/*                                                         /                  */
-/*                                                        /                   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_utils.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: chamada <chamada@student.le-101.fr>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/14 08:35:14 by chamada           #+#    #+#             */
+/*   Updated: 2020/08/06 02:28:50 by chamada          ###   ########lyon.fr   */
+/*                                                                            */
 /* ************************************************************************** */
+
 
 
 #include <libft.h>
 #include <stdlib.h>
-
-static void	*unload_strs(char **strs, int count)
-{
-	while (count-- > 0 || *strs)
-		free(*strs++);
-	return (NULL);
-}
 
 const char	*map_add(t_map **map, const char *key, const char *value)
 {
@@ -93,7 +86,7 @@ char		**map_export(t_map *map)
 	{
 		len = map->key_size + 1 + ft_strlen(map->value);
 		if (!(*s = malloc((sizeof(**s) * len) + 1)))
-			return (unload_strs(strs, count + 1));
+			return (strs_unload_n(strs, count + 1));
 		ft_memcpy(*s, map->key, map->key_size);
 		(*s)[map->key_size] = '=';
 		ft_memcpy(&(*s)[map->key_size + 1], map->value, len - map->key_size);
