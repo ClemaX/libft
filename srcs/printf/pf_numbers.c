@@ -1,14 +1,13 @@
 /* ************************************************************************** */
-/*                                                          LE - /            */
-/*                                                              /             */
-/*   pf_numbers.c                                     .::    .:/ .      .::   */
-/*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: chamada <chamada@student.le-101.fr>        +:+   +:    +:    +:+     */
-/*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/11/23 17:08:17 by chamada      #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/09 16:51:59 by chamada     ###    #+. /#+    ###.fr     */
-/*                                                         /                  */
-/*                                                        /                   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pf_numbers.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: chamada <chamada@student.42lyon.fr>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/23 17:08:17 by chamada           #+#    #+#             */
+/*   Updated: 2020/08/23 16:43:34 by chamada          ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
@@ -60,8 +59,10 @@ void		parse_dimensions(t_number *n, t_spec s)
 
 t_number	parse_number(va_list ap, t_spec spec)
 {
-	const int	radixes[RADIX_N] = RADIXES;
-	const char	*digits[RADIX_N] = DIGITS;
+	const int	radixes[RADIX_N] = {
+		R_HEX, R_DEC, R_DEC, R_DEC, R_HEX, R_HEX, R_OCT};
+	const char	*digits[RADIX_N] = {
+		D_LHEX, D_DEC, D_DEC, D_DEC, D_LHEX, D_UHEX, D_OCT};
 	t_number	number;
 
 	if (spec.type == DEC || spec.type == INT)

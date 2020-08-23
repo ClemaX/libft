@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chamada <chamada@student.le-101.fr>        +#+  +:+       +#+        */
+/*   By: chamada <chamada@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 08:35:14 by chamada           #+#    #+#             */
-/*   Updated: 2020/08/06 02:28:50 by chamada          ###   ########lyon.fr   */
+/*   Updated: 2020/08/23 16:38:15 by chamada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #include <libft.h>
 #include <stdlib.h>

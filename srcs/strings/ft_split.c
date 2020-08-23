@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chamada <chamada@student.le-101.fr>        +#+  +:+       +#+        */
+/*   By: chamada <chamada@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 17:28:54 by chamada           #+#    #+#             */
-/*   Updated: 2020/08/06 02:27:35 by chamada          ###   ########lyon.fr   */
+/*   Updated: 2020/08/23 16:33:08 by chamada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include <libft.h>
 #include <stdlib.h>

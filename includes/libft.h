@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chamada <chamada@student.le-101.fr>        +#+  +:+       +#+        */
+/*   By: chamada <chamada@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 23:24:01 by chamada           #+#    #+#             */
-/*   Updated: 2020/08/17 22:44:19 by chamada          ###   ########lyon.fr   */
+/*   Updated: 2020/08/23 16:11:33 by chamada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef LIBFT_H
 # define LIBFT_H
@@ -72,7 +71,6 @@ char			**ft_split(char const *s, char c);
 void			*strs_unload_n(char **strs, int n);
 void			*strs_unload(char **strs);
 char			*ft_basename(const char *path);
-
 
 char			*ft_itoa(int n);
 char			*ft_strmapi
