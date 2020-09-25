@@ -8,7 +8,6 @@ RM		=		/bin/rm
 AFLAGS	=		rcus
 CFLAGS	=		-Wall -Wextra -Werror
 IFLAGS	=		-I$(INCDIR)
-HEADER	=		libft.h
 
 SRCS	=		$(addprefix $(SRCDIR)/,											\
 				$(addprefix	io/ft_,												\
@@ -16,8 +15,8 @@ SRCS	=		$(addprefix $(SRCDIR)/,											\
 				$(addprefix lists/ft_,											\
 					lstadd_back.c lstadd_front.c lstclear.c lstdelone.c			\
 					lstiter.c lstlast.c lstmap.c lstnew.c lstsize.c lstsort.c)	\
-				$(addprefix map/map,											\
-					.c _utils.c _sort.c)										\
+				$(addprefix map/,												\
+					map.c map_utils.c map_sort.c)								\
 				$(addprefix images/,											\
 					write_bmp.c)												\
 				$(addprefix memory/ft_,											\
@@ -28,7 +27,7 @@ SRCS	=		$(addprefix $(SRCDIR)/,											\
 				$(addprefix strings/ft_,										\
 					split.c strchr.c strdup.c strjoin.c strlcat.c strlcpy.c		\
 					strlen.c strmapi.c strncmp.c strnstr.c strpos.c strrchr.c	\
-					strrem.c strtrim.c substr.c striter.c basename.c)				\
+					strrem.c strtrim.c substr.c striter.c basename.c)			\
 				$(addprefix types/ft_,											\
 					isalnum.c isalpha.c isascii.c isdigit.c						\
 					islower.c isprint.c issign.c isspace.c isupper.c iscntrl.c	\
@@ -38,13 +37,22 @@ SRCS	=		$(addprefix $(SRCDIR)/,											\
 				$(addprefix printf/, ft_printf.c pf_parse.c pf_convert.c		\
 					pf_format.c pf_line.c pf_numbers.c pf_specs.c)				\
 				$(addprefix scanf/,												\
-					ft_sscanf.c sf_convert.c sf_specs.c))
+					ft_sscanf.c sf_convert.c sf_specs.c)						\
+				$(addprefix term/, clip.c controls.c hist_cursor.c hist.c init.c\
+				line_cursor.c line_edit.c line.c read_special.c	read.c select.c	\
+				term.c write.c))
 
 OBJDS	=		$(addprefix $(OBJDIR)/,											\
 					io lists map images memory numbers strings types gnl printf	\
-					scanf)
+					scanf term)
 
 OBJS	=		$(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
+
+HDRS	=		$(addprefix $(INCDIR)/, gnl/get_next_line.h						\
+				$(addprefix printf/, format.h line.h numbers.h parse.h specs.h)	\
+				$(addprefix scanf/, convert.h specs.h)							\
+				$(addprefix term/, term.h)										\
+				libft.h)
 
 all:			$(NAME)
 
@@ -53,9 +61,9 @@ $(NAME):		$(OBJDS) $(OBJS)
 	@$(AR) $(AFLAGS) $@ $(OBJS)
 
 $(OBJDS):
-		mkdir -p $@
+	mkdir -p $@
 
-$(OBJDIR)/%.o:	$(SRCDIR)/%.c $(INCDIR)/$(HEADER) Makefile
+$(OBJDIR)/%.o:	$(SRCDIR)/%.c $(HDRS) Makefile
 	@echo CC $<
 	@$(CC) $(CFLAGS) $(IFLAGS) -c -o $@ $<
 
