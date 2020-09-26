@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 21:13:17 by chamada           #+#    #+#             */
-/*   Updated: 2020/09/25 14:47:57 by chamada          ###   ########lyon.fr   */
+/*   Updated: 2020/09/26 15:15:08 by chamada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ static int	handle_alt_escape(t_term *t, int status)
 	if (c[1] == '2')
 	{
 		if (c[2] == t->caps.k_left[2])
-			select_left(t);
+			select_left(&t->caps, &t->cursor, &t->clip.select, t->line);
 		else if (c[2] == t->caps.k_right[2])
-			select_right(t);
+			select_right(&t->caps, &t->cursor, &t->clip.select, t->line);
 		return (status | TERM_SELECT);
 	}
 	else if (c[1] == '5')
@@ -46,13 +46,13 @@ static int	handle_control_custom(t_term *t, int status, char c)
 	if (c == '\n')
 		return (status | TERM_NEWLINE);
 	if (c == 'a' - 'a' + 1)
-		term_start_line(t);
+		cursor_start_line(&t->caps, &t->cursor);
 	else if (c == 'e' - 'a' + 1)
-		term_end_line(t);
+		cursor_end_line(&t->caps, &t->cursor, t->line);
 	else if (c == 'y' - 'a' + 1)
-		clip_paste(t);
+		clip_paste(&t->caps, &t->cursor, &t->clip, t->line);
 	else if (c == 'k' - 'a' + 1)
-		clip_cut(t);
+		clip_cut(&t->caps, &t->cursor, &t->clip, t->line);
 	else if (c == 'p' - 'a' + 1)
 		term_up(t);
 	else if (c == 'n' - 'a' + 1)
@@ -72,9 +72,9 @@ static void	handle_arrow_keys(t_term *t, char *c)
 	else if (c[1] == t->caps.k_down[2])
 		term_down(t);
 	else if (c[1] == t->caps.k_left[2])
-		term_left(t);
+		cursor_l(&t->caps, &t->cursor);
 	else if (c[1] == t->caps.k_right[2])
-		term_right(t);
+		cursor_r(&t->caps, &t->cursor, t->line);
 }
 
 int			term_read_control(t_term *t, int status, char c)
@@ -109,7 +109,7 @@ int			term_read_escape(t_term *t, int status)
 	if (status & TERM_SELECT)
 	{
 		status &= ~TERM_SELECT;
-		select_clear(t);
+		select_clear(&t->caps, &t->cursor, &t->clip.select, t->line);
 	}
 	handle_arrow_keys(t, c);
 	return (status);

@@ -6,12 +6,11 @@
 /*   By: chamada <chamada@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 19:29:17 by chamada           #+#    #+#             */
-/*   Updated: 2020/09/25 14:53:33 by chamada          ###   ########lyon.fr   */
+/*   Updated: 2020/09/26 15:18:24 by chamada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <term/term.h>
-
 
 static int	parse_line(t_term *t, int status)
 {
@@ -36,7 +35,7 @@ static int	parse_line(t_term *t, int status)
 
 int			term_cancel(t_term *t)
 {
-	select_clear(t);
+	select_clear(&t->caps, &t->cursor, &t->clip.select, t->line);
 	*t->line->data = '\0';
 	t->line->length = 0;
 	return (TERM_NEWLINE | TERM_READING);
@@ -50,10 +49,10 @@ void		term_stop(t_term *t)
 
 int			term_new_line(t_term *t, int status)
 {
-	term_end_line(t);
-	select_clear(t);
+	cursor_end_line(&t->caps, &t->cursor, t->line);
+	select_clear(&t->caps, &t->cursor, &t->clip.select, t->line);
 	if ((status = parse_line(t, status)) & TERM_WAITING)
-		term_write(t, "\n", 1);
+		term_write(&t->cursor, t->line, "\n", 1);
 	else
 	{
 		tputs(t->caps.insert_end, 0, &ft_putchar);
@@ -72,7 +71,7 @@ int			term_new_line(t_term *t, int status)
 		t->cursor.pos.x = 0;
 		t->cursor.pos.y = 0;
 	}
-	term_write_prompt(t, status);
+	term_write_prompt(&t->cursor, status);
 	return (status & ~TERM_NEWLINE);
 }
 

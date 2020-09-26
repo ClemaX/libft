@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 18:57:02 by chamada           #+#    #+#             */
-/*   Updated: 2020/09/25 14:51:25 by chamada          ###   ########lyon.fr   */
+/*   Updated: 2020/09/26 15:18:10 by chamada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,9 @@ int			term_init(t_term *t, const char **envp,
 {
 	t->pid = 0;
 	t->cursor = (t_cursor){.origin={.x=0, .y=0}, .pos={.x=0, .y=0}};
-	t->select = (t_selection){.start.x=-1U, .end.x=-1U};
-	t->clip = (t_line){.data=NULL, .length=0, .size=0, .prev=NULL, .next=NULL};
+	t->clip.select = (t_select){.start.x=-1U, .end.x=-1U};
+	t->clip.line = (t_line){.data=NULL, .length=0, .size=0,
+		.prev=NULL, .next=NULL};
 	t->exec = exec;
 	t->st = 0;
 	if (!(t->line = line_new(10))

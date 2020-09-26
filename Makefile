@@ -39,7 +39,7 @@ SRCS	=		$(addprefix $(SRCDIR)/,											\
 				$(addprefix scanf/,												\
 					ft_sscanf.c sf_convert.c sf_specs.c)						\
 				$(addprefix term/, clip.c controls.c hist_cursor.c hist.c init.c\
-				line_cursor.c line_edit.c line.c read_special.c	read.c select.c	\
+				cursor.c line_edit.c line.c read_special.c read.c select.c		\
 				term.c write.c))
 
 OBJDS	=		$(addprefix $(OBJDIR)/,											\
@@ -51,7 +51,8 @@ OBJS	=		$(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
 HDRS	=		$(addprefix $(INCDIR)/, gnl/get_next_line.h						\
 				$(addprefix printf/, format.h line.h numbers.h parse.h specs.h)	\
 				$(addprefix scanf/, convert.h specs.h)							\
-				$(addprefix term/, term.h)										\
+				$(addprefix term/, term.h caps.h cursor.h hist.h line.h select.h\
+					term.h write.h)												\
 				libft.h)
 
 all:			$(NAME)
