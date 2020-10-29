@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 23:24:01 by chamada           #+#    #+#             */
-/*   Updated: 2020/08/23 16:11:33 by chamada          ###   ########.fr       */
+/*   Updated: 2020/10/29 07:00:58 by chamada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int				ft_memcmp(const void *s1, const void *s2, size_t n);
 size_t			ft_strlen(const char *s);
 void			*ft_calloc(size_t count, size_t size);
 char			*ft_strdup(const char *s1);
+char			*ft_strndup(const char *src, size_t n);
 size_t			ft_strlcpy(char *dst, const char *src, size_t size);
 size_t			ft_strlcat(char *dst, const char *src, size_t size);
 char			*ft_strchr(const char *s, int c);
