@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 18:57:02 by chamada           #+#    #+#             */
-/*   Updated: 2020/09/26 15:18:10 by chamada          ###   ########.fr       */
+/*   Updated: 2020/11/04 16:06:15 by chamada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ static int	fatal_caps(t_caps *caps)
 
 static int	fatal_ios(t_term *t)
 {
-	t_map	*term_type;
-	char	term_buff[MAX_ENTRY];
+	const char	*term_type;
+	char		term_buff[MAX_ENTRY];
 
-	if (!(term_type = map_get(t->env, "TERM"))
-	|| !map_set(&t->env, "PS1", TERM_PS1)
-	|| tgetent(term_buff, term_type->value) <= 0
+	if (!(term_type = env_get(t->env, "TERM"))
+	|| !env_set(&t->env, "PS1", TERM_PS1, false)
+	|| tgetent(term_buff, term_type) <= 0
 	|| tcgetattr(0, &t->s_ios) == -1)
 		return (0);
 	t->s_ios_bkp = t->s_ios;
@@ -68,7 +68,7 @@ static int	fatal_ios(t_term *t)
 }
 
 int			term_init(t_term *t, const char **envp,
-	int (*exec)(const char*, t_term*))
+	int (*exec)(t_tok *tokens, t_term *term))
 {
 	t->pid = 0;
 	t->cursor = (t_cursor){.origin={.x=0, .y=0}, .pos={.x=0, .y=0}};
@@ -78,8 +78,9 @@ int			term_init(t_term *t, const char **envp,
 	t->exec = exec;
 	t->st = 0;
 	if (!(t->line = line_new(10))
-	|| !(t->env = map_load(envp)))
+	|| !(t->env = env_import(envp)))
 		return (0);
+	ft_bzero(&t->lex_st, sizeof(t->lex_st));
 	t->hist.last = NULL;
 	t->line->prev = t->hist.last;
 	*t->line->data = '\0';
@@ -97,8 +98,9 @@ int			term_init(t_term *t, const char **envp,
 
 int			term_destroy(t_term *t)
 {
+	token_clr(&t->lex_st.tokens);
 	hist_clear(&t->hist);
-	map_clr(&t->env);
+	env_clr(&t->env);
 	line_clear(&t->line);
 	clip_clear(&t->clip);
 	free(t->name);

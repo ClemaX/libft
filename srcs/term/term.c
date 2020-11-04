@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 19:29:38 by chamada           #+#    #+#             */
-/*   Updated: 2020/09/26 15:17:13 by chamada          ###   ########.fr       */
+/*   Updated: 2020/11/04 17:45:32 by chamada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	handle_status(t_term *t, int status)
 }
 
 int			term_prompt(int ac, const char **av, const char **envp,
-	int (*exec)(const char*, t_term*))
+	int (*exec)(t_tok *tokens, t_term *term))
 {
 	int		status;
 	t_term	term;

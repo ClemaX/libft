@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 16:00:47 by chamada           #+#    #+#             */
-/*   Updated: 2020/09/26 15:26:31 by chamada          ###   ########.fr       */
+/*   Updated: 2020/11/04 17:46:01 by chamada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,62 +27,58 @@
 # include <term/hist.h>
 # include <term/caps.h>
 # include <term/clip.h>
+# include <term/env.h>
+# include <term/lexer.h>
 
 # define TERM_PS1		"minish> "
 
 # define TERM_READING	1
 # define TERM_ERROR		2
-# define TERM_B_SLASH	4
-# define TERM_S_QUOTE	8
-# define TERM_D_QUOTE	16
-# define TERM_NEWLINE	32
-# define TERM_INT		64
-# define TERM_ERASE		128
-# define TERM_EOF		256
-# define TERM_STOP		512
-# define TERM_SUSPEND	1024
-# define TERM_CLEAR		2048
-# define TERM_SELECT	4096
-# define TERM_IGNORE	8192
-
-/*
-**	(TERM_B_SLASH | TERM_S_QUOTE | TERM_D_QUOTE)
-*/
-# define TERM_WAITING	28
+# define TERM_WAITING	4
+# define TERM_NEWLINE	8
+# define TERM_INT		16
+# define TERM_ERASE		32
+# define TERM_EOF		64
+# define TERM_STOP		128
+# define TERM_SUSPEND	256
+# define TERM_CLEAR		512
+# define TERM_SELECT	1024
+# define TERM_IGNORE	2048
 
 /*
 **	(TERM_NEWLINE | TERM_CLEAR | TERM_INT | TERM_EOF | TERM_STOP | TERM_ERASE
 **	| TERM_SUSPEND | TERM_IGNORE)
 */
-# define TERM_CONSUME	12256
+# define TERM_CONSUME	3064
 
 typedef	struct	s_term
 {
-	t_map			*env;
+	t_env			*env;
 	char			*name;
 	int				pid;
 	int				st;
 	struct termios	s_ios;
 	struct termios	s_ios_bkp;
+	t_lex_st		lex_st;
 	t_line			*line;
 	t_caps			caps;
 	t_cursor		cursor;
 	t_clip			clip;
 	t_hist			hist;
-	int				(*exec)(const char*, struct s_term*);
+	int				(*exec)(t_tok *tokens, struct s_term *term);
 }				t_term;
 
 /*
 **				term.c
 */
 int				term_prompt(int ac, const char **av, const char **envp,
-	int (*exec)(const char*, t_term*));
+	int (*exec)(t_tok *tokens, t_term *term));
 
 /*
 **				init.c
 */
 int				term_init(t_term *t, const char **envp,
-	int (*exec)(const char*, t_term*));
+	int (*exec)(t_tok *tokens, t_term *term));
 int				term_destroy(t_term *t);
 
 /*
