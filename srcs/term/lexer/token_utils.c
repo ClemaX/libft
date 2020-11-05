@@ -44,7 +44,9 @@ void		tokens_print(t_tok *tokens)
 	while (tokens)
 	{
 		//ft_dprintf(2, "[%4u]", tokens->type);
-		if (tokens->type & TOK_PARAM)
+		if (tokens->type & TOK_CMD)
+			tokens_print(tokens->data);
+		else if (tokens->type & TOK_PARAM)
 			ft_dprintf(2, "%s", tokens->data);
 		else if (tokens->type & TOK_INLN_MASK)
 			ft_dprintf(2, "%s %s", token_name(tokens->type), tokens->data);
@@ -52,7 +54,5 @@ void		tokens_print(t_tok *tokens)
 			ft_dprintf(2, "%s", token_name(tokens->type));
 		if ((tokens = tokens->next))
 			ft_dprintf(2, " ");
-		else
-			ft_dprintf(2, "\n");
 	}
 }

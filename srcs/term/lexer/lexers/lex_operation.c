@@ -12,6 +12,7 @@ t_lex_err	lex_operation(t_lex_st *st)
 	status = LEX_EOK;
 	operation_st.input = st->input,
 	i = 0;
+	lex_ifs(st);
 	while (i < sizeof(lexers) / sizeof(*lexers)
 	&& (status = lexers[i](&operation_st)) == LEX_EOK)
 		i++;

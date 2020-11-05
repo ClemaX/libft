@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 23:24:01 by chamada           #+#    #+#             */
-/*   Updated: 2020/10/29 07:00:58 by chamada          ###   ########.fr       */
+/*   Updated: 2020/11/04 21:30:21 by chamada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,7 @@ void			*strs_unload(char **strs);
 char			*ft_basename(const char *path);
 
 char			*ft_itoa(int n);
-char			*ft_strmapi
-	(char const *s, char (*f)(unsigned int, char));
+char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void			ft_striter(char *str, void (*fun)(char));
 void			ft_putchar_fd(char c, int fd);
 int				ft_putchar(int c);
