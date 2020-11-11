@@ -1,4 +1,4 @@
-#include <term/lexer.h>
+#include <term/token.h>
 
 t_tok		*token_str(const char *str, size_t length, t_tok_t type)
 {
@@ -48,7 +48,7 @@ void		tokens_print(t_tok *tokens)
 			tokens_print(tokens->data);
 		else if (tokens->type & TOK_PARAM)
 			ft_dprintf(2, "%s", tokens->data);
-		else if (tokens->type & TOK_INLN_MASK)
+		else if (tokens->type & (OP_REDIR_RD | OP_REDIR_WR | OP_REDIR_WA))
 			ft_dprintf(2, "%s %s", token_name(tokens->type), tokens->data);
 		else
 			ft_dprintf(2, "%s", token_name(tokens->type));

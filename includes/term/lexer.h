@@ -2,115 +2,139 @@
 # define LEXER_H
 
 # include <stdbool.h>
-# include <stdint.h>
-# include <stdlib.h>
-# include <stdio.h>
 
-# include <libft.h>
-# include <term/env.h>
 # include <term/token.h>
 
-/*
-** Token types
-*/
-# define TOK_NONE		0b0000000000000000
+typedef uint16_t	t_tok_t;
 
 /*
-** Inline operators
+** A character that, when unquoted, separates words
 */
-# define OP_REDIR_RD	0b0000000000000001
-# define OP_HEREDOC		0b0000000000000010
-# define OP_REDIR_WR	0b0000000000000100
-# define OP_REDIR_WA	0b0000000000001000
-
-# define TOK_INLN_MASK	0b0000000000001111
+# define LEX_META		" \t\n|&;()<>"
 
 /*
-** Operators
+** A character that, when unquoted, quotes following words
 */
-# define OP_PIPE		0b0000000000010000
-# define OP_OR			0b0000000000100000
-# define OP_AND			0b0000000001000000
-
-# define TOK_OP_MASK	0b0000000001110000
+# define LEX_QUOT		"'\"\\"
 
 /*
-** Separators
+** A character that, when unquoted, cannot be part of a word
 */
-# define SEP_SEMICOL	0b0000000010000000
+# define LEX_SPEC		LEX_META""LEX_QUOT
 
 /*
-** Scopes
+** LEX_EALLOC: Could not allocate memory!
+** LEX_ESYNTAX: Syntax error!
+** LEX_ENOMATCH: Incompatible lexer!
+** LEX_EWAIT: Waiting for more input!
+** LEX_EEND: End of input!
 */
-# define SCOPE_IN		0b0000000100000000
-# define SCOPE_OUT		0b0000001000000000
-
-# define TOK_SCOPE_MASK	0b0000001100000000
-
-# define TOK_PARAM		0b0000010000000000
-
-# define TOK_CMD		0b0000100000000000
-
-# define LEX_SPECIAL	"<<>>||&;()"
-
-//# define LEX_TERMINATOR	';'
-# define LEX_VAR_SUBST	'$'
-# define LEX_VAR_RETVAL	'?'
-# define LEX_VAR_ASSIGN	'='
-
-# define LEX_EMPTY		""
-# define IFS_DEFAULT	" \t\n"
-
 typedef enum		e_lex_err
 {
-//	LEX_ESYNT = -3, // TODO: Maybe use on operations and cmds
-	LEX_ETYPE = -2,
-	LEX_EALLOC = -1,
-	LEX_EOK = 0,
-	LEX_EWAIT = 1,
+	LEX_EALLOC		= -3,
+	LEX_ESYNTAX		= -2,
+	LEX_ENOMATCH	= -1,
+	LEX_EOK			= 0,
+	LEX_EWAIT		= 1,
+	LEX_EEND		= 2,
 }					t_lex_err;
 
 typedef struct		s_lex_st
 {
 	const char	*input;
 	t_tok		*tokens;
-	int			subshell_level; // TODO: $BASH_SUBSHELL
+	int			subshell_level;
 	t_tok_t		wait;
 }					t_lex_st;
 
-typedef t_lex_err	(*t_lex_fun)(t_lex_st *st);
-
-t_lex_err			lexer_tokenize(t_lex_st *st);
-
-t_tok_t				lexer_type(char input);
-t_lex_err			lexer_expand(t_lex_st *st);
+/*
+** returns true if the character cannot be part of an unquoted word
+*/
+bool				is_special(char c);
 
 /*
-** - lex_cmdline
-**   - lex_sep
-**   - lex_scope
-**     - lex_cmd_line
-**   - lex_operation
-**     - lex_cmd_line
-**     - lex_op
-**     - lex_cmd_line
-**   - lex_cmd
-**     - lex_inline
-**     - lex_param
+** TOKENS
+** TOKENs separated by IFS.
+**
+** IFS ( TOKEN IFS )*
 */
-t_lex_err			lex_cmd_line(t_lex_st *st);
+t_lex_err			lex_tokens(t_lex_st *st);
 
-t_lex_err			lex_scope(t_lex_st *st);
+/*
+** SUBSHELL
+** TOKENS wrapped in parenthesis.
+**
+** '(' TOKENS ')'
+*/
+t_lex_err			lex_subshell(t_lex_st *st);
 
-t_lex_err			lex_op(t_lex_st *st);
-
-t_lex_err			lex_sep(t_lex_st *st);
-t_lex_err			lex_inline(t_lex_st *st);
+/*
+** CMD
+** CMD_SIMPLEs followed by OPERATIONs.
+**
+** CMD_SIMPLEs OPERATION*
+*/
 t_lex_err			lex_cmd(t_lex_st *st);
+
+
+/*
+** OPERATION
+** OPERATOR followed by CMD
+**
+** OPERATOR CMD
+*/
 t_lex_err			lex_operation(t_lex_st *st);
 
-t_lex_err			lex_param(t_lex_st *st);
-t_lex_err			lex_param_data(char **data, const char **input);
-char				lex_ifs(t_lex_st *st);
+/*
+** PARAM
+** Multiple PARAM_QUOTEDs or PARAM_SIMPLEs.
+**
+** (PARAM_QUOTED | PARAM_SIMPLE)*
+*/
+t_lex_err			lex_param(t_lex_st *st, t_tok_t type);
+
+/*
+** PARAM_QUOTED
+** PARAM_SQUOTED or PARAM_DQUOTED.
+**
+** PARAM_SQUOTED | PARAM_DQUOTED
+*/
+t_lex_err			lex_param_quoted(t_lex_st *st, t_tok_t type);
+
+/*
+** PARAM_SQUOTED
+** chars preceded by backslash or chars wrapped in single quotes, escaped by
+** backslash.
+**
+** '\'' ( char - \' )* '\''
+*/
+t_lex_err			lex_param_squoted(t_lex_st *st, t_tok_t type);
+
+/*
+** PARAM_DQUOTED
+** chars wrapped in double quotes, escaped by backslash.
+**
+** '"' ( ( char - ["\"\\"] ) | ( '\\' ["\"\\"] ) )* '"'
+*/
+t_lex_err			lex_param_dquoted(t_lex_st *st, t_tok_t type);
+
+/*
+** INLINE
+** REDIR or HEREDOC
+**
+** REDIR | HEREDOC
+*/
+t_lex_err			lex_inline(t_lex_st *st);
+
+/*
+** IFS
+** Whitespaces
+**
+** ( ' ' | [\t .. \r] )*
+*/
+t_lex_err			lex_ifs(t_lex_st *st);
+
+
+void	token_print(t_tok *tokens, const char *prefix);
 
 #endif

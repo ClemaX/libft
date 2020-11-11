@@ -43,9 +43,9 @@ SRCS	=		$(addprefix $(SRCDIR)/,											\
 						_get.c _set.c .c)										\
 					$(addprefix lexer/,											\
 						$(addprefix lexers/lex_,								\
-							cmd.c cmd_line.c inline.c op.c operation.c param.c	\
-							scope.c sep.c)										\
-							lexer.c token_utils.c token.c)			\
+							cmd.c ifs.c inline.c param_quoted.c param.c			\
+							subshell.c tokens.c)								\
+							lexer.c token_utils.c token.c)						\
 					clip.c controls.c hist_cursor.c hist.c init.c				\
 					cursor.c line_edit.c line.c read_special.c read.c select.c	\
 					term.c write.c))

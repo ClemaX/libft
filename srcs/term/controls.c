@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 19:29:17 by chamada           #+#    #+#             */
-/*   Updated: 2020/11/04 17:53:03 by chamada          ###   ########.fr       */
+/*   Updated: 2020/11/11 06:29:14 by chamada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int			term_new_line(t_term *t, int status)
 	select_clear(&t->caps, &t->cursor, &t->clip.select, t->line);
 	if (!(status & TERM_WAITING))
 		t->lex_st.input = t->line->data;
-	if ((lex_err = lexer_tokenize(&t->lex_st)) == LEX_EOK)
+	if ((lex_err = lex_tokens(&t->lex_st)) == LEX_EOK)
 		status = term_next_line(t, status & ~TERM_WAITING);
 	else if (lex_err & LEX_EWAIT)
 	{

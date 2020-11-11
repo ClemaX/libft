@@ -1,73 +1,93 @@
 #include <term/lexer.h>
 
-static t_tok_t	inline_op_type(const char **input)
-{
-	t_tok_t	type;
+/*
+** REDIR_OPERATOR
+** Single and double redirection operators
+**
+** ">" | ">>" | "<"
+*/
 
-	if ((type = lexer_type(**input) & TOK_INLN_MASK))
+static t_tok_t	lex_redir_op_type(t_lex_st *st)
+{
+	t_tok_t		type;
+
+	ft_dprintf(2, "[LEX][  CMD][INLINE][ REDIR][OP] Input: '%s'\n", st->input);
+	type = TOK_NONE;
+	if (*st->input == '>')
 	{
-		(*input)++;
-		if (type & OP_REDIR_WR && lexer_type(**input) == OP_REDIR_WR)
+		ft_dprintf(2, "[LEX][  CMD][INLINE][ REDIR][OP][ WR] MATCH!\n");
+		st->input++;
+		if (*st->input == '>')
 		{
-			(*input)++;
+			ft_dprintf(2, "[LEX][  CMD][INLINE][ REDIR][OP][ WA] MATCH!\n");
+			ft_dprintf(2, "[LEX][  CMD][INLINE][ REDIR][OP][  OR] MATCH!\n");
 			type = OP_REDIR_WA;
+			st->input++;
 		}
-		else if (type & OP_REDIR_RD && lexer_type(**input) == OP_REDIR_RD)
-		{
-			(*input)++;
-			type = OP_HEREDOC;
-		}
+		else
+			type = OP_REDIR_WR;
 	}
-//	ft_dprintf(2, "Inline: %c: %d\n", (*input)[-1], type);
+	else if (*st->input == '<')
+	{
+		ft_dprintf(2, "[LEX][  CMD][INLINE][ REDIR][OP][ RD] MATCH!\n");
+		type = OP_REDIR_RD;
+		st->input++;
+	}
+	else
+	{
+		ft_dprintf(2, "[LEX][  CMD][INLINE][ REDIR][OP] NOMATCH!\n");
+	}
 	return (type);
 }
 
-t_lex_err		lex_inline_op(t_lex_st *st)
+/*
+** REDIR
+** REDIR_OPERATOR followed by PARAM, separated by IFS
+**
+** REDIR_OPERATOR IFS PARAM
+*/
+static t_lex_err	lex_redir(t_lex_st *st)
 {
-	t_lex_err	status;
-	t_tok_t		type;
-	t_tok		*token;
-	char		*data;
+	const t_tok_t	type = lex_redir_op_type(st);
+	t_lex_err		status;
 
-	status = LEX_ETYPE;
-	if ((type = inline_op_type(&st->input))
-	&& lex_ifs(st) && (status = lex_param_data(&data, &st->input)) == LEX_EOK)
-	{
-		if ((token = token_new(data, type)))
-			token_add_back(&st->tokens, token);
-		else
-			status = LEX_EALLOC;
-	}
-//	ft_dprintf(2, "inline data: %s\n", data);
+	ft_dprintf(2, "[LEX][  CMD][INLINE][ REDIR] Input: '%s'\n", st->input);
+	if (type == TOK_NONE)
+		return (LEX_ENOMATCH);
+	if ((status = lex_ifs(st)) != LEX_EOK
+	|| (status = lex_param(st, type)) == LEX_ENOMATCH)
+		return (LEX_ESYNTAX);
 	return (status);
 }
 
+/*
+** HEREDOC
+** HEREDOC_OPERATOR followed by PARAM
+**
+** "<<" PARAM
+*/
+static t_lex_err	lex_heredoc(t_lex_st *st)
+{
+	if (ft_strncmp(st->input, "<<", 2))
+		return (LEX_ENOMATCH);
+	ft_dprintf(2, "[LEX][  CMD][INLINE][HEREDOC] Input: '%s'\n", st->input);
+	return (lex_param(st, OP_HEREDOC));
+}
+
+/*
+** INLINE
+** REDIR or HEREDOC
+**
+** REDIR | HEREDOC
+*/
 t_lex_err		lex_inline(t_lex_st *st)
 {
-	t_lex_err				status;
-	static const t_lex_fun	lexers[] = {&lex_inline_op};
-	t_lex_st				inline_st;
-	t_tok_t					i;
+	t_lex_err		status;
 
-	status = LEX_EOK;
-	inline_st = (t_lex_st){.tokens = NULL, .wait = st->wait,\
-		.subshell_level = st->subshell_level};
-	while (status == LEX_EOK && lex_ifs(st))
-	{
-		inline_st.input = st->input;
-		i = 0;
-		while (i < sizeof(lexers) / sizeof(*lexers)
-		&& (status = lexers[i](&inline_st)) == LEX_ETYPE)
-			i++;
-		if (status == LEX_EOK)
-			st->input = inline_st.input;
-	}
-	if (inline_st.tokens)
-	{
-		token_add_back(&st->tokens, inline_st.tokens);
-		st->wait = inline_st.wait;
-		return (LEX_EOK);
-	}
-//	ft_dprintf(2, "[inline]input: %s, status: %d\n", st->input, status);
+	ft_dprintf(2, "[LEX][  CMD][INLINE] Input: '%s'\n", st->input);
+	if ((status = lex_redir(st)) == LEX_ENOMATCH) // alocates a token redir
+		status = lex_heredoc(st); // alocates a token heredoc
+
+	ft_dprintf(2, "[LEX][  CMD][INLINE] Status: %d\n", status);
 	return (status);
 }

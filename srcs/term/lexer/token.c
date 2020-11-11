@@ -38,12 +38,12 @@ void		token_add_front(t_tok **tokens, t_tok *token)
 
 void		token_clr(t_tok **tokens)
 {
-	t_tok	*current;
-
-	while ((current = *tokens))
+	while(*tokens)
 	{
-		*tokens = current->next;
-		free(current->data);
-		free(current);
+		if ((*tokens)->type & TOK_CMD)
+			token_clr((t_tok**)&(*tokens)->data);
+		else
+			free((*tokens)->data);
+		*tokens = (*tokens)->next;
 	}
 }
