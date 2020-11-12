@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 21:25:00 by chamada           #+#    #+#             */
-/*   Updated: 2020/08/23 16:32:08 by chamada          ###   ########.fr       */
+/*   Updated: 2020/11/12 10:48:36 by chamada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int		line_put(char **dest, t_line **line, char alloc)
 	const int	len = line_len(*line);
 	t_line		*curr;
 
-	if (alloc && !(*dest = malloc(sizeof(*dest) * (len + 1))))
+	if (alloc && !(*dest = malloc(sizeof(**dest) * (len + 1))))
 	{
 		line_clr(line);
 		return (-1);
