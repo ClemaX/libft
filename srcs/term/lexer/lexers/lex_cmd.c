@@ -34,7 +34,7 @@ static t_lex_err	lex_cmd_simple(t_lex_st *st)
 	}
 	cmd_st.tokens = cmd; // TODO: Cleanup duplicate pointers
 	st->input = cmd_st.input;
-	st->wait = cmd_st.wait | (status == LEX_EWAIT) ? TOK_CMD : TOK_NONE;
+	st->wait = cmd_st.wait; // TODO: | (status == LEX_EWAIT) ? TOK_CMD : TOK_NONE
 	if ((!cmd->data && !cmd->next))
 	{
 		free(cmd);
@@ -98,10 +98,10 @@ t_lex_err			lex_cmd(t_lex_st *st)
 {
 	t_lex_err	status;
 
-	if (st->wait & TOK_SCOPE_OUT)
+/* 	if (st->wait & TOK_SCOPE_OUT)
 		return (lex_subshell(st));
 	if (st->wait & TOK_CMD)
-		return (lex_cmd_simple(st));
+		return (lex_cmd_simple(st)); */
 
 	ft_dprintf(2, "[LEX][  CMD] Input: '%s'!\n", st->input);
 	if ((status = lex_subshell(st)) == LEX_ENOMATCH)

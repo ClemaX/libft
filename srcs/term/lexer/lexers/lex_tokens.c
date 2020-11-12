@@ -58,8 +58,8 @@ t_lex_err			lex_tokens(t_lex_st *st)
 {
 	t_lex_err	status;
 
-	if (st->wait & TOK_CMD && (status = lex_cmd(st)) != LEX_EOK)
-		return (status);
+	/* if (st->wait & TOK_CMD && (status = lex_cmd(st)) != LEX_EOK)
+		return (status); */
 
 	while ((status = lex_ifs(st)) == LEX_EOK
 	&& (status = lex_token(st)) == LEX_EOK

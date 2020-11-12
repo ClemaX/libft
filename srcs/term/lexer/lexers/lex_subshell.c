@@ -75,6 +75,7 @@ t_lex_err	lex_subshell(t_lex_st *st)
 			status = lex_scope_out(st);
 			ft_dprintf(2, "[LEX][SUBSH][OUT] Status: %d Wait: '%d'\n", status, st->wait);
 		}
+		ft_dprintf(2, "[LEX][SUBSH][END] Status '%d'\n", status);
 	}
 	return (status);
 }
