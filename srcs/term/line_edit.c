@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 19:30:03 by chamada           #+#    #+#             */
-/*   Updated: 2020/09/26 15:15:06 by chamada          ###   ########.fr       */
+/*   Updated: 2020/11/12 07:27:45 by chamada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int		line_erase_at(t_line *line, size_t at, size_t n)
 		line->length -= n;
 	else
 	{
-		ft_memmove(line->data + at, line->data + at + n, n);
+		ft_memmove(line->data + at, line->data + at + n, line->length - at - n);
 		line->length -= n;
 	}
 	line->data[line->length] = '\0';
