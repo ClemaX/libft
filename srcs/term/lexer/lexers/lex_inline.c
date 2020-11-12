@@ -54,7 +54,7 @@ static t_lex_err	lex_redir(t_lex_st *st)
 	ft_dprintf(2, "[LEX][  CMD][INLINE][ REDIR] Input: '%s'\n", st->input);
 	if (type == TOK_NONE)
 		return (LEX_ENOMATCH);
-	if ((status = lex_ifs(st)) != LEX_EOK
+	if (lex_ifs(st) != LEX_EOK
 	|| (status = lex_param(st, type)) == LEX_ENOMATCH)
 		return (LEX_ESYNTAX);
 	return (status);
