@@ -42,7 +42,7 @@ const char		**env_export(t_env *env)
 	{
 		current = env;
 		strs[length--] = NULL;
-		while (current && length)
+		while (current && length >= 0)
 		{
 			if (current->exported)
 				strs[length--] = current->key;
