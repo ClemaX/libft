@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 19:29:17 by chamada           #+#    #+#             */
-/*   Updated: 2020/11/12 05:27:30 by chamada          ###   ########.fr       */
+/*   Updated: 2020/11/12 10:34:40 by chamada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void		term_stop(t_term *t)
 
 int			term_next_line(t_term *t, int status)
 {
+	if (!t->line->length)
+		return (status);
 	if (t->caps.enabled)
 		tputs(t->caps.insert_end, 0, &ft_putchar);
 	if (t->interactive)
@@ -103,7 +105,6 @@ int			term_new_line(t_term *t, int status)
 		cursor_end_line(&t->caps, &t->cursor, t->line);
 		select_clear(t);
 	}
-	
 	if (!(status & TERM_WAITING))
 		t->lex_st.input = t->line->data;
 	if ((lex_err = lex_tokens(&t->lex_st)) == LEX_EOK)
