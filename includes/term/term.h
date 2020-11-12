@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 16:00:47 by chamada           #+#    #+#             */
-/*   Updated: 2020/11/04 17:46:01 by chamada          ###   ########.fr       */
+/*   Updated: 2020/11/12 02:16:54 by chamada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef	struct	s_term
 {
 	t_env			*env;
 	char			*name;
-	int				pid;
+	pid_t			pid;
 	int				st;
 	struct termios	s_ios;
 	struct termios	s_ios_bkp;
