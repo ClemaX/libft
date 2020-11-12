@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 08:35:14 by chamada           #+#    #+#             */
-/*   Updated: 2020/08/23 16:38:15 by chamada          ###   ########.fr       */
+/*   Updated: 2020/11/12 10:37:24 by chamada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ t_map		*map_load(const char **strs)
 		|| !(val = ft_strchr(key, '=')))
 		{
 			free(key);
+			map_clr(&map);
 			return (NULL);
 		}
 		*val++ = '\0';
