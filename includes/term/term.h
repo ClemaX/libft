@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 16:00:47 by chamada           #+#    #+#             */
-/*   Updated: 2020/11/12 02:16:54 by chamada          ###   ########.fr       */
+/*   Updated: 2020/11/12 05:27:09 by chamada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,8 @@
 
 # include <term/line.h>
 # include <term/cursor.h>
-# include <term/select.h>
 # include <term/hist.h>
 # include <term/caps.h>
-# include <term/clip.h>
 # include <term/env.h>
 # include <term/lexer.h>
 
@@ -51,10 +49,23 @@
 */
 # define TERM_CONSUME	3064
 
+typedef struct	s_select
+{
+	t_pos	start;
+	t_pos	end;
+}				t_select;
+
+typedef struct	s_clip
+{
+	t_line		line;
+	t_select	select;
+}				t_clip;
+
 typedef	struct	s_term
 {
 	t_env			*env;
 	char			*name;
+	bool			interactive;
 	pid_t			pid;
 	int				st;
 	struct termios	s_ios;
@@ -88,6 +99,16 @@ int				term_read(t_term *t, int status);
 int				term_read_control(t_term *t, int status, char c);
 int				term_read_escape(t_term *t, int status);
 
+
+/*
+**				write.c
+*/
+void			term_write_prompt(t_term *t, int status);
+int				term_prewrite(t_term *t, const char *str, size_t n);
+int				term_write(t_term *t, const char *str, size_t n);
+void			term_clear_line(t_term *t);
+void			term_clear_screen(t_term *t, int status);
+
 /*
 **				controls.c
 */
@@ -101,5 +122,20 @@ int				term_erase(t_term *t, int status);
 */
 void			term_up(t_term *t);
 void			term_down(t_term *t);
+
+/*
+**				select.c
+*/
+void			select_left(t_term *t);
+void			select_right(t_term *t);
+void			select_clear(t_term *t);
+
+/*
+**				clip.c
+*/
+char			*clip_copy(t_term *t);
+char			*clip_cut(t_term *t);
+int				clip_paste(t_term *t);
+void			clip_clear(t_term *t);
 
 #endif

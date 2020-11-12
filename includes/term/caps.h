@@ -6,19 +6,21 @@
 /*   By: chamada <chamada@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 14:02:31 by chamada           #+#    #+#             */
-/*   Updated: 2020/09/26 15:20:05 by chamada          ###   ########.fr       */
+/*   Updated: 2020/11/12 03:18:45 by chamada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CAPS_H
 # define CAPS_H
 
+# include <stdbool.h>
 # include <term.h>
 
 # define MAX_ENTRY		1024
 
 typedef struct	s_caps
 {
+	bool	enabled;
 	char	*insert;
 	char	*insert_end;
 	char	*clear;

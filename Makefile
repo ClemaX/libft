@@ -59,8 +59,8 @@ OBJS	=		$(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
 HDRS	=		$(addprefix $(INCDIR)/, gnl/get_next_line.h						\
 				$(addprefix printf/, format.h line.h numbers.h parse.h specs.h)	\
 				$(addprefix scanf/, convert.h specs.h)							\
-				$(addprefix term/, caps.h clip.h cursor.h env.h hist.h lexer.h	\
-					line.h select.h term.h token.h write.h)						\
+				$(addprefix term/, caps.h cursor.h env.h hist.h lexer.h			\
+					line.h term.h token.h)										\
 				libft.h)
 
 all:			$(NAME)
