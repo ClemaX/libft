@@ -111,16 +111,17 @@ t_lex_err			lex_cmd(t_lex_st *st)
 
 /*
 ** OPERATION
-** OPERATOR followed by CMD
+** OPERATOR followed by IFS and CMD
 **
-** OPERATOR CMD
+** OPERATOR IFS CMD
 */
 t_lex_err			lex_operation(t_lex_st *st)
 {
 	t_lex_err	status;
 
 	ft_dprintf(2, "[LEX][   OP] Input: '%s'\n", st->input);
-	if ((status = lex_operator(st)) == LEX_EOK)
+	if ((status = lex_operator(st)) == LEX_EOK
+	&& (status = lex_ifs(st)) == LEX_EOK)
 		status = lex_cmd(st);
 	return (status);
 }
