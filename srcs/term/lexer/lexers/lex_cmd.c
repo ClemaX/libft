@@ -57,7 +57,6 @@ static t_lex_err	lex_operator(t_lex_st *st)
 	t_tok		*operator;
 
 	ft_dprintf(2, "[LEX][  CMD][ OP] Input: '%s'\n", st->input);
-	type = TOK_NONE;
 	if (*st->input == '|')
 	{
 		ft_dprintf(2, "[LEX][  CMD][ OP][PIPE] MATCH!\n");
