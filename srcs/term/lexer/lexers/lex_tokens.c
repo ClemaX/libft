@@ -30,17 +30,17 @@ static t_lex_err	lex_sep(t_lex_st *st)
 ** TOKEN
 ** Command followed by multiple operations
 **
-** CMD IFS OPERATION*
+** CMD (IFS OPERATION)*
 */
 static t_lex_err	lex_token(t_lex_st *st)
 {
 	t_lex_err	status;
 
 	ft_dprintf(2, "[LEX][TOKEN] Input: '%s'\n", st->input);
-	if ((status = lex_cmd(st)) == LEX_EOK
-	&& (status = lex_ifs(st)) == LEX_EOK)
+	if ((status = lex_cmd(st)) == LEX_EOK)
 	{
-		while ((status = lex_operation(st)) == LEX_EOK)
+		while ((status = lex_ifs(st)) == LEX_EOK
+		&& (status = lex_operation(st)) == LEX_EOK)
 			;
 		if (status == LEX_ENOMATCH)
 			status = LEX_EOK;
