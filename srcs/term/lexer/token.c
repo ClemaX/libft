@@ -12,6 +12,21 @@ t_tok		*token_new(void *data, t_tok_t type)
 	return (token);
 }
 
+t_tok		*token_strndup(const char *input, size_t n, t_tok_t type)
+{
+	t_tok	*token;
+	char	*content;
+
+	if (!(content = ft_strndup(input, n)))
+		return (NULL);
+	if (!(token = token_new(content, type)))
+	{
+		free(content);
+		return (NULL);
+	}
+	return (token);
+}
+
 void		token_add_back(t_tok **tokens, t_tok *token)
 {
 	t_tok	*current;

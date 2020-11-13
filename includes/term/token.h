@@ -42,14 +42,17 @@ typedef struct		s_tok
 }					t_tok;
 
 t_tok		*token_new(void *data, t_tok_t type);
+t_tok		*token_strndup(const char *input, size_t n, t_tok_t type);
 
 void		token_add_back(t_tok **tokens, t_tok *token);
 void		token_add_front(t_tok **tokens, t_tok *token);
 
 void		token_sort(t_tok **lst, int (*cmp)(t_tok_t, t_tok_t));
 
-void		token_clr(t_tok **tokens);
+size_t		token_len(t_tok *tokens);
 
-void		tokens_print(t_tok *tokens);
+char *const	*token_export(t_tok *tokens);
+
+void		token_clr(t_tok **tokens);
 
 #endif

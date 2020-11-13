@@ -4,6 +4,7 @@
 # include <stdbool.h>
 
 # include <term/token.h>
+# include <term/env.h>
 
 typedef uint16_t	t_tok_t;
 
@@ -133,7 +134,6 @@ t_lex_err			lex_inline(t_lex_st *st);
 ** ( ' ' | [\t .. \r] )*
 */
 t_lex_err			lex_ifs(t_lex_st *st);
-
 
 void	token_print(t_tok *tokens, const char *prefix);
 

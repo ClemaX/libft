@@ -1,20 +1,5 @@
 #include <term/lexer.h>
 
-static t_tok	*token_strndup(const char *input, size_t n, t_tok_t type)
-{
-	t_tok	*token;
-	char	*content;
-
-	if (!(content = ft_strndup(input, n)))
-		return (NULL);
-	if (!(token = token_new(content, type)))
-	{
-		free(content);
-		return (NULL);
-	}
-	return (token);
-}
-
 /*
 ** PARAM_SQUOTED
 ** chars preceded by backslash or chars wrapped in single quotes, escaped by

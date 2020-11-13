@@ -1,58 +1,36 @@
 #include <term/token.h>
 
-t_tok		*token_str(const char *str, size_t length, t_tok_t type)
+size_t		token_len(t_tok *tokens)
 {
-	t_tok	*token;
+	size_t	length;
 
-	if (!(token = malloc(sizeof(*token))))
-		return (NULL);
-	if (!(token->data = ft_strndup(str, length)))
-	{
-		free(token);
-		return (NULL);
-	}
-	token->next = NULL;
-	token->type = type;
-	return (token);
-}
-
-const char	*token_name(t_tok_t type)
-{
-	static const char *names[] = {
-		"<",
-		"<<",
-		">",
-		">>",
-		"|",
-		"||",
-		"&&",
-		";",
-		"(",
-		")",
-		NULL
-	};
-	t_tok_t	i;
-
-	i = 0;
-	while (type >>= 1)
-		i++;
-	return (names[i]);
-}
-
-void		tokens_print(t_tok *tokens)
-{
+	length = 0;
 	while (tokens)
 	{
-		//ft_dprintf(2, "[%4u]", tokens->type);
-		if (tokens->type & TOK_CMD)
-			tokens_print(tokens->data);
-		else if (tokens->type & TOK_PARAM)
-			ft_dprintf(2, "%s", tokens->data);
-		else if (tokens->type & (OP_REDIR_RD | OP_REDIR_WR | OP_REDIR_WA))
-			ft_dprintf(2, "%s %s", token_name(tokens->type), tokens->data);
-		else
-			ft_dprintf(2, "%s", token_name(tokens->type));
-		if ((tokens = tokens->next))
-			ft_dprintf(2, " ");
+		length++;
+		tokens = tokens->next;
 	}
+	return (length);
+}
+
+char *const	*token_export(t_tok *tokens)
+{
+	char		**av;
+	t_tok		*next;
+	size_t		i;
+
+	if (!(av = malloc(sizeof(*av) * (token_len(tokens) + 1))))
+	{
+		token_clr(&tokens);
+		return (NULL);
+	}
+	i = 0;
+	while (tokens)
+	{
+		next = tokens->next;
+		av[i++] = tokens->data;
+		free(tokens);
+	}
+	av[i] = NULL;
+	return (av);
 }
