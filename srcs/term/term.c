@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 19:29:38 by chamada           #+#    #+#             */
-/*   Updated: 2020/11/12 05:28:10 by chamada          ###   ########.fr       */
+/*   Updated: 2020/11/13 03:35:02 by chamada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int			term_prompt(int ac, const char **av, const char **envp,
 		status |= TERM_ERROR;
 	if (term.caps.enabled)
 		tputs(term.caps.insert_end, 0, &ft_putchar);
-	write(1, "exit\n", 5);
+	if (term.interactive)
+		write(1, "exit\n", 5);
 	return ((status & TERM_ERROR) ? -1 : term.st);
 }

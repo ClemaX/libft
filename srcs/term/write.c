@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 19:30:06 by chamada           #+#    #+#             */
-/*   Updated: 2020/11/12 05:31:55 by chamada          ###   ########.fr       */
+/*   Updated: 2020/11/13 03:37:10 by chamada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 
 void	term_write_prompt(t_term *t, int status)
 {
-	if (status & TERM_WAITING)
-		term_prewrite(t, "> ", 2);
-	else
-		term_prewrite(t, TERM_PS1, sizeof(TERM_PS1) - 1);
+	if (t->interactive)
+	{
+		if (status & TERM_WAITING)
+			term_prewrite(t, "> ", 2);
+		else
+			term_prewrite(t, TERM_PS1, sizeof(TERM_PS1) - 1);
+	}	
 }
 
 int		term_prewrite(t_term *t, const char *str, size_t n)
