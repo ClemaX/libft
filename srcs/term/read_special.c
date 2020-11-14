@@ -12,6 +12,10 @@
 
 #include <term/term.h>
 
+
+// TODO: Implement home and end
+// TODO: Implement del key (delete to the right)
+
 static int	handle_alt_escape(t_term *t, int status)
 {
 	int		ret;

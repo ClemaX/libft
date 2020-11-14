@@ -12,7 +12,7 @@ static t_lex_err	lex_param_simple(t_lex_st *st, t_tok_t type)
 	const char	*start;
 
 	start = st->input;
-	ft_dprintf(2, "[LEX][PARAM][SIMPLE] Input: '%s'\n", st->input);
+//	ft_dprintf(2, "[LEX][PARAM][SIMPLE] Input: '%s'\n", st->input);
 	while (*st->input && !is_special(*st->input))
 		st->input++;
 	if (st->input == start)

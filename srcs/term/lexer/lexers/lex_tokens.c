@@ -10,7 +10,7 @@ static t_lex_err	lex_sep(t_lex_st *st)
 {
 	t_tok		*sep;
 
-	ft_dprintf(2, "[LEX][  SEP] Input: '%s'\n", st->input);
+//	ft_dprintf(2, "[LEX][  SEP] Input: '%s'\n", st->input);
 	if (*st->input == '\0')
 		return (LEX_EEND);
 	if (*st->input == ';' || *st->input == '\n')
@@ -36,7 +36,7 @@ static t_lex_err	lex_token(t_lex_st *st)
 {
 	t_lex_err	status;
 
-	ft_dprintf(2, "[LEX][TOKEN] Input: '%s'\n", st->input);
+//	ft_dprintf(2, "[LEX][TOKEN] Input: '%s'\n", st->input);
 	if ((status = lex_cmd(st)) == LEX_EOK)
 	{
 		while ((status = lex_ifs(st)) == LEX_EOK
@@ -66,8 +66,8 @@ t_lex_err			lex_tokens(t_lex_st *st)
 	&& (status = lex_ifs(st)) == LEX_EOK
 	&& (status = lex_sep(st)) == LEX_EOK)
 		;
-	ft_dprintf(2, "[LEX][TOKNS] Status: %d, Wait: %d, Subsh-lvl: %d\n",
-		status, st->wait, st->subshell_level);
+	/* ft_dprintf(2, "[LEX][TOKNS] Status: %d, Wait: %d, Subsh-lvl: %d\n",
+		status, st->wait, st->subshell_level); */
 	if (status == LEX_ENOMATCH)
 		return (LEX_ESYNTAX);
 	if (status == LEX_EEND && st->subshell_level == 0)

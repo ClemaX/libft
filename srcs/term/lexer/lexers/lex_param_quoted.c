@@ -12,7 +12,7 @@ t_lex_err		lex_param_squoted(t_lex_st *st, t_tok_t type)
 	t_tok		*param;
 	const char	*start;
 
-	ft_dprintf(2, "[LEX][PARAM][SQUOTE] Input: '%s'\n", st->input);
+//	ft_dprintf(2, "[LEX][PARAM][SQUOTE] Input: '%s'\n", st->input);
 	if (!(st->wait & TOK_SQUOTED))
 	{
 		if (*st->input != '\'')
@@ -48,7 +48,7 @@ t_lex_err		lex_param_dquoted(t_lex_st *st, t_tok_t type)
 	{
 		if (*st->input != '"')
 			return (LEX_ENOMATCH);
-		ft_dprintf(2, "[LEX][PARAM][DQUOTE] Input: '%s'\n", st->input);
+//		ft_dprintf(2, "[LEX][PARAM][DQUOTE] Input: '%s'\n", st->input);
 		st->input++;
 		st->wait |= TOK_DQUOTED;
 	}
@@ -88,7 +88,7 @@ t_lex_err			lex_param_quoted(t_lex_st *st, t_tok_t type)
 {
 	t_lex_err	status;
 
-	ft_dprintf(2, "[LEX][PARAM][QUOTED] Input: '%s'\n", st->input);
+//	ft_dprintf(2, "[LEX][PARAM][QUOTED] Input: '%s'\n", st->input);
 	if (st->wait & TOK_SQUOTED
 	|| (status = lex_param_dquoted(st, type)) == LEX_ENOMATCH) // allocates a param and set flag DQUOTE + trim dquotes
 		status = lex_param_squoted(st, type); // allocates a param and set the flag SQUOTE + trim squotes
