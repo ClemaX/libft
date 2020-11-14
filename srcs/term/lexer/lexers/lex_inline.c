@@ -49,14 +49,29 @@ static t_tok_t	lex_redir_op_type(t_lex_st *st)
 static t_lex_err	lex_redir(t_lex_st *st)
 {
 	const t_tok_t	type = lex_redir_op_type(st);
+	t_lex_st		param_st;
 	t_lex_err		status;
+	t_tok			*redir;
 
 	ft_dprintf(2, "[LEX][  CMD][INLINE][ REDIR] Input: '%s'\n", st->input);
 	if (type == TOK_NONE)
 		return (LEX_ENOMATCH);
-	if (lex_ifs(st) != LEX_EOK
-	|| (status = lex_param(st, type)) == LEX_ENOMATCH)
+	param_st = *st;
+	param_st.tokens = NULL;
+	if (lex_ifs(&param_st) != LEX_EOK
+	|| (status = lex_param(&param_st, TOK_PARAM)) == LEX_ENOMATCH)
 		return (LEX_ESYNTAX);
+	if (status == LEX_EOK)
+	{
+		if (!(redir = token_new(param_st.tokens, type)))
+		{
+			token_clr(&param_st.tokens);
+			return (LEX_EALLOC);
+		}
+		token_add_back(&st->tokens, redir);
+		st->input = param_st.input;
+		st->wait = param_st.wait;
+	}
 	return (status);
 }
 
