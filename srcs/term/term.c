@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 19:29:38 by chamada           #+#    #+#             */
-/*   Updated: 2020/11/13 03:35:02 by chamada          ###   ########.fr       */
+/*   Updated: 2020/11/13 07:49:46 by chamada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,10 @@ int			term_prompt(int ac, const char **av, const char **envp,
 		return (-1);
 	}
 	term_write_prompt(&term, status);
-	if (term.caps.enabled)
-		tputs(term.caps.insert, 0, &ft_putchar);
 	while (status & TERM_READING)
 		status = handle_status(&term, term_read(&term, status));
 	if (term_destroy(&term) == -1)
 		status |= TERM_ERROR;
-	if (term.caps.enabled)
-		tputs(term.caps.insert_end, 0, &ft_putchar);
 	if (term.interactive)
 		write(1, "exit\n", 5);
 	return ((status & TERM_ERROR) ? -1 : term.st);

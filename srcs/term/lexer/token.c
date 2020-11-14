@@ -51,11 +51,16 @@ void		token_add_front(t_tok **tokens, t_tok *token)
 	*tokens = token;
 }
 
+/*
+** Clear a token list recursively depending on token type.
+**
+** type & TOK_CMD and type == TOK_PARAM are cleared recursively.
+*/
 void		token_clr(t_tok **tokens)
 {
 	while(*tokens)
 	{
-		if ((*tokens)->type & TOK_CMD)
+		if ((*tokens)->type & TOK_CMD || ((*tokens)->type == TOK_PARAM))
 			token_clr((t_tok**)&(*tokens)->data);
 		else
 			free((*tokens)->data);

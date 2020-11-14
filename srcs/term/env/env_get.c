@@ -5,16 +5,14 @@
 **
 ** returns a pointer to the variable's value.
 */
-const char		*env_get(t_env *env, const char *key)
+const char		*env_get(t_env *env, const char *key, size_t key_length)
 {
-	const size_t	key_length = ft_strlen(key);
-
 	while (env && (key_length != env->key_length
 	|| ft_strncmp(env->key, key, env->key_length)))
 		env = env->next;
 	if (env)
 		return (env->key + key_length + 1);
-	return (NULL);
+	return ("");
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 19:29:17 by chamada           #+#    #+#             */
-/*   Updated: 2020/11/12 10:34:40 by chamada          ###   ########.fr       */
+/*   Updated: 2020/11/13 18:20:10 by chamada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,23 @@ int			term_next_line(t_term *t, int status)
 {
 	if (!t->line->length)
 		return (status);
-	if (t->caps.enabled)
-		tputs(t->caps.insert_end, 0, &ft_putchar);
 	if (t->interactive)
+	{
+		if (t->caps.enabled)
+		{
+			tputs(t->caps.insert_end, 0, &ft_putchar);
+			if (tcsetattr(0, 0, &t->s_ios_bkp) == -1)
+				return ((status | TERM_ERROR) & ~TERM_READING);
+		}
 		write(1, "\n", 1);
-	t->exec(t->lex_st.tokens, t); // TODO: t->st = ...
+		t->exec(t->lex_st.tokens, t); // TODO: t->st = ...
+		if (tcsetattr(0, 0, &t->s_ios) == -1)
+			return ((status | TERM_ERROR) & ~TERM_READING);
+	}
+	else
+		t->exec(t->lex_st.tokens, t);
 	token_clr(&t->lex_st.tokens);
+//	TODO: Clear on the fly, t->lex_st.tokens = NULL;
 	if (t->caps.enabled)
 		tputs(t->caps.insert, 0, &ft_putchar);
 	if ((!t->hist.next || t->line == t->hist.next)

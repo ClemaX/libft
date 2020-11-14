@@ -20,19 +20,20 @@ typedef uint16_t	t_tok_t;
 # define TOK_SCOPE_OUT	0b0000000000000100
 
 # define TOK_PARAM		0b0000000000001000
-# define TOK_SQUOTED	0b0000000000010000
-# define TOK_DQUOTED	0b0000000000100000
+# define TOK_SIMPLE		0b0000000000010000
+# define TOK_SQUOTED	0b0000000000100000
+# define TOK_DQUOTED	0b0000000001000000
 
-# define TOK_CMD		0b0000000001000000
+# define TOK_CMD		0b0000000010000000
 
-# define OP_OR			0b0000000010000000
-# define OP_AND			0b0000000100000000
-# define OP_PIPE		0b0000001000000000
+# define OP_OR			0b0000000100000000
+# define OP_AND			0b0000001000000000
+# define OP_PIPE		0b0000010000000000
 
-# define OP_REDIR_WR	0b0000010000000000
-# define OP_REDIR_WA	0b0000100000000000
-# define OP_REDIR_RD	0b0001000000000000
-# define OP_HEREDOC		0b0010000000000000
+# define OP_REDIR_WR	0b0000100000000000
+# define OP_REDIR_WA	0b0001000000000000
+# define OP_REDIR_RD	0b0010000000000000
+# define OP_HEREDOC		0b0100000000000000
 
 typedef struct		s_tok
 {
@@ -50,8 +51,6 @@ void		token_add_front(t_tok **tokens, t_tok *token);
 void		token_sort(t_tok **lst, int (*cmp)(t_tok_t, t_tok_t));
 
 size_t		token_len(t_tok *tokens);
-
-char *const	*token_export(t_tok *tokens);
 
 void		token_clr(t_tok **tokens);
 

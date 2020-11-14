@@ -3,7 +3,7 @@
 /*
 ** Get an entry in a given environment using it's key.
 **
-** returns a pointer to the entry if it was found, or NULL otherwise.
+** returns a pointer to the entry or NULL in case of error.
 */
 static t_env	*env_get_entry(t_env **env, const char *key, size_t key_length)
 {
@@ -27,26 +27,26 @@ static t_env	*env_get_entry(t_env **env, const char *key, size_t key_length)
 /*
 ** Assign an environment variable using an assignment operation.
 **
-** returns a pointer to the variable's value.
+** The assignment string should be composed of [KEY]=[VALUE].
+** The key's characters must be alphanumeric or '-' and '_'.
+**
+** returns 0 if the assignment is invalid, 1 if successful and -1 otherwise.
 */
-const char		*env_assign(t_env **env, const char *assignment, bool exported)
+char		env_assign(t_env **env, const char *assignment, bool exported)
 {
-	const char *	key_end = ft_strchr(assignment, ENV_OP_ASSIGN);
+	size_t			key_len = env_key_len(assignment);
 	t_env			*entry;
 
-	if (!key_end)
-		return (NULL);
-	if (!(entry = env_get_entry(env, assignment, key_end - assignment)))
-		return (NULL);
+	if (!key_len || assignment[key_len] != ENV_OP_ASSIGN)
+		return (0);
+	if (!(entry = env_get_entry(env, assignment, key_len)))
+		return (-1);
 	free(entry->key);
 	if (!(entry->key = ft_strdup(assignment)))
-	{
-		free(entry);
-		return (NULL);
-	}
+		return (-1);
 	entry->exported = exported;
-	entry->key_length = key_end - assignment;
-	return (entry->key + entry->key_length + 1);
+	entry->key_length = key_len;
+	return (1);
 }
 
 /*

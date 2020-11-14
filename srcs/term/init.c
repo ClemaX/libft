@@ -6,7 +6,7 @@
 /*   By: chamada <chamada@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 18:57:02 by chamada           #+#    #+#             */
-/*   Updated: 2020/11/12 05:06:15 by chamada          ###   ########.fr       */
+/*   Updated: 2020/11/13 08:12:48 by chamada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	fatal_ios(t_term *t)
 	if (!env_set(&t->env, "PS1", TERM_PS1, false)
 	|| fstat(STDIN_FILENO, &input_stat)
 	|| !(t->interactive = S_ISCHR(input_stat.st_mode))
-	|| !(term_type = env_get(t->env, "TERM"))
+	|| !(term_type = env_get(t->env, "TERM", 4))
 	|| tgetent(term_buff, term_type) <= 0
 	|| tcgetattr(0, &t->s_ios) == -1)
 		return (0);
@@ -97,7 +97,11 @@ int			term_destroy(t_term *t)
 	line_clear(&t->line);
 	clip_clear(t);
 	free(t->name);
-	if (t->caps.enabled && tcsetattr(0, 0, &t->s_ios_bkp) == -1)
-		return (-1);
+	if (t->caps.enabled)
+	{
+		if (tcsetattr(0, 0, &t->s_ios_bkp) == -1)
+			return (-1);
+		tputs(t->caps.insert_end, 0, &ft_putchar);
+	}
 	return (0);
 }
