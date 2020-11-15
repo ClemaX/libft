@@ -139,7 +139,7 @@ int			term_erase(t_term *t, int status)
 		tputs(t->caps.c_left, 0, &ft_putchar);
 		tputs(t->caps.c_del, 0, &ft_putchar);
 		t->cursor.pos.x--;
-		line_erase_at(t->line, t->cursor.pos.x, 1);
+		line_erase(t->line, t->cursor.pos.x, 1);
 	}
 	return (status);
 }

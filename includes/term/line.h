@@ -33,9 +33,8 @@ t_line			*line_new(size_t size);
 /*
 **				line_edit.c
 */
-int				line_insert_at(t_line *line, size_t at,
-	const char *str, size_t n);
-int				line_erase_at(t_line *line, size_t at, size_t n);
+int				line_insert(t_line *line, size_t at, const char *str, size_t n);
+int				line_erase(t_line *line, size_t at, size_t n);
 void			line_clear(t_line **line);
 
 #endif

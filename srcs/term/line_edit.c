@@ -12,7 +12,7 @@
 
 #include <term/term.h>
 
-int		line_insert_at(t_line *line, size_t at, const char *str, size_t n)
+int		line_insert(t_line *line, size_t at, const char *str, size_t n)
 {
 	char	*new;
 	size_t	new_len;
@@ -37,7 +37,7 @@ int		line_insert_at(t_line *line, size_t at, const char *str, size_t n)
 	return (1);
 }
 
-int		line_erase_at(t_line *line, size_t at, size_t n)
+int		line_erase(t_line *line, size_t at, size_t n)
 {
 	if (!line || line->len - at < n)
 		return (0);

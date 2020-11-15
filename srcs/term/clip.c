@@ -45,8 +45,8 @@ char	*clip_cut(t_term *t)
 		tputs(t->caps.c_del_n, t->clip.line.len, &ft_putchar);
 		ft_dprintf(2, "[CLIPBD] Cut %ld chars from %s at %d\n",
 			t->clip.line.len, (t->line) ? t->line->data : NULL, t->cursor.pos.x);
-		// TODO: Fix line_erase_at with full line
-		line_erase_at(t->line, t->cursor.pos.x, t->clip.line.len);
+		// TODO: Fix line_erase with full line
+		line_erase(t->line, t->cursor.pos.x, t->clip.line.len);
 		select_clear(t);
 	}
 	return (t->clip.line.data);
