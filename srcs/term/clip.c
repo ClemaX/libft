@@ -18,16 +18,16 @@ char	*clip_copy(t_term *t)
 	{
 		free(t->clip.line.data);
 		t->clip.line.data = NULL;
-		t->clip.line.length = t->clip.select.end.x - t->clip.select.start.x;
-		if (!t->clip.line.length || !t->line)
+		t->clip.line.len = t->clip.select.end.x - t->clip.select.start.x;
+		if (!t->clip.line.len || !t->line)
 			return (NULL);
 		ft_dprintf(2, "[CLIPBD] Copy %ld chars from %s at %d\n",
-			t->clip.line.length, (t->line) ? t->line->data : NULL, t->cursor.pos.x);
+			t->clip.line.len, (t->line) ? t->line->data : NULL, t->cursor.pos.x);
 		if (!(t->clip.line.data = ft_substr(t->line->data,
-		t->clip.select.start.x, t->clip.line.length)))
+		t->clip.select.start.x, t->clip.line.len)))
 			return (NULL);
 		t->cursor.pos.x = t->clip.select.start.x;
-		t->clip.line.size = t->clip.line.length + 1;
+		t->clip.line.size = t->clip.line.len + 1;
 		t->clip.line.next = NULL;
 		t->clip.line.prev = NULL;
 	}
@@ -42,11 +42,11 @@ char	*clip_cut(t_term *t)
 			return (NULL);
 		tputs(tgoto(t->caps.c_move_h, 0, t->cursor.origin.x + t->cursor.pos.x),
 			0, &ft_putchar);
-		tputs(t->caps.c_del_n, t->clip.line.length, &ft_putchar);
+		tputs(t->caps.c_del_n, t->clip.line.len, &ft_putchar);
 		ft_dprintf(2, "[CLIPBD] Cut %ld chars from %s at %d\n",
-			t->clip.line.length, (t->line) ? t->line->data : NULL, t->cursor.pos.x);
+			t->clip.line.len, (t->line) ? t->line->data : NULL, t->cursor.pos.x);
 		// TODO: Fix line_erase_at with full line
-		line_erase_at(t->line, t->cursor.pos.x, t->clip.line.length);
+		line_erase_at(t->line, t->cursor.pos.x, t->clip.line.len);
 		select_clear(t);
 	}
 	return (t->clip.line.data);
@@ -54,18 +54,18 @@ char	*clip_cut(t_term *t)
 
 int		clip_paste(t_term *t)
 {
-	if (!t->clip.line.length)
+	if (!t->clip.line.len)
 		return (0);
 	select_clear(t);
-	ft_dprintf(2, "[CLIPBD] Paste %ld chars to %s at %d\n", t->clip.line.length,
+	ft_dprintf(2, "[CLIPBD] Paste %ld chars to %s at %d\n", t->clip.line.len,
 		t->line->data, t->cursor.pos.x);
-	term_write(t, t->clip.line.data, t->clip.line.length);
+	term_write(t, t->clip.line.data, t->clip.line.len);
 	return (1);
 }
 
 void	clip_clear(t_term *t)
 {
-	t->clip.line.length = 0;
+	t->clip.line.len = 0;
 	t->clip.line.size = 0;
 	free(t->clip.line.data);
 	t->clip.line.data = NULL;

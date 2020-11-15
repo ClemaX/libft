@@ -17,9 +17,9 @@ int		line_insert_at(t_line *line, size_t at, const char *str, size_t n)
 	char	*new;
 	size_t	new_len;
 
-	if (at > line->length)
+	if (at > line->len)
 		return (0);
-	new_len = line->length + n;
+	new_len = line->len + n;
 	if (new_len + 1 > line->size)
 	{
 		while (new_len + 1 > line->size)
@@ -30,25 +30,25 @@ int		line_insert_at(t_line *line, size_t at, const char *str, size_t n)
 		free(line->data);
 		line->data = new;
 	}
-	ft_memmove(line->data + at + n, line->data + at, line->length - at);
+	ft_memmove(line->data + at + n, line->data + at, line->len - at);
 	ft_memcpy(line->data + at, str, n);
-	line->length = new_len;
-	line->data[line->length] = '\0';
+	line->len = new_len;
+	line->data[line->len] = '\0';
 	return (1);
 }
 
 int		line_erase_at(t_line *line, size_t at, size_t n)
 {
-	if (!line || line->length - at < n)
+	if (!line || line->len - at < n)
 		return (0);
-	if (at == line->length)
-		line->length -= n;
+	if (at == line->len)
+		line->len -= n;
 	else
 	{
-		ft_memmove(line->data + at, line->data + at + n, line->length - at - n);
-		line->length -= n;
+		ft_memmove(line->data + at, line->data + at + n, line->len - at - n);
+		line->len -= n;
 	}
-	line->data[line->length] = '\0';
+	line->data[line->len] = '\0';
 	return (1);
 }
 

@@ -38,7 +38,7 @@ int			term_cancel(t_term *t)
 	if (t->caps.enabled)
 		select_clear(t);
 	*t->line->data = '\0';
-	t->line->length = 0;
+	t->line->len = 0;
 	return (TERM_NEWLINE | TERM_READING);
 }
 
@@ -50,7 +50,7 @@ void		term_stop(t_term *t)
 
 int			term_next_line(t_term *t, int status)
 {
-	if (!t->line->length)
+	if (!t->line->len)
 		return (status);
 	if (t->interactive)
 	{
@@ -102,7 +102,7 @@ void		term_lex_error(t_term *t)
 	t->st = 258;
 	lex_reset(&t->lex_st);
 	*t->line->data = '\0';
-	t->line->length = 0;
+	t->line->len = 0;
 	t->cursor.pos.x = 0;
 	t->cursor.pos.y = 0;
 }

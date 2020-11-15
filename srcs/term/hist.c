@@ -23,7 +23,7 @@ void	hist_add(t_hist *hist, t_line *line)
 
 	// Clear next data
 	*hist->next->data = '\0';
-	hist->next->length = 0;
+	hist->next->len = 0;
 
 	// Advance existing history
 	hist->last = line;
@@ -58,6 +58,6 @@ void	hist_commit(t_hist *hist, t_line *line)
 {
 	free(hist->curr->data);
 	hist->curr->data = line->data;
-	hist->curr->length = line->length;
+	hist->curr->len = line->len;
 	hist->curr->size = line->size;
 }

@@ -18,7 +18,7 @@
 typedef struct	s_line
 {
 	char			*data;
-	size_t			length;
+	size_t			len;
 	size_t			size;
 	struct s_line	*next;
 	struct s_line	*prev;

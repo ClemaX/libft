@@ -81,7 +81,7 @@ int			term_init(t_term *t, const char **envp,
 		return (0);
 	t->line->prev = t->hist.last;
 	*t->line->data = '\0';
-	t->line->length = 0;
+	t->line->len = 0;
 	t->hist.curr = t->line;
 	t->hist.next = t->line;
 	if (fatal_ios(t) && fatal_caps(&t->caps))

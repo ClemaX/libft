@@ -24,9 +24,9 @@ t_line	*line_dup(t_line *line)
 		free(new);
 		return (NULL);
 	}
-	ft_memcpy(new->data, line->data, line->length);
-	new->length = line->length;
-	new->data[new->length] = '\0';
+	ft_memcpy(new->data, line->data, line->len);
+	new->len = line->len;
+	new->data[new->len] = '\0';
 	return (new);
 }
 
@@ -42,7 +42,7 @@ t_line	*line_new(size_t size)
 		free(line);
 		return (NULL);
 	}
-	line->length = 0;
+	line->len = 0;
 	*line->data = '\0';
 	line->next = NULL;
 	line->prev = NULL;

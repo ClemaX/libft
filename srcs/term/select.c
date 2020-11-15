@@ -26,7 +26,7 @@ void	highlight(t_term *t)
 			t->clip.select.end.x - t->clip.select.start.x);
 		tputs(t->caps.standout_end, 0, &ft_putchar);
 		write(1, t->line->data + t->clip.select.end.x,
-			t->line->length - t->clip.select.end.x);
+			t->line->len - t->clip.select.end.x);
 		tputs(tgoto(t->caps.c_move_h, 0, t->cursor.origin.x + t->cursor.pos.x),
 			0, &ft_putchar);
 	}
@@ -55,7 +55,7 @@ void	select_left(t_term *t)
 
 void	select_right(t_term *t)
 {
-	if (t->cursor.pos.x < t->line->length)
+	if (t->cursor.pos.x < t->line->len)
 	{
 		if (t->clip.select.start.x == -1U || t->clip.select.end.x == -1U)
 		{
@@ -86,7 +86,7 @@ void	select_clear(t_term *t)
 			tputs(tgoto(t->caps.c_move_h, 0, t->cursor.origin.x),
 				0, &ft_putchar);
 			tputs(t->caps.c_del_line, 0, &ft_putchar);
-			write(1, t->line->data, t->line->length);
+			write(1, t->line->data, t->line->len);
 			tputs(tgoto(t->caps.c_move_h, 0,
 				t->cursor.origin.x + t->cursor.pos.x), 0, &ft_putchar);
 		}

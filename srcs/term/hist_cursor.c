@@ -16,16 +16,16 @@ void	term_up(t_term *t)
 {
 	if (t->hist.curr->prev)
 	{
-		if (t->hist.curr != t->hist.next && t->line->length)
+		if (t->hist.curr != t->hist.next && t->line->len)
 		{
 			hist_commit(&t->hist, t->line);
 			free(t->line);
 		}
 		t->hist.curr = t->hist.curr->prev;
 		term_clear_line(t);
-		write(1, t->hist.curr->data, t->hist.curr->length);
+		write(1, t->hist.curr->data, t->hist.curr->len);
 		t->line = line_dup(t->hist.curr);
-		t->cursor.pos.x = t->hist.curr->length;
+		t->cursor.pos.x = t->hist.curr->len;
 	}
 }
 
@@ -40,8 +40,8 @@ void	term_down(t_term *t)
 		}
 		t->hist.curr = t->hist.curr->next;
 		term_clear_line(t);
-		write(1, t->hist.curr->data, t->hist.curr->length);
+		write(1, t->hist.curr->data, t->hist.curr->len);
 		t->line = line_dup(t->hist.curr);
-		t->cursor.pos.x = t->hist.curr->length;
+		t->cursor.pos.x = t->hist.curr->len;
 	}
 }

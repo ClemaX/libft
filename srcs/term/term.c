@@ -16,7 +16,7 @@ static int	handle_status(t_term *t, int status)
 {
 	if (status & TERM_INT)
 		status = term_cancel(t);
-	if (status & TERM_EOF && t->line->length == 0)
+	if (status & TERM_EOF && t->line->len == 0)
 		status &= ~TERM_READING;
 	if (status & TERM_NEWLINE)
 		status = term_new_line(t, status);

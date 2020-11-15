@@ -55,7 +55,7 @@ void	term_clear_screen(t_term *t, int status)
 	{
 		tputs(t->caps.clear, 0, &ft_putchar);
 		term_write_prompt(t, status);
-		write(1, t->line->data, t->line->length);
-		t->cursor.pos.x = t->line->length;
+		write(1, t->line->data, t->line->len);
+		t->cursor.pos.x = t->line->len;
 	}
 }
