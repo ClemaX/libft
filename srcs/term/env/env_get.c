@@ -3,7 +3,7 @@
 /*
 ** Get an environment variable using it's key.
 **
-** returns a pointer to the variable's value.
+** returns a pointer to the variable's value if it is found or NULL otherwise.
 */
 const char		*env_get(t_env *env, const char *key, size_t key_length)
 {
@@ -12,7 +12,7 @@ const char		*env_get(t_env *env, const char *key, size_t key_length)
 		env = env->next;
 	if (env)
 		return (env->key + key_length + 1);
-	return ("");
+	return (NULL);
 }
 
 /*

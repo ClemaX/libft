@@ -52,7 +52,8 @@ char		env_assign(t_env **env, const char *assignment, bool exported)
 /*
 ** Set an environment variable using a key a value and an export flag.
 **
-** returns a pointer to the value that has been set.
+** returns a pointer to the value that has been set successfully, or NULL
+** otherwise.
 */
 const char		*env_set(t_env **env,
 	const char *key, const char *value, bool exported)
