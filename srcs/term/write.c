@@ -14,12 +14,12 @@
 
 void	term_write_prompt(t_term *t, int status)
 {
+	const char	*ps;
+
 	if (t->interactive)
 	{
-		if (status & TERM_WAITING)
-			term_prewrite(t, "> ", 2);
-		else
-			term_prewrite(t, TERM_PS1, sizeof(TERM_PS1) - 1);
+		ps = env_get(t->env, (status & TERM_WAITING) ? "PS2" : "PS1", 3);
+			term_prewrite(t, ps, ft_strlen(ps));
 		if (t->caps.enabled)
 			tputs(t->caps.insert, 0, &ft_putchar);
 	}

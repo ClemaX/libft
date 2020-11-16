@@ -28,7 +28,15 @@
 # include <term/env.h>
 # include <term/lexer.h>
 
+/*
+** Displayed before reading the first-line of a command.
+*/
 # define TERM_PS1		"minish> "
+
+/*
+** Displayed before reading the second and subsquent lines of a command.
+*/
+# define TERM_PS2		"> "
 
 # define TERM_READING	1
 # define TERM_ERROR		2
