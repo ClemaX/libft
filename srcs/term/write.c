@@ -12,6 +12,7 @@
 
 #include <term/term.h>
 
+// TODO: Expand PS1 and PS2 using string_expand.
 void	term_write_prompt(t_term *t, int status)
 {
 	const char	*ps;
@@ -37,7 +38,7 @@ int		term_prewrite(t_term *t, const char *str, size_t n)
 int		term_write(t_term *t, const char *str, size_t n)
 {
 	if ((t->interactive && write(1, str, n) <= 0)
-	|| !(line_insert(t->line, t->cursor.pos.x, str, n)))
+	|| !line_insert(t->line, t->cursor.pos.x, str, n))
 		return (0);
 	t->cursor.pos.x += n;
 	return (n);
