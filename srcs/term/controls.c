@@ -50,6 +50,9 @@ void		term_stop(t_term *t)
 
 int			term_next_line(t_term *t, int status)
 {
+	// TODO: Check if multi-line crashes (lex_ifs.c:11 heap-use-after-free)
+	if (t->interactive)
+		write(2, "\n", 1);
 	if (!t->line->len)
 		return (status);
 	if (t->interactive)
@@ -60,15 +63,13 @@ int			term_next_line(t_term *t, int status)
 			if (tcsetattr(0, 0, &t->s_ios_bkp) == -1)
 				return ((status | TERM_ERROR) & ~TERM_READING);
 		}
-		write(1, "\n", 1);
 		t->exec(t->lex_st.tokens, t); // TODO: t->st = ...
 		if (tcsetattr(0, 0, &t->s_ios) == -1)
 			return ((status | TERM_ERROR) & ~TERM_READING);
 	}
 	else
 		t->exec(t->lex_st.tokens, t);
-	token_clr(&t->lex_st.tokens);
-//	TODO: Clear on the fly, t->lex_st.tokens = NULL;
+	t->lex_st.tokens = NULL;
 	if (t->caps.enabled)
 		tputs(t->caps.insert, 0, &ft_putchar);
 	if ((!t->hist.next || t->line == t->hist.next)
