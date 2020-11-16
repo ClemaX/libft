@@ -44,8 +44,11 @@ int			term_cancel(t_term *t)
 
 void		term_stop(t_term *t)
 {
-	if (t->pid != 0)
-		kill(t->pid, SIGSTOP);
+	const pid_t	pid
+		= t->session->processes[t->session->processes[MANAGE].pid].pid;
+
+	if (pid != 0)
+		kill(pid, SIGSTOP);
 }
 
 int			term_next_line(t_term *t, int status)

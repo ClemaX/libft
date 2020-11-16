@@ -78,7 +78,8 @@ int			term_init(t_term *t, const char **envp,
 	t->clip.select = (t_select){.start.x=-1U, .end.x=-1U};
 	t->exec = exec;
 	if (!(t->line = line_new(10))
-	|| !(t->env = env_import(envp)))
+	|| !(t->env = env_import(envp))
+	|| !(t->session = start_session()))
 		return (0);
 	t->line->prev = t->hist.last;
 	*t->line->data = '\0';
@@ -92,6 +93,7 @@ int			term_init(t_term *t, const char **envp,
 
 int			term_destroy(t_term *t)
 {
+	end_session(t->session);
 	token_clr(&t->lex_st.tokens);
 	hist_clear(&t->hist);
 	env_clr(&t->env);

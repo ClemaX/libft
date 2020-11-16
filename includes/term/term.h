@@ -27,6 +27,7 @@
 # include <term/caps.h>
 # include <term/env.h>
 # include <term/lexer.h>
+# include <term/process.h>
 
 /*
 ** Displayed before reading the first-line of a command.
@@ -74,7 +75,7 @@ typedef	struct	s_term
 	t_env			*env;
 	char			*name;
 	bool			interactive;
-	pid_t			pid;
+	t_session		*session;
 	int				st;
 	struct termios	s_ios;
 	struct termios	s_ios_bkp;
