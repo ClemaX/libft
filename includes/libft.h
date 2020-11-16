@@ -69,8 +69,11 @@ char			*ft_substr(char const *s, unsigned int start,
 char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_strtrim(char const *s1, char const *set);
 char			**ft_split(char const *s, char c);
+
 void			*strs_unload_n(char **strs, int n);
 void			*strs_unload(char **strs);
+void			strs_print(char **strs);
+
 char			*ft_basename(const char *path);
 
 char			*ft_itoa(int n);

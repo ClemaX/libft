@@ -38,25 +38,6 @@ static size_t	splitlen(const char *s1, const char c)
 	return (s - s1);
 }
 
-void			*strs_unload_n(char **strs, int n)
-{
-	while (n)
-		free(strs[--n]);
-	free(strs);
-	return (NULL);
-}
-
-void			*strs_unload(char **strs)
-{
-	int	i;
-
-	i = 0;
-	while (strs[i])
-		free(strs[i++]);
-	free(strs);
-	return (NULL);
-}
-
 char			**ft_split(char const *s, char c)
 {
 	const size_t	count = splitcnt(s, c);
