@@ -38,29 +38,17 @@ SRCS	=		$(addprefix $(SRCDIR)/,											\
 					pf_format.c pf_line.c pf_numbers.c pf_specs.c)				\
 				$(addprefix scanf/,												\
 					ft_sscanf.c sf_convert.c sf_specs.c)						\
-				$(addprefix term/,												\
-					$(addprefix env/env,										\
-						_get.c _set.c .c)										\
-					$(addprefix lexer/,											\
-						$(addprefix lexers/lex_,								\
-							cmd.c ifs.c inline.c param_quoted.c param.c			\
-							subshell.c tokens.c)								\
-							lexer.c token_utils.c token.c)						\
-					clip.c controls.c hist_cursor.c hist.c init.c				\
-					cursor.c line_edit.c line.c read_special.c read.c select.c	\
-					term.c write.c))
+				)
 
 OBJDS	=		$(addprefix $(OBJDIR)/,											\
 					io lists map images memory numbers strings types gnl printf	\
-					scanf term term/env term/lexer term/lexer/lexers)
+					scanf)
 
 OBJS	=		$(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
 
 HDRS	=		$(addprefix $(INCDIR)/, gnl/get_next_line.h						\
 				$(addprefix printf/, format.h line.h numbers.h parse.h specs.h)	\
 				$(addprefix scanf/, convert.h specs.h)							\
-				$(addprefix term/, caps.h cursor.h env.h hist.h lexer.h			\
-					line.h term.h token.h process.h)										\
 				libft.h)
 
 all:			$(NAME)
