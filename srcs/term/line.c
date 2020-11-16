@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <term/term.h>
+#include <term/line.h>
 
 t_line	*line_dup(t_line *line)
 {
@@ -47,4 +47,35 @@ t_line	*line_new(size_t size)
 	line->next = NULL;
 	line->prev = NULL;
 	return (line);
+}
+
+void	line_add_back(t_line **line_list, t_line *line)
+{
+	t_line	*current;
+
+	if (line)
+	{
+		if (*line_list)
+		{
+			current = *line_list;
+			while (current->next)
+				current = current->next;
+			current->next = line;
+		}
+		else
+			*line_list = line;
+	}
+}
+
+size_t	line_count(t_line *line_list)
+{
+	size_t	count;
+
+	count = 0;
+	while (line_list)
+	{
+		line_list = line_list->next;
+		count++;
+	}
+	return (count);
 }

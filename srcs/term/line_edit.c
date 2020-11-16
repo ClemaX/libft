@@ -37,6 +37,11 @@ int		line_insert(t_line *line, size_t at, const char *str, size_t n)
 	return (1);
 }
 
+int		line_append(t_line *line, const char *str)
+{
+	return (line_insert(line, line->len, str, ft_strlen(str)));
+}
+
 int		line_erase(t_line *line, size_t at, size_t n)
 {
 	if (!line || line->len - at < n)
@@ -59,5 +64,17 @@ void	line_clear(t_line **line)
 		free((*line)->data);
 		free(*line);
 		*line = NULL;
+	}
+}
+
+void	lines_clear(t_line **line_list)
+{
+	t_line	*curr;
+
+	while ((curr = *line_list))
+	{
+		*line_list = (*line_list)->next;
+		free(curr->data);
+		free(curr);
 	}
 }

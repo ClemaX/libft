@@ -14,6 +14,7 @@
 # define LINE_H
 
 # include <stdlib.h>
+# include <libft.h>
 
 typedef struct	s_line
 {
@@ -30,11 +31,19 @@ typedef struct	s_line
 t_line			*line_dup(t_line *line);
 t_line			*line_new(size_t size);
 
+size_t			line_count(t_line *line_list);
+
+void			line_add_back(t_line **line_list, t_line *line);
+
 /*
 **				line_edit.c
 */
 int				line_insert(t_line *line, size_t at, const char *str, size_t n);
+int				line_append(t_line *line, const char *str);
+
 int				line_erase(t_line *line, size_t at, size_t n);
 void			line_clear(t_line **line);
+
+void			lines_clear(t_line **line_list);
 
 #endif
