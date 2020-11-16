@@ -56,9 +56,9 @@ static int	fatal_ios(t_term *t)
 	const char	*term_type;
 	char		term_buff[MAX_ENTRY];
 
-	if (!env_set(&t->env, "PS1", TERM_PS1, false)
-	|| fstat(STDIN_FILENO, &input_stat)
+	if (fstat(STDIN_FILENO, &input_stat)
 	|| !(t->interactive = S_ISCHR(input_stat.st_mode))
+	|| !env_set(&t->env, "PS1", TERM_PS1, false)
 	|| !(term_type = env_get(t->env, "TERM", 4))
 	|| tgetent(term_buff, term_type) <= 0
 	|| tcgetattr(0, &t->s_ios) == -1)
