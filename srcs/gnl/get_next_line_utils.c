@@ -17,9 +17,9 @@ int		search_end(char *s, size_t size, char **end)
 	while (size && *s && *s != '\n' && size--)
 		s++;
 	if (size)
-		return ((*(*end = s) == '\0') ? END : NEW_LINE);
+		return ((*(*end = s) == '\0') ? GNL_END : GNL_NL);
 	*end = NULL;
-	return (CONTINUE);
+	return (GNL_CONTINUE);
 }
 
 t_fd	*del_fd(t_fd *curr, int fd)

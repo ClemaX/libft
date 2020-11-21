@@ -71,17 +71,17 @@ static int	add_words(t_words **words, char *content, size_t size)
 	if (!size)
 		return (1);
 	if (!(new = malloc(sizeof(*new))))
-		return (-1);
+		return (GNL_ERROR);
 	if (!(new->content = malloc(size)))
 	{
 		free(new);
-		return (-1);
+		return (GNL_ERROR);
 	}
 	new->size = size;
 	ft_memcpy(new->content, content, size);
 	new->next = *words;
 	*words = new;
-	return (1);
+	return (GNL_CONTINUE);
 }
 
 static int	gnl_parse(t_fd *fd, t_words **words, size_t size)
@@ -95,13 +95,13 @@ static int	gnl_parse(t_fd *fd, t_words **words, size_t size)
 	buffer = fd->buffer + fd->position;
 	size -= fd->position;
 	fd->position = 0;
-	if ((state = search_end(buffer, size, &end)) != 1)
+	if ((state = search_end(buffer, size, &end)) != GNL_CONTINUE)
 	{
 		size = end - buffer;
 		if (size < BUFFER_SIZE - 1 && fd->buffer[size + 1] != '\0')
 			fd->position = end - fd->buffer + 1;
 	}
-	return (add_words(words, buffer, size) != -1 ? state : -1);
+	return (add_words(words, buffer, size) != GNL_ERROR ? state : GNL_ERROR);
 }
 
 int			get_next_line(int fd, char **line)
@@ -113,22 +113,22 @@ int			get_next_line(int fd, char **line)
 	int			state;
 
 	if (!line || fd < 0)
-		return (-1);
+		return (GNL_ERROR);
 	words = NULL;
 	curr_fd = get_fd(&fd_list, fd);
-	state = (curr_fd) ? 1 : -1;
-	if (state == 1 && curr_fd->position)
+	state = (curr_fd) ? GNL_CONTINUE : GNL_ERROR;
+	if (state == GNL_CONTINUE && curr_fd->position)
 		state = gnl_parse(curr_fd, &words, BUFFER_SIZE);
 	size = 0;
 	while (state == 1 && (size = read(fd, curr_fd->buffer, BUFFER_SIZE)) > 0)
 		state = gnl_parse(curr_fd, &words, size);
-	if (size == -1 || state == -1 || !(*line = get_line(words)))
+	if (size == -1 || state == GNL_ERROR || !(*line = get_line(words)))
 	{
 		clear_fds(&fd_list);
 		clear_words(words);
-		return (-1);
+		return (GNL_ERROR);
 	}
-	if (state != 2)
+	if (state != GNL_NL)
 		fd_list = del_fd(fd_list, fd);
-	return (state == 2 || (state == 0 && !size));
+	return (state == GNL_NL || (state == GNL_END && !size));
 }
