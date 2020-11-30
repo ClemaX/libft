@@ -77,6 +77,7 @@ void			strs_print(char **strs);
 char			*ft_basename(const char *path);
 
 char			*ft_itoa(int n);
+int				ft_snitoa(char *dest, int n, int size);
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void			ft_striter(char *str, void (*fun)(char));
 void			ft_putchar_fd(char c, int fd);
