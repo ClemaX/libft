@@ -18,13 +18,13 @@
 # include <fcntl.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 32
+#  define BUFFER_SIZE	32
 # endif
 
-# define CONTINUE 1
-# define END 0
-# define ERROR -1
-# define NEW_LINE 2
+# define GNL_CONTINUE	1
+# define GNL_END		0
+# define GNL_ERROR		-1
+# define GNL_NL			2
 
 typedef struct	s_words
 {
