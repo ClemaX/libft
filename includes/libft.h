@@ -49,6 +49,7 @@ int				ft_strpos(const char *s, int c);
 char			*ft_strnstr(const char *haystack, const char *needle,
 	size_t len);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
+int				ft_strcmp(const char *s1, const char *s2);
 
 int				ft_isupper(int c);
 int				ft_islower(int c);
@@ -77,6 +78,7 @@ void			strs_print(char **strs);
 char			*ft_basename(const char *path);
 
 char			*ft_itoa(int n);
+int				ft_snitoa(char *dest, int n, int size);
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void			ft_striter(char *str, void (*fun)(char));
 void			ft_putchar_fd(char c, int fd);
