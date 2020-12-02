@@ -101,6 +101,8 @@ void			ft_lstclear(t_list **lst, void (*del)(void*));
 t_list			*ft_lstmap
 	(t_list *lst, void *(*f)(void*), void (*del)(void*));
 void			ft_lstsort(t_list **lst, int (*cmp)(void*, void*));
+void			ft_lstinsert(t_list **list, t_list *elem,
+	int (*cmp)(void*, void*));
 
 const char		*map_set(t_map **map, const char *key, const char *value);
 t_map			*map_get(t_map *map, const char *key);

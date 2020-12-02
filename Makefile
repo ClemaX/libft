@@ -12,9 +12,9 @@ IFLAGS	=		-I$(INCDIR)
 SRCS	=		$(addprefix $(SRCDIR)/,											\
 				$(addprefix	io/ft_,												\
 					putchar_fd.c putendl_fd.c putnbr_fd.c putstr_fd.c)			\
-				$(addprefix lists/ft_,											\
-					lstadd_back.c lstadd_front.c lstclear.c lstdelone.c			\
-					lstiter.c lstlast.c lstmap.c lstnew.c lstsize.c lstsort.c)	\
+				$(addprefix lists/ft_lst,										\
+					add_back.c add_front.c clear.c delone.c						\
+					iter.c last.c map.c new.c size.c sort.c insert.c)			\
 				$(addprefix map/,												\
 					map.c map_utils.c map_sort.c)								\
 				$(addprefix images/,											\
