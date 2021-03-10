@@ -1,6 +1,6 @@
 NAME	=		libft.a
-SRCDIR	=		srcs
-INCDIR	=		includes
+SRCDIR	=		src
+INCDIR	=		include
 OBJDIR	=		objs
 CC		=		/usr/bin/clang
 AR		=		/usr/bin/ar
