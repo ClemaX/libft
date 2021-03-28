@@ -17,8 +17,8 @@
 
 typedef	struct	s_list
 {
-	void			*content;
 	struct s_list	*next;
+	void			*content;
 }				t_list;
 
 typedef struct	s_map
