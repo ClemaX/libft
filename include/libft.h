@@ -15,6 +15,12 @@
 
 # include <stddef.h>
 
+# ifdef __APPLE__
+# define PF_OFF_T "%llu"
+# else
+# define PF_OFF_T "%lu"
+# endif
+
 typedef	struct	s_list
 {
 	struct s_list	*next;
