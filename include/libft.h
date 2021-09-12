@@ -15,10 +15,14 @@
 
 # include <stddef.h>
 
-# ifdef __APPLE__
-# define PF_OFF_T "%llu"
-# else
-# define PF_OFF_T "%lu"
+# ifndef PRIuOFF_T
+#  ifdef __APPLE__
+#  define PRIuOFF_T "%llu"
+#  define PRIxOFF_T "%llx"
+#  else
+#  define PRIuOFF_T "%lu"
+#  define PRIxOFF_T "%lx"
+#  endif
 # endif
 
 typedef	struct	s_list
