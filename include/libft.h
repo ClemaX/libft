@@ -25,11 +25,17 @@
 #  endif
 # endif
 
+typedef void	(t_striter_fun(char c));
+typedef char	(t_strmapi_fun(unsigned i, char c));
+
 typedef	struct	s_list
 {
 	struct s_list	*next;
 	void			*content;
 }				t_list;
+
+typedef int		(t_cmp_fun(void *a, void *b));
+typedef void	(t_lstinsert_fun(t_list **list, t_list *elem, t_cmp_fun *cmp));
 
 typedef struct	s_map
 {
@@ -56,8 +62,7 @@ size_t			ft_strlcat(char *dst, const char *src, size_t size);
 char			*ft_strchr(const char *s, int c);
 char			*ft_strrchr(const char *s, int c);
 int				ft_strpos(const char *s, int c);
-char			*ft_strnstr(const char *haystack, const char *needle,
-	size_t len);
+char			*ft_strnstr(const char *hay, const char *needle, size_t len);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 int				ft_strcmp(const char *s1, const char *s2);
 
@@ -89,8 +94,8 @@ char			*ft_basename(const char *path);
 
 char			*ft_itoa(int n);
 int				ft_snitoa(char *dest, int n, int size);
-char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
-void			ft_striter(char *str, void (*fun)(char));
+char			*ft_strmapi(char const *s, t_strmapi_fun *fun);
+void			ft_striter(char *str, t_striter_fun *fun);
 void			ft_putchar_fd(char c, int fd);
 int				ft_putchar(int c);
 void			ft_putstr_fd(char *s, int fd);
@@ -110,10 +115,10 @@ void			ft_lstiter(t_list *lst, void (*f)(void *));
 void			ft_lstclear(t_list **lst, void (*del)(void*));
 t_list			*ft_lstmap
 	(t_list *lst, void *(*f)(void*), void (*del)(void*));
-void			ft_lstsort(t_list **lst, int (*cmp)(void*, void*));
-void			ft_lstsortrev(t_list **lst, int (*cmp)(void*, void*));
-void			ft_lstinsert(t_list **list, t_list *elem,
-	int (*cmp)(void*, void*));
+void			ft_lstsort(t_list **lst, t_cmp_fun *cmp);
+void			ft_lstsortrev(t_list **lst, t_cmp_fun *cmp);
+void			ft_lstinsert(t_list **list, t_list *elem, t_cmp_fun *cmp);
+void			ft_lstinsertrev(t_list **list, t_list *elem, t_cmp_fun *cmp);
 
 const char		*map_set(t_map **map, const char *key, const char *value);
 t_map			*map_get(t_map *map, const char *key);
