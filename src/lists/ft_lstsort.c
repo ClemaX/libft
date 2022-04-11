@@ -54,6 +54,27 @@ static void	*lstmergecmp(t_list *a, t_list *b, int (*cmp)(void*, void*))
 	return (lst);
 }
 
+static void	*lstmergecmprev(t_list *a, t_list *b, int (*cmp)(void*, void*))
+{
+	t_list	*lst;
+
+	if (a == NULL)
+		return (b);
+	if (b == NULL)
+		return (a);
+	if (cmp(a->content, b->content) < 0)
+	{
+		lst = a;
+		lst->next = lstmergecmprev(a->next, b, cmp);
+	}
+	else
+	{
+		lst = b;
+		lst->next = lstmergecmprev(a, b->next, cmp);
+	}
+	return (lst);
+}
+
 void		ft_lstsort(t_list **lst, int (*cmp)(void*, void*))
 {
 	t_list	*head;
@@ -67,4 +88,19 @@ void		ft_lstsort(t_list **lst, int (*cmp)(void*, void*))
 	ft_lstsort(&a, cmp);
 	ft_lstsort(&b, cmp);
 	*lst = lstmergecmp(a, b, cmp);
+}
+
+void		ft_lstsortrev(t_list **lst, int (*cmp)(void*, void*))
+{
+	t_list	*head;
+	t_list	*a;
+	t_list	*b;
+
+	head = *lst;
+	if (head == NULL || head->next == NULL)
+		return ;
+	lstsplit(head, &a, &b);
+	ft_lstsortrev(&a, cmp);
+	ft_lstsortrev(&b, cmp);
+	*lst = lstmergecmprev(a, b, cmp);
 }
