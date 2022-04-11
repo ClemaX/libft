@@ -35,6 +35,8 @@ typedef	struct	s_list
 }				t_list;
 
 typedef int		(t_cmp_fun(void *a, void *b));
+
+typedef void	(t_lstadd_fun(t_list **list, t_list *elem));
 typedef void	(t_lstinsert_fun(t_list **list, t_list *elem, t_cmp_fun *cmp));
 
 typedef struct	s_map
