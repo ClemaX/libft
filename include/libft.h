@@ -15,6 +15,8 @@
 
 # include <stddef.h>
 
+# define PATH_DELIM '/'
+
 # ifndef PRIuOFF_T
 #  ifdef __APPLE__
 #  define PRIuOFF_T "%llu"
@@ -108,10 +110,10 @@ long double		ft_pow(int nb, int pow);
 int				ft_atoi(const char *str);
 
 t_list			*ft_lstnew(void *content);
-void			ft_lstadd_front(t_list **alst, t_list *new);
+void			ft_lstadd_front(t_list **alst, t_list *elem);
 t_list			*ft_lstlast(t_list *lst);
 int				ft_lstsize(t_list *lst);
-void			ft_lstadd_back(t_list **alst, t_list *new);
+void			ft_lstadd_back(t_list **alst, t_list *elem);
 void			ft_lstdelone(t_list *lst, void (*del)(void*));
 void			ft_lstiter(t_list *lst, void (*f)(void *));
 void			ft_lstclear(t_list **lst, void (*del)(void*));
@@ -141,5 +143,7 @@ int				ft_sscanf
 	(const char *src, const char *fmt, ...) __attribute__((format(scanf,2,3)));
 int				write_bmp(const char *path, const char *buffer,
 	int w, int h);
+
+char			*path_cat(char *dest, const char *a, const char *b);
 
 #endif

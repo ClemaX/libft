@@ -38,11 +38,13 @@ SRCS	=		$(addprefix $(SRCDIR)/,											\
 					pf_format.c pf_line.c pf_numbers.c pf_specs.c)				\
 				$(addprefix scanf/,												\
 					ft_sscanf.c sf_convert.c sf_specs.c)						\
+				$(addprefix paths/,												\
+					path_cat.c)													\
 				)
 
 OBJDS	=		$(addprefix $(OBJDIR)/,											\
 					io lists map images memory numbers strings types gnl printf	\
-					scanf)
+					scanf paths)
 
 OBJS	=		$(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
 
