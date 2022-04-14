@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include <memory.h>
+#include <gnl.h>
+
 #include <gnl/get_next_line.h>
 
 static char	*get_line(t_words *words)

@@ -11,7 +11,10 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <libft.h>
+
+#include <memory.h>
+#include <strings.h>
+
 #include <printf/specs.h>
 #include <printf/line.h>
 #include <printf/numbers.h>

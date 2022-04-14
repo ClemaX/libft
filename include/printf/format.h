@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FORMAT_H
-# define FORMAT_H
+#pragma once
+
+#include <printf/line.h>
+#include <printf/specs.h>
 
 extern int	(*g_format[10])(t_line **line, t_spec spec, va_list ap);
-
-#endif

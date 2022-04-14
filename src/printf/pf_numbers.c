@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include <numbers.h>
+
 #include <printf/numbers.h>
 #include <printf/specs.h>
 

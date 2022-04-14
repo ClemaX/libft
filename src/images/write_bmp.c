@@ -11,9 +11,9 @@
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <stdint.h>
 #include <fcntl.h>
-#include <sys/stat.h>
+
+#include <images.h>
 
 static unsigned char	*get_file_header(int w, int h)
 {

@@ -14,6 +14,7 @@
 # define NUMBERS_H
 
 # include <stdint.h>
+
 # include <printf/specs.h>
 
 # define D_DEC		"0123456789"

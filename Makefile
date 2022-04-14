@@ -1,79 +1,94 @@
-NAME	=		libft.a
-SRCDIR	=		src
-INCDIR	=		include
-OBJDIR	=		objs
-CC		=		/usr/bin/clang
-AR		=		/usr/bin/ar
-RM		=		/bin/rm
-AFLAGS	=		rcus
-CFLAGS	=		-Wall -Wextra -Werror
-IFLAGS	=		-I$(INCDIR)
+NAME = libft.a
 
-SRCS	=		$(addprefix $(SRCDIR)/,											\
-				$(addprefix	io/ft_,												\
-					putchar_fd.c putendl_fd.c putnbr_fd.c putstr_fd.c)			\
-				$(addprefix lists/ft_lst,										\
-					add_back.c add_front.c clear.c delone.c						\
-					iter.c last.c map.c new.c size.c sort.c insert.c)			\
-				$(addprefix map/,												\
-					map.c map_utils.c map_sort.c)								\
-				$(addprefix images/,											\
-					write_bmp.c)												\
-				$(addprefix memory/ft_,											\
-					bzero.c calloc.c memccpy.c memchr.c memcmp.c memcpy.c		\
-					memmove.c memset.c)											\
-				$(addprefix numbers/ft_,										\
-					atoi.c itoa.c numlen.c pow.c)								\
-				$(addprefix strings/ft_,										\
-					split.c strchr.c strdup.c strjoin.c strlcat.c strlcpy.c		\
-					strlen.c strmapi.c strcmp.c strnstr.c strpos.c strrchr.c	\
-					strrem.c strtrim.c substr.c striter.c strings.c)			\
-				$(addprefix types/ft_,											\
-					isalnum.c isalpha.c isascii.c isdigit.c						\
-					islower.c isprint.c issign.c isspace.c isupper.c iscntrl.c	\
-					tolower.c toupper.c)										\
-				$(addprefix gnl/,												\
-					get_next_line.c get_next_line_utils.c)						\
-				$(addprefix printf/, ft_printf.c pf_parse.c pf_convert.c		\
-					pf_format.c pf_line.c pf_numbers.c pf_specs.c)				\
-				$(addprefix scanf/,												\
-					ft_sscanf.c sf_convert.c sf_specs.c)						\
-				$(addprefix paths/,												\
-					path_cat.c ft_basename.c )									\
-				)
+# Compiler and linker
+CC = clang
+LD = clang
+AR = ar
 
-OBJDS	=		$(addprefix $(OBJDIR)/,											\
-					io lists map images memory numbers strings types gnl printf	\
-					scanf paths)
+# Paths
+include srcs.mk
+INCDIR = include
+LIBDIR = lib
 
-OBJS	=		$(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
+OBJDIR = obj
+BINDIR = .
 
-HDRS	=		$(addprefix $(INCDIR)/, gnl/get_next_line.h						\
-				$(addprefix printf/, format.h line.h numbers.h parse.h specs.h)	\
-				$(addprefix scanf/, convert.h specs.h)							\
-				libft.h)
+# Library dependencies
+LIBS = $(addprefix $(LIBDIR)/, )
 
-all:			$(NAME)
+LIBDIRS = $(dir $(LIBS))
+LIBINCS = $(addsuffix $(INCDIR), $(LIBDIRS))
+LIBARS = $(notdir $(LIBS))
 
-$(NAME):		$(OBJDS) $(OBJS)
-	@echo AR $(NAME)
-	@$(AR) $(AFLAGS) $@ $(OBJS)
+# Sources
+INCS = $(LIBINCS) $(INCDIR)
+OBJS = $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
+DEPS = $(OBJS:.o=.d)
 
-$(OBJDS):
-	mkdir -p $@
+# Flags
+CFLAGS = -Wall -Wextra -Werror $(INCS:%=-I%)
+DFLAGS = -MT $@ -MMD -MP -MF $(OBJDIR)/$*.d
+LDFLAGS = $(LIBDIRS:%=-L%)
+ARFLAGS = -rcTs
+LDLIBS = $(LIBARS:lib%.a=-l%)
 
-$(OBJDIR)/%.o:	$(SRCDIR)/%.c $(HDRS) Makefile
-	@echo CC $<
-	@$(CC) $(CFLAGS) $(IFLAGS) -c -o $@ $<
+# Compiling commands
+COMPILE.c = $(CC) $(DFLAGS) $(CFLAGS) -c
+COMPILE.o = $(LD) $(LDFLAGS)
+ARCHIVE.o = $(AR) $(ARFLAGS)
+
+all: $(BINDIR)/$(NAME)
+
+# Directories
+$(OBJDIR) $(BINDIR):
+	@echo "MK $@"
+	mkdir -p "$@"
+
+# Libraries
+$(LIBS): %.a: FORCE
+	make -C $(dir $@) NAME=$(@F)
+
+# Objects
+$(OBJS): $(OBJDIR)/%.o: $(SRCDIR)/%.c $(OBJDIR)/%.d | $(OBJDIR)
+	@mkdir -p '$(@D)'
+	@echo "CC $<"
+	$(COMPILE.c) $< -o $@
+
+# Dependencies
+$(DEPS): $(OBJDIR)/%.d:
+include $(wildcard $(DEPS))
+
+$(TESTDEPS): $(OBJDIR)/%.d:
+include $(wildcard $(TESTDEPS))
+
+# Binaries
+$(BINDIR)/$(NAME): $(OBJS) $(LIBS) | $(BINDIR)
+	@echo "AR $@"
+
+	$(ARCHIVE.o) $@ $^
+
+debug: CFLAGS += -DDEBUG -g3 -fsanitize=address
+debug: LDFLAGS += -g3 -fsanitize=address
+debug: re
 
 clean:
-	@echo RM $(OBJDIR)
-	@$(RM) -rf $(OBJDIR)
+	$(foreach dir, $(LIBDIRS),\
+		@echo "MK $(addprefix -C, $(LIBDIRS)) $@" && make -C $(dir) $@ && ):
+	@echo "RM $(OBJDIR)"
+	rm -rf "$(OBJDIR)"
 
-fclean:			clean
-	@echo RM $(NAME)
-	@$(RM) -f $(NAME)
+fclean: clean
+	$(foreach dir, $(LIBDIRS),\
+		@echo "MK $(addprefix -C, $(LIBDIRS)) $@" && make -C $(dir) $@ && ):
+	@echo "RM $(BINDIR)/$(NAME)"
+	rm -f "$(BINDIR)/$(NAME)"
+	@rmdir "$(BINDIR)" 2>/dev/null && echo "RM $(BINDIR)" || :
 
-re:				fclean all
+re: fclean all
 
-.PHONY	=		all clean fclean re
+FORCE: ;
+
+.PHONY: all clean fclean re FORCE
+
+# Assign a value to VERBOSE to enable verbose output
+$(VERBOSE).SILENT:

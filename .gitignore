@@ -1,6 +1,6 @@
 # Binaries
 libft.a
-objs
+obj/
 
 #clangd
 .cache/
