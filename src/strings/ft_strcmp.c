@@ -41,5 +41,5 @@ int	ft_strcmpi(const char *a, const char *b)
 		a++;
 		b++;
 	}
-	return ((unsigned char)*a - (unsigned char)*b);
+	return ((unsigned char)ft_tolower(*a) - (unsigned char)ft_tolower(*b));
 }
