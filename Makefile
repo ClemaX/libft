@@ -27,7 +27,7 @@ SRCS	=		$(addprefix $(SRCDIR)/,											\
 				$(addprefix strings/ft_,										\
 					split.c strchr.c strdup.c strjoin.c strlcat.c strlcpy.c		\
 					strlen.c strmapi.c strcmp.c strnstr.c strpos.c strrchr.c	\
-					strrem.c strtrim.c substr.c striter.c basename.c strings.c)	\
+					strrem.c strtrim.c substr.c striter.c strings.c)			\
 				$(addprefix types/ft_,											\
 					isalnum.c isalpha.c isascii.c isdigit.c						\
 					islower.c isprint.c issign.c isspace.c isupper.c iscntrl.c	\
@@ -39,7 +39,7 @@ SRCS	=		$(addprefix $(SRCDIR)/,											\
 				$(addprefix scanf/,												\
 					ft_sscanf.c sf_convert.c sf_specs.c)						\
 				$(addprefix paths/,												\
-					path_cat.c)													\
+					path_cat.c ft_basename.c )									\
 				)
 
 OBJDS	=		$(addprefix $(OBJDIR)/,											\

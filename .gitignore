@@ -1,2 +1,8 @@
+# Binaries
 libft.a
 objs
+
+#clangd
+.cache/
+.vimrc
+compile_commands.json

@@ -12,24 +12,34 @@
 
 #include <libft.h>
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+int	ft_strncmp(const char *a, const char *b, size_t n)
 {
 	if (!n)
 		return (0);
-	while (n-- > 1 && *s1 && *s2 && *s1 == *s2)
+	while (--n && *a && *a == *b)
 	{
-		s1++;
-		s2++;
+		a++;
+		b++;
 	}
-	return ((unsigned char)*s1 - (unsigned char)*s2);
+	return ((unsigned char)*a - (unsigned char)*b);
 }
 
-int	ft_strcmp(const char *s1, const char *s2)
+int	ft_strcmp(const char *a, const char *b)
 {
-	while (*s1 && *s2 && *s1 == *s2)
+	while (*a && *a == *b)
 	{
-		s1++;
-		s2++;
+		a++;
+		b++;
 	}
-	return ((unsigned char)*s1 - (unsigned char)*s2);
+	return ((unsigned char)*a - (unsigned char)*b);
+}
+
+int	ft_strcmpi(const char *a, const char *b)
+{
+	while (*a && ft_tolower(*a) == ft_tolower(*b))
+	{
+		a++;
+		b++;
+	}
+	return ((unsigned char)*a - (unsigned char)*b);
 }
