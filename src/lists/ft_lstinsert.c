@@ -1,6 +1,6 @@
 #include <libft.h>
 
-void	ft_lstinsert(t_list **list, t_list *elem, int (*cmp)(void*, void*))
+void	ft_lstinsert(t_list **list, t_list *elem, t_cmp_fun *cmp)
 {
 	t_list	*curr;
 	t_list	*prev;
@@ -26,7 +26,7 @@ void	ft_lstinsert(t_list **list, t_list *elem, int (*cmp)(void*, void*))
 	}
 }
 
-void	ft_lstinsertrev(t_list **list, t_list *elem, int (*cmp)(void*, void*))
+void	ft_lstinsertrev(t_list **list, t_list *elem, t_cmp_fun *cmp)
 {
 	t_list	*curr;
 	t_list	*prev;

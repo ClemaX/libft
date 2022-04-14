@@ -36,9 +36,11 @@ typedef	struct	s_list
 	void			*content;
 }				t_list;
 
-typedef int		(t_cmp_fun(void *a, void *b));
+typedef int		(t_cmp_fun(const void *a, const void *b));
 
 typedef void	(t_lstadd_fun(t_list **list, t_list *elem));
+typedef void	(t_lstcontent_fun(void *content));
+typedef void	*(t_lstmap_fun(const void *content));
 typedef void	(t_lstinsert_fun(t_list **list, t_list *elem, t_cmp_fun *cmp));
 
 typedef struct	s_map
@@ -48,6 +50,8 @@ typedef struct	s_map
 	char			*value;
 	struct s_map	*next;
 }				t_map;
+
+typedef int		(t_mapcmp_fun(const t_map *a, const t_map *b));
 
 void			*ft_memset(void *b, int c, size_t len);
 void			ft_bzero(void *s, size_t n);
@@ -114,11 +118,11 @@ void			ft_lstadd_front(t_list **alst, t_list *elem);
 t_list			*ft_lstlast(t_list *lst);
 int				ft_lstsize(t_list *lst);
 void			ft_lstadd_back(t_list **alst, t_list *elem);
-void			ft_lstdelone(t_list *lst, void (*del)(void*));
-void			ft_lstiter(t_list *lst, void (*f)(void *));
-void			ft_lstclear(t_list **lst, void (*del)(void*));
-t_list			*ft_lstmap
-	(t_list *lst, void *(*f)(void*), void (*del)(void*));
+void			ft_lstdelone(t_list *lst, t_lstcontent_fun *del);
+void			ft_lstiter(t_list *lst, t_lstcontent_fun *del);
+void			ft_lstclear(t_list **lst, t_lstcontent_fun *del);
+t_list			*ft_lstmap(t_list *lst, t_lstmap_fun *map,
+	t_lstcontent_fun *del);
 void			ft_lstsort(t_list **lst, t_cmp_fun *cmp);
 void			ft_lstsortrev(t_list **lst, t_cmp_fun *cmp);
 void			ft_lstinsert(t_list **list, t_list *elem, t_cmp_fun *cmp);
@@ -131,7 +135,7 @@ t_map			*map_del(t_map *map, const char *key);
 void			map_clr(t_map **map);
 t_map			*map_load(const char **strs);
 char			**map_export(t_map *map);
-void			map_sort(t_map **map, int (*cmp)(t_map*, t_map*));
+void			map_sort(t_map **map, t_mapcmp_fun *cmp);
 int				map_cmp(t_map *a, t_map *b);
 
 int				get_next_line(int fd, char **line);

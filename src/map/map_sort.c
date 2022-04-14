@@ -33,7 +33,7 @@ static void	mapsplit(t_map *map, t_map **a, t_map **b)
 	slow->next = NULL;
 }
 
-static void	*mapmergecmp(t_map *a, t_map *b, int (*cmp)(t_map*, t_map*))
+static void	*mapmergecmp(t_map *a, t_map *b, t_mapcmp_fun *cmp)
 {
 	t_map	*map;
 
@@ -59,7 +59,7 @@ int			map_cmp(t_map *a, t_map *b)
 	return (ft_strncmp(b->key, a->key, b->key_size));
 }
 
-void		map_sort(t_map **map, int (*cmp)(t_map*, t_map*))
+void		map_sort(t_map **map, t_mapcmp_fun *cmp)
 {
 	t_map	*head;
 	t_map	*a;
