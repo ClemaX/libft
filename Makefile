@@ -29,7 +29,7 @@ DEPS = $(OBJS:.o=.d)
 CFLAGS = -Wall -Wextra -Werror $(INCS:%=-I%)
 DFLAGS = -MT $@ -MMD -MP -MF $(OBJDIR)/$*.d
 LDFLAGS = $(LIBDIRS:%=-L%)
-ARFLAGS = -rcTs
+ARFLAGS = -rcs
 LDLIBS = $(LIBARS:lib%.a=-l%)
 
 # Compiling commands
