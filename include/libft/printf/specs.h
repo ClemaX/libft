@@ -28,12 +28,12 @@ typedef unsigned char	t_flags;
 
 typedef enum			e_type
 {
-	ERR = -1, CHAR, STR, PCNT, PTR, DEC, INT, UINT, LHEX, UHEX, OCT, CNT
+	ERR = -1, CHAR, STR, PCNT, PTR, DEC, INT, UINT, LHEX, UHEX, OCT, CNT,
 }						t_type;
 
 typedef enum			e_numsize
 {
-	S_DEF, S_L, S_LL, S_H, S_HH, S_Z
+	S_DEF, S_L, S_LL, S_H, S_HH, S_Z, S_J,
 }						t_numsize;
 
 typedef struct			s_spec

@@ -38,7 +38,7 @@
 
 typedef struct	s_number
 {
-	uint64_t	value;
+	uintmax_t	value;
 	char		sign;
 	int			radix;
 	const char	*digits;
