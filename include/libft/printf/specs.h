@@ -33,7 +33,7 @@ typedef enum			e_type
 
 typedef enum			e_numsize
 {
-	S_DEF, S_L, S_LL, S_H, S_HH
+	S_DEF, S_L, S_LL, S_H, S_HH, S_Z
 }						t_numsize;
 
 typedef struct			s_spec

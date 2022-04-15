@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <sys/types.h>
+
 #include <libft/printf/numbers.h>
 
 t_numsize	parse_size(const char **fmt)
@@ -34,6 +36,11 @@ t_numsize	parse_size(const char **fmt)
 		else
 			return (S_H);
 	}
+	else if (**fmt == 'z')
+	{
+		(*fmt)++;
+		return (S_Z);
+	}
 	else
 		return (S_DEF);
 }
@@ -51,6 +58,8 @@ t_number	convert_signed(va_list ap, t_spec spec)
 		value = va_arg(ap, long);
 	else if (spec.size == S_LL)
 		value = va_arg(ap, long long);
+	else if (spec.size == S_Z)
+		value = va_arg(ap, ssize_t);
 	else
 		value = va_arg(ap, int);
 	if (value < 0)
@@ -81,6 +90,8 @@ t_number	convert_unsigned(va_list ap, t_spec spec)
 		number.value = va_arg(ap, unsigned long);
 	else if (spec.size == S_LL)
 		number.value = va_arg(ap, unsigned long long);
+	else if (spec.size == S_Z)
+		number.value = va_arg(ap, size_t);
 	else
 		number.value = va_arg(ap, unsigned int);
 	number.sign = '\0';
