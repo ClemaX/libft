@@ -6,24 +6,25 @@
 /*   By: chamada <chamada@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 04:45:20 by chamada           #+#    #+#             */
-/*   Updated: 2020/08/23 16:38:56 by chamada          ###   ########.fr       */
+/*   Updated: 2020/08/23 16:44:00 by chamada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SPECS_H
-# define SPECS_H
+#pragma once
 
-# include <stdarg.h>
+#include <stdarg.h>
 
-# define FLAGS	"-+ 0#"
+#define FLAGS	"-+ 0#*m"
 
-# define MINUS	1
-# define PLUS	2
-# define SPACE	4
-# define ZERO	8
-# define HASH	16
+#define MINUS	1
+#define PLUS	2
+#define SPACE	4
+#define ZERO	8
+#define HASH	16
+#define STAR	32
+#define ALLOC	64
 
-# define TYPES	"cs%pdiuxXon"
+#define TYPES	"cs%pdiuxXon"
 
 typedef unsigned char	t_flags;
 
@@ -46,6 +47,4 @@ typedef struct			s_spec
 	t_numsize	size;
 }						t_spec;
 
-t_spec					pf_parse_spec(const char **fmt, va_list ap);
-
-#endif
+t_spec					sf_parse_spec(const char **fmt, va_list ap);

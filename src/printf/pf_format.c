@@ -12,12 +12,12 @@
 
 #include <stdlib.h>
 
-#include <memory.h>
-#include <strings.h>
+#include <libft/memory.h>
+#include <libft/strings.h>
 
-#include <printf/specs.h>
-#include <printf/line.h>
-#include <printf/numbers.h>
+#include <libft/printf/specs.h>
+#include <libft/printf/line.h>
+#include <libft/printf/numbers.h>
 
 static int	fmt_char(t_line **line, t_spec spec, va_list ap)
 {

@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <strings.h>
+#include <libft/strings.h>
 
-#include <printf/format.h>
+#include <libft/printf/format.h>
 
 /*
 **	fmt:	The format string

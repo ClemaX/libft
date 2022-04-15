@@ -10,10 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
 #include <stdarg.h>
-#include <scanf/specs.h>
-#include <scanf/convert.h>
+
+#include <libft/types.h>
+
+#include <libft/scanf/specs.h>
+#include <libft/scanf/convert.h>
 
 static int	parse_txt(const char **src, const char **fmt)
 {

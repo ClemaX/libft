@@ -1,8 +1,8 @@
 #pragma once
 
-#include <gnl.h>
-#include <printf.h>
-#include <scanf.h>
+#include <libft/gnl.h>
+#include <libft/printf.h>
+#include <libft/scanf.h>
 
 void	ft_putchar_fd(char c, int fd);
 int		ft_putchar(int c);

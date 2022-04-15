@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <printf/numbers.h>
-#include <libft.h>
+#include <libft/printf/numbers.h>
 
 t_numsize	parse_size(const char **fmt)
 {

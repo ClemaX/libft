@@ -12,7 +12,7 @@
 
 #pragma once
 
-#include <printf/line.h>
-#include <printf/specs.h>
+#include <libft/printf/line.h>
+#include <libft/printf/specs.h>
 
 extern int	(*g_format[10])(t_line **line, t_spec spec, va_list ap);

@@ -11,9 +11,12 @@
 /* ************************************************************************** */
 
 #include <stdarg.h>
-#include <libft.h>
-#include <printf/specs.h>
-#include <printf/numbers.h>
+
+#include <libft/strings.h>
+#include <libft/types.h>
+
+#include <libft/printf/specs.h>
+#include <libft/printf/numbers.h>
 
 /*
 **	fmt:	The format string

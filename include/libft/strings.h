@@ -1,7 +1,6 @@
-#ifndef STRINGS_H
-# define STRINGS_H
+#pragma once
 
-# include <stddef.h>
+#include <stddef.h>
 
 typedef void	(t_striter_fun(char c));
 typedef char	(t_strmapi_fun(unsigned i, char c));
@@ -31,5 +30,3 @@ char			**ft_split(char const *s, char c);
 void			*strs_unload_n(char **strs, int n);
 void			*strs_unload(char **strs);
 void			strs_print(char **strs);
-
-#endif

@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <numbers.h>
+#include <libft/numbers.h>
 
-#include <printf/numbers.h>
-#include <printf/specs.h>
+#include <libft/printf/numbers.h>
+#include <libft/printf/specs.h>
 
 /*
 **	n:	The number

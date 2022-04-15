@@ -12,8 +12,11 @@
 
 #include <stdarg.h>
 #include <stdlib.h>
-#include <libft.h>
-#include <scanf/specs.h>
+
+#include <libft/numbers.h>
+#include <libft/strings.h>
+#include <libft/types.h>
+#include <libft/scanf/specs.h>
 
 /*
 **	Warning: The WILDCARD/STAR flag does increment the match count!

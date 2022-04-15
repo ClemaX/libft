@@ -11,8 +11,9 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <libft.h>
-#include <printf/line.h>
+
+#include <libft/memory.h>
+#include <libft/printf/line.h>
 
 /*
 **	line:		The line to add content on

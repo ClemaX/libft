@@ -13,7 +13,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-#include <images.h>
+#include <libft/images.h>
 
 static unsigned char	*get_file_header(int w, int h)
 {

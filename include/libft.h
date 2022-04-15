@@ -12,13 +12,13 @@
 
 #pragma once
 
-#include <gnl.h>
-#include <images.h>
-#include <io.h>
-#include <lists.h>
-#include <map.h>
-#include <memory.h>
-#include <numbers.h>
-#include <paths.h>
-#include <strings.h>
-#include <types.h>
+#include <libft/gnl.h>
+#include <libft/images.h>
+#include <libft/io.h>
+#include <libft/lists.h>
+#include <libft/map.h>
+#include <libft/memory.h>
+#include <libft/numbers.h>
+#include <libft/paths.h>
+#include <libft/strings.h>
+#include <libft/types.h>

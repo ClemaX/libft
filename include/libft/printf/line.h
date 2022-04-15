@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   convert.h                                          :+:      :+:    :+:   */
+/*   line.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chamada <chamada@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/21 22:02:48 by chamada           #+#    #+#             */
-/*   Updated: 2020/08/23 16:28:51 by chamada          ###   ########.fr       */
+/*   Created: 2019/11/20 17:07:54 by chamada           #+#    #+#             */
+/*   Updated: 2020/08/23 16:27:40 by chamada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONVERT_H
-# define CONVERT_H
+#pragma once
 
-# include <scanf/specs.h>
-# include <stdarg.h>
+#include <stddef.h>
 
-extern int	(*g_convert[10])(const char **src, t_spec spec, va_list ap);
+typedef struct	s_line
+{
+	struct s_line	*next;
+	char			*content;
+	size_t			size;
+}				t_line;
 
-#endif
+t_line			*line_add(t_line **line, char *content, int size);
+t_line			*line_clr(t_line **line);
+int				line_len(t_line *line);
+int				line_put(char **dest, t_line **line, char alloc);

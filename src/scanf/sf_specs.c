@@ -11,8 +11,11 @@
 /* ************************************************************************** */
 
 #include <stdarg.h>
-#include <libft.h>
-#include <scanf/specs.h>
+
+#include <libft/types.h>
+#include <libft/strings.h>
+
+#include <libft/scanf/specs.h>
 
 static t_numsize	parse_size(const char **fmt)
 {

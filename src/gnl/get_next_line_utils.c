@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <gnl/get_next_line.h>
+#include <libft/gnl/get_next_line.h>
 
 int		search_end(char *s, size_t size, char **end)
 {
