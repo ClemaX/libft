@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <libft.h>
+#include <libft/lists.h>
 
 t_list	*ft_lstnew(void *content)
 {

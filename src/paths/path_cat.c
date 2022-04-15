@@ -10,10 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include <libft/strings.h>
 
-#include <limits.h>
-#include <stddef.h>
+#include <libft/paths.h>
 
 char	*path_cat(char *dest, const char *a, const char *b)
 {

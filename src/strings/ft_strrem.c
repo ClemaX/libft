@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include <libft/strings.h>
 #include <stdlib.h>
 
 static size_t	strremlen(const char *s1, const char *set)

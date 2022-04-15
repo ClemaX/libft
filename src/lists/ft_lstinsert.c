@@ -1,4 +1,4 @@
-#include <libft.h>
+#include <libft/lists.h>
 
 void	ft_lstinsert(t_list **list, t_list *elem, t_cmp_fun *cmp)
 {

@@ -10,8 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
 #include <stdlib.h>
+
+#include <libft/memory.h>
+
+#include <libft/strings.h>
 
 static size_t	splitcnt(const char *s1, const char c)
 {

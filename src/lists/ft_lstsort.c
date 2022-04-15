@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include <libft/lists.h>
 #include <stdlib.h>
 
 static void	lstsplit(t_list *lst, t_list **a, t_list **b)

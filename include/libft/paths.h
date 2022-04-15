@@ -1,5 +1,8 @@
 #pragma once
 
+#include <limits.h>
+#include <stddef.h>
+
 #ifndef PATH_DELIM
 # define PATH_DELIM '/'
 #endif

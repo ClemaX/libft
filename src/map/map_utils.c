@@ -10,8 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
 #include <stdlib.h>
+
+#include <libft/memory.h>
+#include <libft/strings.h>
+
+#include <libft/map.h>
 
 const char	*map_add(t_map **map, const char *key, const char *value)
 {

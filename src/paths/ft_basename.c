@@ -10,8 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
 #include <stdlib.h>
+
+#include <libft/strings.h>
+
+#include <libft/paths.h>
 
 char	*ft_basename(const char *path)
 {

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include <libft/strings.h>
 
 int	ft_strpos(const char *s, int c)
 {

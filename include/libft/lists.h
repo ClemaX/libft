@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stddef.h>
+
 typedef	struct	s_list
 {
 	struct s_list	*next;

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include <libft/io.h>
 
 static void	putdigits(unsigned int u_n, int fd)
 {

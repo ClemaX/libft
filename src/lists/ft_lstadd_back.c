@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include <libft/lists.h>
 
 void	ft_lstadd_back(t_list **list, t_list *element)
 {

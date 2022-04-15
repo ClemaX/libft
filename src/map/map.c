@@ -11,7 +11,10 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <libft.h>
+
+#include <libft/strings.h>
+
+#include <libft/map.h>
 
 t_map		*map_get(t_map *map, const char *key)
 {

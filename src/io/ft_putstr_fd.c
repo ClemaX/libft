@@ -10,8 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
 #include <unistd.h>
+
+#include <libft/strings.h>
+#include <libft/io.h>
 
 void	ft_putstr_fd(char *s, int fd)
 {

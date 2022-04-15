@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include <libft/strings.h>
 #include <stdlib.h>
 
 char	*ft_strdup(const char *src)

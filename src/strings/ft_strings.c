@@ -1,5 +1,7 @@
-#include <libft.h>
 #include <stdlib.h>
+
+#include <libft/printf.h>
+#include <libft/strings.h>
 
 void			*strs_unload_n(char **strs, int n)
 {

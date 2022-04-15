@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include <libft/types.h>
+
+#include <libft/strings.h>
 
 int	ft_strncmp(const char *a, const char *b, size_t n)
 {

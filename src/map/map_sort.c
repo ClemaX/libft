@@ -10,8 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
 #include <stdlib.h>
+
+#include <libft/strings.h>
+
+#include <libft/map.h>
 
 static void	mapsplit(t_map *map, t_map **a, t_map **b)
 {

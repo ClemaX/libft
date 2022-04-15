@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include <libft/types.h>
+
+#include <libft/numbers.h>
 
 int	ft_atoi(const char *str)
 {
