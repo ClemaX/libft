@@ -30,4 +30,4 @@ t_hmap_s_pair	*hmap_s_pair_new(const char *key, void *value);
  * @param pair	The map's bucket to be cleared,
  * @param del	The value's destructor.
  */
-void			hmap_s_pair_clr(t_hmap_s_pair **pair, void(*del(void *)));
+void			hmap_s_pair_clr(t_hmap_s_pair **pair, void(del(void *)));

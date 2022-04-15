@@ -45,4 +45,4 @@ t_hmap_s_pair	*hmap_s_set(t_hmap_s *map, const char *key,
  * @param map	A reference to the map to be cleared.
  * @param del	The value's destructor.
  */
-void			hmap_s_clr(t_hmap_s **map, void(*del(void *)));
+void			hmap_s_clr(t_hmap_s **map, void(del(void *)));
