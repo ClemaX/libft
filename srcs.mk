@@ -6,6 +6,12 @@ SRCS = $(addprefix $(SRCDIR)/,\
 		get_next_line.c\
 		get_next_line_utils.c\
 	)\
+	$(addprefix hashmap/,\
+		hmap_i.c\
+		hmap_i_pair.c\
+		hmap_s.c\
+		hmap_s_pair.c\
+	)\
 	$(addprefix images/,\
 		write_bmp.c\
 	)\

@@ -13,6 +13,8 @@
 #pragma once
 
 #include <libft/gnl.h>
+#include <libft/hmap_i.h>
+#include <libft/hmap_s.h>
 #include <libft/images.h>
 #include <libft/io.h>
 #include <libft/lists.h>
