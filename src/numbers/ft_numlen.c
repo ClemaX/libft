@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_numlen(unsigned long long n, unsigned base)
+#include <libft/numbers.h>
+
+int	ft_numlen(uintmax_t n, unsigned base)
 {
 	int	len;
 

@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <libft/numbers.h>
+
 long double	ft_pow(int nb, int power)
 {
 	long double	result;

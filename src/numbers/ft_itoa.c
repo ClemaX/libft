@@ -12,6 +12,8 @@
 
 #include <stdlib.h>
 
+#include <libft/numbers.h>
+
 static int	uintlen(unsigned int n)
 {
 	int len;
