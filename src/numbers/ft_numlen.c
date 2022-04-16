@@ -12,14 +12,15 @@
 
 #include <libft/numbers.h>
 
-int	ft_numlen(uintmax_t n, unsigned base)
+unsigned	ft_numlen(uintmax_t n, unsigned base)
 {
-	int	len;
+	unsigned	len;
 
-	if (base < 2)
-		return (-1);
-	len = 1;
-	while (n /= base)
-		len++;
+	len = base >= 2;
+	if (len == 1)
+	{
+		while (n /= base)
+			len++;
+	}
 	return (len);
 }
