@@ -1,5 +1,7 @@
+#include <stddef.h>
 #include <stdlib.h>
 
+#include <libft/strings.h>
 #include <libft/hmap/hmap_s_pair.h>
 
 /**
@@ -23,10 +25,14 @@ void			hmap_s_pair_add(t_hmap_s_pair **bucket, t_hmap_s_pair *elem)
  */
 t_hmap_s_pair	*hmap_s_pair_new(const char *key, void *value)
 {
-	t_hmap_s_pair *const pair = malloc(sizeof(*pair));
+	const size_t			key_size = ft_strlen(key) + 1;
+	t_hmap_s_pair *const	pair = malloc(sizeof(*pair) + key_size);
 
 	if (pair != NULL)
-		*pair = (t_hmap_s_pair){key, value, NULL};
+	{
+		*pair = (t_hmap_s_pair){(const char *)(pair + 1), value, NULL};
+		ft_strlcpy((char *)(pair + 1), key, key_size);
+	}
 
 	return pair;
 }
