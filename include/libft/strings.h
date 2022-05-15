@@ -26,6 +26,7 @@ void			ft_striter(char *str, t_striter_fun *fun);
 char			*ft_strjoin(char const *a, char const *b);
 char			*ft_strtrim(char const *a, char const *set);
 char			**ft_split(char const *s, char c);
+char			*ft_strtok(char *restrict str, const char *restrict delim);
 
 void			*strs_unload_n(char **strs, int n);
 void			*strs_unload(char **strs);
