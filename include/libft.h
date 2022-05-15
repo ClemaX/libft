@@ -12,6 +12,7 @@
 
 #pragma once
 
+#include <libft/dirs.h>
 #include <libft/gnl.h>
 #include <libft/hmap_i.h>
 #include <libft/hmap_s.h>
@@ -21,6 +22,7 @@
 #include <libft/map.h>
 #include <libft/memory.h>
 #include <libft/numbers.h>
+#include <libft/opts.h>
 #include <libft/paths.h>
 #include <libft/strings.h>
 #include <libft/types.h>

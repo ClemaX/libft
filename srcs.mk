@@ -58,6 +58,9 @@ SRCS = $(addprefix $(SRCDIR)/,\
 		ft_numlen.c\
 		ft_pow.c\
 	)\
+	$(addprefix opts/,\
+		opts.c\
+	)\
 	$(addprefix paths/,\
 		ft_basename.c\
 		path.c\
