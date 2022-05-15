@@ -57,7 +57,7 @@ SRCS = $(addprefix $(SRCDIR)/,\
 	)\
 	$(addprefix paths/,\
 		ft_basename.c\
-		path_cat.c\
+		path.c\
 	)\
 	$(addprefix printf/,\
 		ft_printf.c\
