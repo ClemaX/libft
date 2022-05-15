@@ -14,9 +14,9 @@
 
 void	ft_lstadd_back(t_list **list, t_list *element)
 {
-	if (list)
+	if (element != NULL)
 	{
-		if (!*list)
+		if (*list == NULL)
 			*list = element;
 		else
 			ft_lstlast(*list)->next = element;
