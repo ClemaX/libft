@@ -10,30 +10,62 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stddef.h>
 #include <stdlib.h>
 
 #include <libft/strings.h>
 
 #include <libft/paths.h>
 
+size_t	ft_baselen(const char *path)
+{
+	const char	*basename;
+	size_t		len;
+
+	len = 0;
+	if (*path != '\0')
+	{
+		basename = path;
+		while ((path = ft_strchr(path, PATH_DELIM)) && path[1] != '\0')
+			basename = path;
+		while (basename[len] != '\0' && basename[len] != PATH_DELIM)
+			len++;
+		if (basename[len] != '\0' && len == 0)
+			len++;
+	}
+	else
+		len = 1;
+	return (len);
+}
+
 char	*ft_basename(const char *path)
 {
-	int		i;
-	char	*basename;
+	char		*result;
+	const char	*basename;
 
-	i = 0;
-	basename = (char *)path;
-	if (!path[i])
-		return (ft_strdup(""));
-	while (path[i])
+	if (*path != '\0')
 	{
-		if (path[i] == '/' && path[i + 1])
-			basename = (char *)(path + i + 1);
-		i++;
+		basename = path;
+		while ((path = ft_strchr(path, PATH_DELIM)) != NULL && path[1] != '\0')
+		{
+			while (*path == PATH_DELIM)
+				path++;
+			if (*path != '\0')
+				basename = path;
+			else
+				break;
+		}
+		result = ft_strtrim(basename, (char[]){PATH_DELIM, '\0'});
+		if (result != NULL)
+		{
+			if (*result == '\0')
+			{
+				free(result);
+				result = ft_strdup(PATH_ROOT);
+			}
+		}
 	}
-	basename = ft_strtrim(basename, "/");
-	if (*basename)
-		return (basename);
-	free(basename);
-	return (ft_strdup("/"));
+	else
+		result = ft_strdup(path);
+	return (result);
 }

@@ -7,5 +7,21 @@
 # define PATH_DELIM '/'
 #endif
 
-char	*path_cat(char *dest, const char *a, const char *b);
+#ifndef PATH_DELIM_S
+# define PATH_DELIM_S "/"
+#endif
+
+#ifndef PATH_PREV
+# define PATH_PREV ".."
+#endif
+
+#ifndef PATH_CURR
+# define PATH_CURR "."
+#endif
+
+#ifndef PATH_ROOT
+# define PATH_ROOT PATH_DELIM_S
+#endif
+
+size_t	ft_baselen(const char *path);
 char	*ft_basename(const char *path);
