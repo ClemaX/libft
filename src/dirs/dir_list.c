@@ -6,7 +6,7 @@
 
 #include <libft/dirs.h>
 
-static int	dir_add(t_list **files, const char *filepath)
+int	dir_add(t_list **files, const char *filepath)
 {
 	const size_t	content_size = ft_strlen(filepath) + 1;
 	t_list			*elem;
@@ -24,7 +24,8 @@ static int	dir_add(t_list **files, const char *filepath)
 	return (err);
 }
 
-int	dir_load(t_list **files, const char *filepath, unsigned char filter)
+int	dir_load(t_list **files, const char *filepath,
+	unsigned char filter, t_dir_opt options)
 {
 	char			full_path[PATH_MAX];
 	const char		*path;
@@ -39,13 +40,16 @@ int	dir_load(t_list **files, const char *filepath, unsigned char filter)
 		do
 		{
 			ent = readdir(dir);
-			if (ent != NULL && (filter == DT_UNKNOWN || filter == ent->d_type)
-				&& !DIR_ISBACKREF(ent->d_name))
+
+			if (ent != NULL
+				&& (filter == DT_UNKNOWN || filter == ent->d_type)
+				&& ((options & DIR_OBACKREF) || !DIR_ISBACKREF(ent->d_name)))
 			{
-				if (!(filepath[0] == '.' && filepath[1] == '\0'))
-					path = path_cat(full_path, filepath, ent->d_name);
-				else
+				if ((options & DIR_OBASENAME) || (filepath[0] == '.' && filepath[1] == '\0'))
 					path = ent->d_name;
+				else
+					path = path_cat(full_path, filepath, ent->d_name);
+
 				err = dir_add(files, path);
 			}
 		}
@@ -63,7 +67,7 @@ int	dir_list(t_list **list, const char *filepath)
 	int		err;
 
 	dirs = NULL;
-	err = dir_load(&dirs, filepath, DT_DIR);
+	err = dir_load(&dirs, filepath, DT_DIR, 0);
 	if (err == 0)
 	{
 		subdirs = NULL;
@@ -81,4 +85,9 @@ int	dir_list(t_list **list, const char *filepath)
 	else
 		ft_lstclear(&dirs, NULL);
 	return (err);
+}
+
+void dir_del(void *data)
+{
+	(void)data;
 }
