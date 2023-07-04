@@ -43,9 +43,9 @@ char	*path_pop(char *path)
 {
 	char	*end;
 
-	end = path + ft_strlen(path);
-	if (end != path)
-		--end;
+	if (*path == '\0')
+		return path;
+	end = path + ft_strlen(path) - 1;
 	while (end != path && *end == PATH_DELIM)
 		--end;
 	while (end != path && *end != PATH_DELIM)
@@ -54,6 +54,8 @@ char	*path_pop(char *path)
 		--end;
 	if (end != path)
 		++end;
+	else
+		*end++ = '.';
 	*end = '\0';
 	return (path);
 }
