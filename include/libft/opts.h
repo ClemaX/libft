@@ -9,7 +9,6 @@
 #endif
 
 #define OPT_ERROR -1
-#define OPT_HELP -2
 
 typedef struct	s_opt_def
 {
