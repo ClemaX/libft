@@ -60,10 +60,11 @@ void		parse_dimensions(t_number *n, t_spec s)
 
 t_number	parse_number(va_list ap, t_spec spec)
 {
-	const int	radixes[RADIX_N] = {
+	static const int	radixes[RADIX_N] = {
 		R_HEX, R_DEC, R_DEC, R_DEC, R_HEX, R_HEX, R_OCT};
-	const char	*digits[RADIX_N] = {
-		D_LHEX, D_DEC, D_DEC, D_DEC, D_LHEX, D_UHEX, D_OCT};
+	static const char	lowercase[RADIX_N] = {
+		1, 0, 0, 0, 1, 0, 0,
+	};
 	t_number	number;
 
 	if (spec.type == DEC || spec.type == INT)
@@ -71,7 +72,8 @@ t_number	parse_number(va_list ap, t_spec spec)
 	else
 		number = convert_unsigned(ap, spec);
 	number.radix = radixes[spec.type - PTR];
-	number.digits = digits[spec.type - PTR];
+	number.digits = BASE36_CHARSET;
+	number.lowercase = lowercase[spec.type - PTR];
 	parse_dimensions(&number, spec);
 	return (number);
 }

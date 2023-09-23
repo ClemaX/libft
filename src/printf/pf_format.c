@@ -58,10 +58,14 @@ static int	fmt_str(t_line **line, t_spec spec, va_list ap)
 
 static void	write_num(char *dest, t_number number)
 {
+	char	digit;
 	dest += number.len + number.prefix_len - 1;
 	while (number.len--)
 	{
-		*dest-- = number.digits[number.value % number.radix];
+		digit = number.digits[number.value % number.radix];
+		if (number.lowercase && digit >= 'A' && digit <= 'Z')
+			digit |= 1 << 5;
+		*dest-- = digit;
 		number.value /= number.radix;
 	}
 	if (number.prefix)

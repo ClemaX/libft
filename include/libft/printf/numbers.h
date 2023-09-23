@@ -16,11 +16,6 @@
 
 #include <libft/printf/specs.h>
 
-#define D_DEC		"0123456789"
-#define D_LHEX		"0123456789abcdef"
-#define D_UHEX		"0123456789ABCDEF"
-#define D_OCT		"01234567"
-
 #define R_DEC		10
 #define R_HEX		16
 #define R_OCT		8
@@ -39,12 +34,13 @@
 typedef struct	s_number
 {
 	uintmax_t	value;
-	char		sign;
-	int			radix;
 	const char	*digits;
+	int			radix;
 	int			len;
 	int			padding;
 	int			prefix_len;
+	char		lowercase;
+	char		sign;
 	char		prefix;
 }				t_number;
 
