@@ -5,96 +5,195 @@
 
 #include <libft/opts.h>
 
-static int	opt_long(const char *name,
-	const char *const *const long_opts)
+static int	opt_params(const opt_spec *spec, const char **av, int *ai,
+	void *data)
 {
-	int	option;
+	const char *const	parser_error = spec->parser(av, ai, data);
 
-	option = 0;
-	while (long_opts[option] != NULL && ft_strcmp(long_opts[option], name) != 0)
-		option++;
-	if (long_opts[option] != NULL)
-		option = 1 << option;
-	else
-		option = OPT_ERROR;
-	return (option);
+	if (parser_error != NULL)
+	{
+		ft_dprintf(STDERR_FILENO, "%s: %s\n", av[0], parser_error);
+
+		return OPT_ERROR;
+	}
+
+	return 0;
 }
 
-static int	opt_short(char c, const char *const short_opts)
+static int	opt_flag_long(const opt_spec *specs, unsigned spec_count,
+	const char *flag, size_t flag_len)
 {
-	const int	i = ft_strpos(short_opts, c);
-	int	option;
+	unsigned	spec_i;
 
-	if (i != OPT_ERROR)
-			option = 1 << i;
-	else
-			option = OPT_ERROR;
-	return (option);
+	for
+	(
+		spec_i = 0;
+		spec_i < spec_count
+			&& specs[spec_i].long_flag != NULL
+			&& (ft_strlen(specs[spec_i].long_flag) != flag_len
+				|| ft_strncmp(specs[spec_i].long_flag, flag, flag_len) != 0);
+		++spec_i
+	);
+
+	if (spec_i == spec_count)
+		return OPT_ERROR;
+
+	return (spec_i);
 }
 
-int			opts_get(const t_opt_def *const def, int *const i,
-	const char *const *const av)
+static int	opt_flag_short(const opt_spec *specs, unsigned spec_count,
+	char flag)
 {
-	int	opts;
-	int	opt;
-	size_t		j;
+	unsigned	spec_i;
+
+	for
+	(
+		spec_i = 0;
+		spec_i < spec_count && specs[spec_i].short_flag != flag;
+		++spec_i
+	);
+
+	if (spec_i == spec_count)
+		return OPT_ERROR;
+
+	return spec_i;
+}
+
+int	opts_get(const opt_spec *specs, unsigned spec_count,
+	const char **av, int *ai, void *data)
+{
+	size_t	flag_len;
+	int		opts;
+	int		spec_i;
+	int		flag_i;
 
 	opts = 0;
-	j = 0;
-	while (opts != OPT_ERROR && av[*i] != NULL && av[*i][j] == OPT_PREFIX)
+
+	while (av[*ai] != NULL && av[*ai][0] == OPT_PREFIX)
 	{
-		++j;
-		if (av[*i][j] == OPT_PREFIX)
+		flag_i = 1;
+
+		if (av[*ai][flag_i] == OPT_PREFIX)
 		{
-			++j;
-			opt = opt_long(av[*i] + j, def->long_opts);
-			if (opt != OPT_ERROR)
-				opts |= opt;
-			else
+			++flag_i;
+			flag_len = ft_strchrnul(av[*ai] + flag_i, '=') - av[*ai] - flag_i;
+
+			spec_i = opt_flag_long(specs, spec_count,
+				av[*ai] + flag_i, flag_len);
+
+
+			if (spec_i == OPT_ERROR)
 			{
-				opts = opt;
-				ft_dprintf(STDERR_FILENO, "%s: "OPT_ILLEGAL" %s\n",
-					av[0], av[*i] + j);
+				ft_dprintf(STDERR_FILENO, "%s: "OPT_ILLEGAL": '%s'\n",
+					av[0], av[*ai] + flag_i);
+
+				return OPT_ERROR;
 			}
+
+			if (av[*ai][flag_i + flag_len] == '=')
+			{
+				if (specs[spec_i].parser == NULL)
+				{
+					ft_dprintf(STDERR_FILENO,
+						"%s: "OPT_PARAM_UNEXPECTED": '%s'\n",
+						av[0], av[*ai] + flag_i);
+
+					return OPT_ERROR;
+				}
+				av[*ai] += flag_i + flag_len + 1;
+			}
+			else
+				++(*ai);
+			opts |= 1 << spec_i;
 		}
 		else
 		{
-			while (opts != OPT_ERROR && av[*i][j] != '\0')
+			while (av[*ai][flag_i] != '\0')
 			{
-				opt = opt_short(av[*i][j], def->short_opts);
-				if (opt != OPT_ERROR)
+				spec_i = opt_flag_short(specs, spec_count, av[*ai][flag_i]);
+
+				if (spec_i == OPT_ERROR)
 				{
-					opts |= opt;
-					++j;
+					ft_dprintf(STDERR_FILENO, "%s: "OPT_ILLEGAL": '%c'\n",
+						av[0], av[*ai][flag_i]);
+
+					return OPT_ERROR;
 				}
-				else
-				{
-					opts = opt;
-					ft_dprintf(STDERR_FILENO, "%s: "OPT_ILLEGAL" %c\n",
-						av[0], av[*i][j]);
-				}
+
+				++flag_i;
+				opts |= 1 << spec_i;
+
+				if (specs[spec_i].parser != NULL)
+					break;
 			}
+
+			if (av[*ai][flag_i] != '\0')
+				av[*ai] += flag_i;
+			else
+				++(*ai);
 		}
-		(*i)++;
-		j = 0;
+		if (specs[spec_i].parser != NULL
+			&& opt_params(specs + spec_i, av, ai, data) == OPT_ERROR)
+			return OPT_ERROR;
 	}
-	return (opts);
+
+	return opts;
 }
 
-void		opts_usage(const t_opt_def *const def, const char *prog)
+void		opts_usage(const opt_spec *const specs, unsigned spec_count,
+	const char *progname, const char *suffix)
 {
-	const char      *fmt;
-	unsigned        i;
+	const char	*params;
 
-	ft_dprintf(2, def->usage, prog, def->short_opts);
-	i = 0;
-	while (def->short_opts[i])
+	ft_dprintf(STDERR_FILENO, "Usage: %s [options]%s\n", progname, suffix);
+
+	for (unsigned spec_i = 0; spec_i < spec_count; ++spec_i)
 	{
-		if (def->long_opts[i] == NULL)
-			fmt = " -%c%-22.0s%s\n";
+		if (specs[spec_i].parser != NULL)
+			params = specs[spec_i].parser(NULL, NULL, NULL);
 		else
-			fmt = " -%c, --%-18s%s\n";
-		ft_dprintf(2, fmt, def->short_opts[i], def->long_opts[i], def->desc[i]);
-		i++;
+			params = NULL;
+
+		if (specs[spec_i].short_flag != '\0')
+		{
+			if (specs[spec_i].long_flag == NULL)
+			{
+				if (params == NULL)
+					ft_dprintf(STDERR_FILENO, " -%-22c%s\n",
+						specs[spec_i].short_flag,
+						specs[spec_i].description);
+				else
+					ft_dprintf(STDERR_FILENO, " -%c %-22s%s\n",
+						specs[spec_i].short_flag,
+						params,
+						specs[spec_i].description);
+			}
+			else
+			{
+				if (params == NULL)
+					ft_dprintf(STDERR_FILENO, " -%c, --%-18s%s\n",
+						specs[spec_i].short_flag,
+						specs[spec_i].long_flag,
+						specs[spec_i].description);
+				else
+					ft_dprintf(STDERR_FILENO, " -%c, --%s=%*s%s\n",
+						specs[spec_i].short_flag,
+						specs[spec_i].long_flag,
+						(int)ft_strlen(specs[spec_i].long_flag) - 17, params,
+						specs[spec_i].description);
+			}
+		}
+		else if (specs[spec_i].long_flag != NULL)
+		{
+			if (params == NULL)
+				ft_dprintf(STDERR_FILENO, "     --%-18s%s\n",
+						specs[spec_i].long_flag,
+						specs[spec_i].description);
+			else
+				ft_dprintf(STDERR_FILENO, "     --%s=%*s%s\n",
+						specs[spec_i].long_flag,
+						(int)ft_strlen(specs[spec_i].long_flag) - 17, params,
+						specs[spec_i].description);
+		}
 	}
 }

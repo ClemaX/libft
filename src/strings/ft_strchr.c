@@ -10,9 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <libft/strings.h>
+
 char	*ft_strchr(const char *s, int c)
 {
 	while (*s && *s != c)
 		s++;
 	return ((*s == c) ? (char*)s : 0);
+}
+
+char	*ft_strchrnul(const char *s, int c)
+{
+	while (*s && *s != c)
+		s++;
+	return ((char *)s);
 }
