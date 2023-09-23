@@ -26,9 +26,10 @@ OBJS = $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 DEPS = $(OBJS:.o=.d)
 
 # Flags
-CFLAGS = -Wall -Wextra -Werror $(INCS:%=-I%)
+DBGFLAGS := -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror $(INCS:%=-I%)# $(DBGFLAGS)
 DFLAGS = -MT $@ -MMD -MP -MF $(OBJDIR)/$*.d
-LDFLAGS = $(LIBDIRS:%=-L%)
+LDFLAGS = $(LIBDIRS:%=-L%)# $(DBGFLAGS)
 ARFLAGS = -rcs
 LDLIBS = $(LIBARS:lib%.a=-l%)
 

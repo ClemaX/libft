@@ -54,9 +54,11 @@ SRCS = $(addprefix $(SRCDIR)/,\
 	)\
 	$(addprefix numbers/,\
 		ft_atoi.c\
+		ft_baseid.c\
 		ft_itoa.c\
 		ft_numlen.c\
 		ft_pow.c\
+		ft_strtol.c\
 	)\
 	$(addprefix opts/,\
 		opts.c\
@@ -81,6 +83,7 @@ SRCS = $(addprefix $(SRCDIR)/,\
 	)\
 	$(addprefix strings/,\
 		ft_split.c\
+		ft_strcasepos.c\
 		ft_strchr.c\
 		ft_strcmp.c\
 		ft_strdup.c\
