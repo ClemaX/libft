@@ -4,8 +4,10 @@
 
 #include <libft/lists.h>
 
-#define DIR_ISBACKREF(name) ((name)[0] == '.' && (((name)[1] == '.')\
-	&& ((name)[2] == '\0') || (name)[1] == '\0'))
+#define DIR_ISBACKREF(name) \
+	((name)[0] == '.' \
+		&& ((((name)[1] == '.') && ((name)[2] == '\0')) \
+		|| (name)[1] == '\0'))
 
 # define DIR_OBACKREF	0b01
 # define DIR_OBASENAME	0b10
