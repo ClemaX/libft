@@ -12,6 +12,7 @@ LIBDIR = lib
 
 OBJDIR = obj
 BINDIR = .
+TESTDIR=test
 
 # Library dependencies
 LIBS = $(addprefix $(LIBDIR)/, )
@@ -59,14 +60,17 @@ $(OBJS): $(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
 $(DEPS): $(OBJDIR)/%.d:
 include $(wildcard $(DEPS))
 
-$(TESTDEPS): $(OBJDIR)/%.d:
-include $(wildcard $(TESTDEPS))
-
 # Binaries
 $(BINDIR)/$(NAME): $(OBJS) $(LIBS) | $(BINDIR)
 	@echo "AR $@"
 
 	$(ARCHIVE.o) $@ $^
+
+# Tests
+test: all
+	@echo "TEST $@"
+	make -C $(TESTDIR) NAME=test
+	./$(TESTDIR)/test
 
 debug: CFLAGS += -DDEBUG -g3 -fsanitize=address
 debug: LDFLAGS += -g3 -fsanitize=address
