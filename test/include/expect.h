@@ -61,3 +61,5 @@ _Generic((actual), \
 	ssize_t: expect_zi, \
 	char*:	expect_s \
 )(#actual, actual, expected)
+
+#define it(name, ...) {name, run, &(struct args){__VA_ARGS__}}

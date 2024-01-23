@@ -3,134 +3,38 @@
 #include <unit.h>
 #include <expect.h>
 
-static int test_rel()
+struct		args
 {
-	char	path[] = "a";
-	int		err;
+	const char	*path;
+	const char	*expected;
+};
+
+static int	run(const struct args *args)
+{
+	char	path[strlen(args->path)];
+
+	strcpy(path, args->path);
 
 	path_trim(path);
 
-	err = expect(path, "a");
-
-	return err;
+	return expect(path, args->expected);
 }
 
-static int test_rel_single()
-{
-	char	path[] = "a/";
-	int		err;
+const unit	unit_paths_path_trim = {
+	"path_trim",
+	(test[]){
+		//													path		expected
+		it("should not affect trimmed relative path",		"a",		"a"),
+		it("should trim trailing delim on relative path",	"a/",		"a"),
+		it("should trim trailing delims on relative path",	"a///",		"a"),
 
-	path_trim(path);
+		it("should not affect trimmed absolute path",		"/a",		"/a"),
+		it("should trim trailing delim on absolute path",	"/a/",		"/a"),
+		it("should trim trailing delims on absolute path",	"/a///",	"/a"),
 
-	err = expect(path, "a");
-
-	return err;
-}
-
-static int test_rel_multiple()
-{
-	char	path[] = "a///";
-	int		err;
-
-	path_trim(path);
-
-	err = expect(path, "a");
-
-	return err;
-}
-
-static int test_abs()
-{
-	char	path[] = "/a";
-	int		err;
-
-	path_trim(path);
-
-	err = expect(path, "/a");
-
-	return err;
-}
-
-
-static int test_abs_single()
-{
-	char	path[] = "/a/";
-	int		err;
-
-	path_trim(path);
-
-	err = expect(path, "/a");
-
-	return err;
-}
-
-static int test_abs_multiple()
-{
-	char	path[] = "/a///";
-	int		err;
-
-	path_trim(path);
-
-	err = expect(path, "/a");
-
-	return err;
-}
-
-static int test_root()
-{
-	char	path[] = "/";
-	int		err;
-
-	path_trim(path);
-
-	err = expect(path, "/");
-
-	return err;
-}
-
-static int test_root_single()
-{
-	char	path[] = "//";
-	int		err;
-
-	path_trim(path);
-
-	err = expect(path, "/");
-
-	return err;
-}
-
-static int test_root_multiple()
-{
-	char	path[] = "////";
-	int		err;
-
-	path_trim(path);
-
-	err = expect(path, "/");
-
-	return err;
-}
-
-
-const unit unit_paths_path_trim = {
-	.name = "path_trim",
-	.tests = (test[]){
-		{"should not affect trimmed relative path", test_rel},
-		{"should trim trailing delim on relative path", test_rel_single},
-		{"should trim trailing delims on relative path", test_rel_multiple}
-,
-		{"should not affect trimmed absolute path", test_abs},
-		{"should trim trailing delim on absolute path", test_abs_single},
-		{"should trim trailing delims on absolute path", test_abs_multiple},
-
-		{"should not affect trimmed root path", test_root},
-		{"should trim trailing delim on root path", test_root_single},
-		{"should trim trailing delims on root path", test_root_multiple},
-
-		{"should not affect trimmed relative path", test_root},
-		{"should not affect trimmed relative path", test_root},
-
-		{NULL, NULL},
+		it("should not affect trimmed root path",			"/", 		"/"),
+		it("should trim trailing delim on root path",		"//", 		"/" ),
+		it("should trim trailing delims on root path",		"////",		"/"),
+		{},
 	},
 };

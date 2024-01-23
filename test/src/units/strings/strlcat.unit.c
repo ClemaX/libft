@@ -8,84 +8,36 @@
 
 #include <string.h>
 
-static int test_buffer_big()
+struct		args
 {
-	char	buffer[64] = {'a'};
+	size_t			buffer_size;
+	const char 		*base;
+	const char		*appendage;
+	const char		*expected;
+	size_t			expected_ret;
+};
+
+static int	run(const struct args *args)
+{
+	char	str[args->buffer_size];
 	size_t	ret;
-	int		err;
 
-	ret = ft_strlcat(buffer, "b", sizeof(buffer));
+	strcpy(str, args->base);
 
-	err = expect(buffer, "ab")
-		| expect(ret, 2UL);
+	ret = ft_strlcat(str, args->appendage, sizeof(str));
 
-	return err;
+	return expect(str, args->expected) | expect(ret, args->expected_ret);
 }
 
-static int test_buffer_small()
-{
-	char	buffer[3] = {'a'};
-	size_t	ret;
-	int		err;
-
-	ret = ft_strlcat(buffer, "b", sizeof(buffer));
-
-	err = expect(buffer, "ab")
-		| expect(ret, 2UL);
-
-	return err;
-}
-
-static int test_buffer_too_small()
-{
-	char	buffer[2] = {'a'};
-	size_t	ret;
-	int		err;
-
-	ret = ft_strlcat(buffer, "b", sizeof(buffer));
-
-	err = expect(buffer, "a")
-		| expect(ret, 2UL);
-
-	return err;
-}
-
-static int test_buffer_empty()
-{
-	char	buffer[2] = {};
-	size_t	ret;
-	int		err;
-
-	ret = ft_strlcat(buffer, "b", sizeof(buffer));
-
-	err = expect(buffer, "b")
-		| expect(ret, 1UL);
-
-	return err;
-}
-
-static int test_empty()
-{
-	char	buffer[1] = {};
-	size_t	ret;
-	int		err;
-
-	ret = ft_strlcat(buffer, "", sizeof(buffer));
-
-	err = expect(buffer, "")
-		| expect(ret, 0UL);
-
-	return err;
-}
-
-const unit unit_strings_strlcat = {
-	.name = "strlcat",
-	.tests = (test[]){
-		{"should concatenate string in big buffer", test_buffer_big},
-		{"should concatenate string in small buffer", test_buffer_small},
-		{"should concatenate until end of buffer", test_buffer_too_small},
-		{"should concatenate string in empty buffer", test_buffer_empty},
-		{"should concatenate empty strings", test_empty},
-		{NULL, NULL},
+const unit	unit_strings_strlcat = {
+	"strlcat",
+	//													sz	a		b		exp.	exp. ret
+	(test[]){
+		it("should concatenate string in big buffer",	64,	"a",	"b",	"ab",	2),
+		it("should concatenate string in small buffer",	3,	"a",	"b",	"ab",	2),
+		it("should concatenate until end of buffer",	2,	"a",	"b",	"a",	2),
+		it("should concatenate string in empty buffer", 2,	"",		"b",	"b",	1),
+		it("should concatenate empty strings", 			1,	"",		"",		"",		0),
+		{},
 	},
 };

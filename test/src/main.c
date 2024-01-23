@@ -29,7 +29,7 @@ int	unit_tests_run(const unit *unit)
 	{
 		fprintf(stdout,  BULLET " %*s ", -fw, unit->tests[test_i].name);
 
-		err |= unit->tests[test_i].test();
+		err |= unit->tests[test_i].test(unit->tests[test_i].args);
 
 		if (!err)
 			fprintf(stdout, MARKER_PASS "\n");
