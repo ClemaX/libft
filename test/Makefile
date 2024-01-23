@@ -13,6 +13,7 @@ UNIT_SUFFIX:=.unit.c
 
 OBJS:=$(addprefix $(OBJ_DIR)/, expect.o main.o)
 
+UNIT_DIRS:=$(shell find "./$(SRC_DIR)/$(UNIT_DIR)" -type d)
 UNIT_SRCS:=$(shell find "./$(SRC_DIR)/$(UNIT_DIR)" -type f -name '*$(UNIT_SUFFIX)')
 UNIT_OBJS:=$(patsubst ./$(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(UNIT_SRCS))
 
@@ -29,7 +30,7 @@ $(OBJ_DIR) $(GEN_DIR):
 	mkdir -p "$@"
 
 # Generated sources
-$(GEN_DIR)/units.h: gen-units.sh $(SRC_DIR)/$(UNIT_DIR) | $(GEN_DIR)
+$(GEN_DIR)/units.h: gen-units.sh $(UNIT_DIRS) | $(GEN_DIR)
 	./gen-units.sh $(SRC_DIR)/$(UNIT_DIR) $(UNIT_SUFFIX) > $@
 
 # Objects
@@ -44,7 +45,7 @@ $(DEPS): $(OBJ_DIR)/%.d:
 include $(wildcard $(DEPS))
 
 # Executables
-$(NAME): $(OBJS) $(UNIT_OBJS)
+$(NAME): $(OBJS) $(UNIT_OBJS) $(LIB_DIR)/libft.a
 	$(CC) $(LDFLAGS) -o $(NAME) $^ $(LDLIBS)
 
 clean:
