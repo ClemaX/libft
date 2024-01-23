@@ -6,7 +6,9 @@
 #include <unit.h>
 #include <expect.h>
 
-static int test_strtok_single_delim()
+#include <string.h>
+
+static int test_single_char_delim()
 {
 	char		str[] = "a/b/c";
 	const char	*delim = "/";
@@ -15,11 +17,18 @@ static int test_strtok_single_delim()
 	size_t		token_i = 0;
 	int			err = 0;
 
-	do {
-		token = ft_strtok(token, delim);
+	token = ft_strtok(str, delim);
+
+	while (1)
+	{
 		err |= expect(token, expected[token_i]);
-		token_i++;
-	} while (token != NULL);
+
+		if (token == NULL || expected[token_i] == NULL)
+			break;
+
+		token = ft_strtok(NULL, delim);
+		++token_i;
+	}
 
 	return err;
 }
@@ -27,7 +36,7 @@ static int test_strtok_single_delim()
 const unit unit_strings_strtok = {
 	.name = "strtok",
 	.tests = (test[]){
-		{"should tokenize with single delimiters", test_strtok_single_delim},
+		{"should tokenize with single character delimiters", test_single_char_delim},
 		{NULL, NULL},
 	},
 };
