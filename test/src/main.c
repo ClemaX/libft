@@ -34,6 +34,8 @@ int	unit_tests_run(const unit *unit)
 		if (!err)
 			fprintf(stdout, MARKER_PASS "\n");
 	}
+
+	return err;
 }
 
 int	main(void)
