@@ -22,13 +22,11 @@ char	*path_trim(char *path)
 
 	end = path + ft_strlen(path);
 	if (end != path)
-		--end;
-
-	while (end != path && *end == PATH_DELIM)
-		--end;
-	if (end != path)
+	{
+		while (end != path && *--end == PATH_DELIM);
 		++end;
-	*end = '\0';
+		*end = '\0';
+	}
 	return (path);
 }
 
@@ -93,11 +91,11 @@ char	*path_cat(char *dest, const char *a, const char *b)
 	if (err == 0)
 	{
 		do
-		{
-			member = ft_strtok(tmp, PATH_DELIM_S);
-			if (member == NULL)
-				path_push(dest, tmp);
-			else
+	{
+		member = ft_strtok(tmp, PATH_DELIM_S);
+		if (member == NULL)
+			path_push(dest, tmp);
+		else
 				path_push(dest, member);
 		} while (member != NULL);
 	}
