@@ -1,12 +1,40 @@
 #include <stddef.h>
 #include <stdio.h>
+#include <string.h>
 
 #include <unit.h>
+#include <ansi.h>
 
 #define UNIT(symbol) \
 extern const unit symbol;
 #include <units.h>
 #undef UNIT
+
+int	unit_tests_run(const unit *unit)
+{
+	int	fw = 0;
+	int err = 0;
+
+	fprintf(stdout,  COLOR_BLUE_BOLD "%s" COLOR_RESET ":\n", unit->name);
+
+	for (size_t test_i = 0; unit->tests[test_i].test != NULL; ++test_i)
+	{
+		const int name_len = (int)strlen(unit->tests[test_i].name);
+
+		if (name_len > fw)
+			fw = name_len;
+	}
+
+	for (size_t test_i = 0; unit->tests[test_i].test != NULL; ++test_i)
+	{
+		fprintf(stdout,  BULLET " %*s ", -fw, unit->tests[test_i].name);
+
+		err |= unit->tests[test_i].test();
+
+		if (!err)
+			fprintf(stdout, MARKER_PASS "\n");
+	}
+}
 
 int	main(void)
 {
@@ -22,15 +50,10 @@ int	main(void)
 	for (size_t unit_i = 0; unit_i < sizeof(units) / sizeof(*units); ++unit_i)
 	{
 		if (unit_i != 0) {
-			fprintf(stderr, "\n");
+			fprintf(stdout, "\n");
 		}
-		fprintf(stderr, "%s:\n", units[unit_i].name);
 
-		for (size_t test_i = 0; units[unit_i].tests[test_i].test != NULL; ++test_i)
-		{
-			fprintf(stderr, "- %s\n", units[unit_i].tests[test_i].name);
-			err |= units[unit_i].tests[test_i].test();
-		}
+		err |= unit_tests_run(&units[unit_i]);
 	}
 
 	return err;

@@ -4,8 +4,13 @@
 #include <string.h>
 #include <inttypes.h>
 
+#include <ansi.h>
+
 #define _fmt_diff(specifier) \
-	"%s: expected \"" specifier "\" but got \"" specifier "\"\n"
+	MARKER_FAIL "\n" \
+	"\t%s: " \
+		"expected \"" COLOR_GREEN specifier COLOR_RESET "\" " \
+		"but got \"" COLOR_RED specifier COLOR_RESET "\"\n"
 
 #define print_diff(label, actual, expected) \
 printf(_Generic((actual), \
