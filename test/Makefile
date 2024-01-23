@@ -11,7 +11,7 @@ GEN_DIR:=gen
 UNIT_DIR:=units
 UNIT_SUFFIX:=.unit.c
 
-OBJS:=$(addprefix $(OBJ_DIR)/, expect.o main.o)
+OBJS:=$(addprefix $(OBJ_DIR)/, main.o)
 
 UNIT_DIRS:=$(shell find "./$(SRC_DIR)/$(UNIT_DIR)" -type d)
 UNIT_SRCS:=$(shell find "./$(SRC_DIR)/$(UNIT_DIR)" -type f -name '*$(UNIT_SUFFIX)')
