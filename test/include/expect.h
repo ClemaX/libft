@@ -10,7 +10,7 @@ _Generic((actual), \
 )(#actual, actual, expected)
 
 #define _fmt_diff(specifier) \
-	"%s: expected \"" specifier " but got \"" specifier "\"\n"
+	"%s: expected \"" specifier "\" but got \"" specifier "\"\n"
 
 #define print_diff(label, actual, expected) \
 printf(_Generic((actual), \
