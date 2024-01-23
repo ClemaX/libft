@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 
-static size_t	token_next(char *restrict *next, char *restrict *str, const char *delim)
+static size_t	token_next(char *restrict *next, char *restrict *token, const char *delim)
 {
 	size_t	end_i;
 	size_t	delim_i;
@@ -20,39 +20,41 @@ static size_t	token_next(char *restrict *next, char *restrict *str, const char *
 		}
 		if (delim[delim_i] != '\0')
 			end_i++;
-		else
-		{
-			*str = *next;
-			(*next) += end_i;
-			if (end_i == delim_i)
-			{
-				end_i = 0;
-				delim_i = 0;
-			}
-		}
 	}
 	while (delim[delim_i] != '\0' && (*next)[end_i] != '\0');
+
+	if (delim[delim_i] == '\0' || (*next)[end_i] == '\0')
+	{
+		*token = *next;
+		(*next) += end_i;
+
+		if (end_i == delim_i)
+		{
+			end_i = 0;
+			delim_i = 0;
+		}
+	}
 	return (delim_i);
 }
 
 char	*ft_strtok(char *restrict str, const char *restrict delim)
 {
-	static char *restrict	token;
+	static char *restrict	start;
 	size_t					delim_i;
 
+
 	if (str != NULL)
-		token = str;
+		start = str;
 	else
-		str = token;
-	if (*delim != '\0' && *token != '\0')
+		str = start;
+	if (*delim != '\0' && *start != '\0')
 	{
-		delim_i = token_next(&token, &str, delim);
+		delim_i = token_next(&start, &str, delim);
 		if (delim[delim_i] == '\0')
-			token[-delim_i] = '\0';
-		else
-			str = NULL;
+			start[-delim_i] = '\0';
 	}
 	if (str != NULL && *str == '\0')
 		str = NULL;
+
 	return (str);
 }
