@@ -19,8 +19,17 @@ UNIT_OBJS:=$(patsubst ./$(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(UNIT_SRCS))
 
 DEPS:=$(OBJS:.o=.d) $(UNIT_OBJS:.o=.d)
 
-CFLAGS=-I$(INC_DIR) -I$(GEN_DIR) -Wall -Wextra -Werror -I$(LIB_DIR)/include -MT $@ -MMD -MP -MF $(OBJ_DIR)/$*.d
-LDFLAGS:=-Wall -Wextra
+CFLAGS=\
+	-I$(INC_DIR) -I$(GEN_DIR) \
+	-I$(LIB_DIR)/include \
+	-Wall -Wextra -Werror \
+	-MT $@ -MMD -MP -MF $(OBJ_DIR)/$*.d \
+	-fsanitize=address -g3
+
+LDFLAGS:=\
+	-Wall -Wextra -Werror \
+	-fsanitize=address -g3
+
 LDLIBS:=-L$(LIB_DIR) -lft
 
 all: $(NAME)
