@@ -51,10 +51,15 @@ char	*path_pop(char *path)
 	while (end != path && *end == PATH_DELIM)
 		--end;
 	if (end != path)
-		++end;
-	else
-		*end++ = '.';
-	*end = '\0';
+	{
+		while (end != path && *end == PATH_DELIM)
+			--end;
+	}
+	else if (*end != PATH_DELIM)
+		*end = '.';
+
+	*++end = '\0';
+
 	return (path);
 }
 
