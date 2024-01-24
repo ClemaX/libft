@@ -12,12 +12,18 @@ struct		args
 static int	run(const struct args *args)
 {
 	char	path[strlen(args->path) + 1];
+	int		err;
 
 	strcpy(path, args->path);
 
 	path_trim(path);
 
-	return expect(path, args->expected);
+	err = expect(path, args->expected);
+
+	if (err)
+		fprintf(stderr, "\tcall: path_trim(\"%s\")", args->path);
+
+	return err;
 }
 
 const unit	unit_paths_path_trim = {

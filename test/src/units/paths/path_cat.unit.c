@@ -13,10 +13,16 @@ struct		args
 static int	run(const struct args *args)
 {
 	char	path[PATH_MAX];
+	int		err;
 
 	path_cat(path, args->a, args->b);
 
-	return expect(path, args->expected);
+	err = expect(path, args->expected);
+
+	if (err)
+		fprintf(stdout, "\tcall: path_cat(path, \"%s\", \"%s\")\n", args->a, args->b);
+
+	return err;
 }
 
 const unit	unit_paths_path_cat = {

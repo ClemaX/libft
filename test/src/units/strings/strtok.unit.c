@@ -37,6 +37,9 @@ static int	run(const struct args *args)
 		++token_i;
 	}
 
+	if (err)
+		fprintf(stderr, "\tcall: ft_strtok(\"%s\", \"%s\")\n", args->str, args->delim);
+
 	return err;
 }
 

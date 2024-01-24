@@ -13,12 +13,18 @@ struct		args
 static int	run(const struct args *args)
 {
 	char	path[PATH_MAX];
+	int		err;
 
 	strcpy(path, args->base);
 
 	path_push(path, args->appendage);
 
-	return expect(path, args->expected);
+	err = expect(path, args->expected);
+
+	if (err)
+		fprintf(stdout, "\tcall: path_push(\"%s\", \"%s\")\n", args->base, args->appendage);
+
+	return err;
 }
 
 const unit	unit_paths_path_push = {

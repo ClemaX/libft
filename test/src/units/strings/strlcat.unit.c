@@ -21,12 +21,19 @@ static int	run(const struct args *args)
 {
 	char	str[args->buffer_size];
 	size_t	ret;
+	int		err;
 
 	strcpy(str, args->base);
 
 	ret = ft_strlcat(str, args->appendage, sizeof(str));
 
-	return expect(str, args->expected) | expect(ret, args->expected_ret);
+	err = expect(str, args->expected) | expect(ret, args->expected_ret);
+
+	if (err)
+		fprintf(stdout, "\tcall: ft_strlcat(\"%s\", \"%s\", %zu)\n",
+			args->base, args->appendage, sizeof(str));
+
+	return err;
 }
 
 const unit	unit_strings_strlcat = {

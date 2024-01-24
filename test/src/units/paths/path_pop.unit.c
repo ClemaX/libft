@@ -12,12 +12,18 @@ struct		args
 static int	run(const struct args *args)
 {
 	char	path_buffer[PATH_MAX];
+	int		err;
 
 	strcpy(path_buffer, args->path);
 
 	path_pop(path_buffer);
 
-	return expect(path_buffer, args->expected);
+	err = expect(path_buffer, args->expected);
+
+	if (err)
+		fprintf(stdout, "\tcall: path_pop(\"%s\")\n", args->path);
+
+	return err;
 }
 
 const unit	unit_paths_path_pop = {
