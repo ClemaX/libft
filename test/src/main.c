@@ -14,6 +14,7 @@ int	unit_tests_run(const unit *unit)
 {
 	int	fw = 0;
 	int err = 0;
+	int	total_err = 0;
 
 	fprintf(stdout,  COLOR_BLUE_BOLD "%s" COLOR_RESET ":\n", unit->name);
 
@@ -29,13 +30,15 @@ int	unit_tests_run(const unit *unit)
 	{
 		fprintf(stdout,  BULLET " %*s ", -fw, unit->tests[test_i].name);
 
-		err |= unit->tests[test_i].test(unit->tests[test_i].args);
+		err = unit->tests[test_i].test(unit->tests[test_i].args);
 
 		if (!err)
 			fprintf(stdout, MARKER_PASS "\n");
+		else
+			++total_err;
 	}
 
-	return err;
+	return total_err;
 }
 
 int	main(void)
