@@ -9,8 +9,8 @@
 #define _fmt_diff(specifier) \
 	MARKER_FAIL "\n" \
 	"\t%s: " \
-		"expected \"" COLOR_GREEN specifier COLOR_RESET "\" " \
-		"but got \"" COLOR_RED specifier COLOR_RESET "\"\n"
+		"expected \"" COLOR_FG(FG_GREEN, specifier) "\" " \
+		"but got \"" COLOR_FG(FG_RED, specifier) "\"\n"
 
 #define print_diff(label, actual, expected) \
 printf(_Generic((actual), \

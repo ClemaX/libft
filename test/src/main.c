@@ -44,7 +44,7 @@ static inline int	unit_tests_run(const unit *unit)
 	const int	name_fw = unit_tests_name_fw(unit->tests);
 	int			err_count = 0;
 
-	fprintf(stdout,  COLOR_BLUE_BOLD "%s" COLOR_RESET ":\n", unit->name);
+	fprintf(stdout, COLOR_SFG(S_BOLD, FG_BLUE, "%s") ":\n", unit->name);
 
 	for (size_t test_i = 0; unit->tests[test_i].test != NULL; ++test_i)
 		err_count += test_run(&unit->tests[test_i], name_fw) != 0;
