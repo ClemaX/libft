@@ -11,7 +11,7 @@ struct		args
 
 static int	run(const struct args *args)
 {
-	char	path[strlen(args->path)];
+	char	path[strlen(args->path) + 1];
 
 	strcpy(path, args->path);
 

@@ -17,7 +17,7 @@ struct		args
 
 static int	run(const struct args *args)
 {
-	char	str[strlen(args->str)];
+	char	str[strlen(args->str) + 1];
 	char	*token;
 	size_t	token_i = 0;
 	int		err = 0;
