@@ -78,15 +78,24 @@ debug: re
 
 clean:
 	$(foreach dir, $(LIBDIRS),\
-		@echo "MK $(addprefix -C, $(LIBDIRS)) $@" && make -C $(dir) $@ && ):
+		@echo "MK -C $(dir) $@" && make -C $(dir) $@ && ):
+
+	@echo "MK -C $(TESTDIR) $@"
+	make -C $(TESTDIR) $@
+
 	@echo "RM $(OBJDIR)"
 	rm -rf "$(OBJDIR)"
 
 fclean: clean
 	$(foreach dir, $(LIBDIRS),\
-		@echo "MK $(addprefix -C, $(LIBDIRS)) $@" && make -C $(dir) $@ && ):
+		@echo "MK -C $(dir) $@" && make -C $(dir) $@ && ):
+
+	@echo "MK -C $(TESTDIR) $@"
+	make -C $(TESTDIR) $@
+
 	@echo "RM $(BINDIR)/$(NAME)"
 	rm -f "$(BINDIR)/$(NAME)"
+
 	@rmdir "$(BINDIR)" 2>/dev/null && echo "RM $(BINDIR)" || :
 
 re: fclean all
