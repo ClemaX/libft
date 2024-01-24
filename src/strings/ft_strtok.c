@@ -1,7 +1,4 @@
 #include <libft/strings.h>
-#include <stddef.h>
-
-#include <stdio.h>
 
 static size_t	token_next(char *restrict *next, char *restrict *token, const char *delim)
 {

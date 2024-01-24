@@ -56,8 +56,6 @@ t_hmap_i_pair		*hmap_i_get(const t_hmap_i *const map, t_hmap_int key)
 	return (pair);
 }
 
-#include <libft/printf.h>
-
 /**
  * @brief Set a value for a key in a hash map.
  *
