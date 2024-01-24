@@ -48,8 +48,6 @@ char	*path_pop(char *path)
 		--end;
 	while (end != path && *end != PATH_DELIM)
 		--end;
-	while (end != path && *end == PATH_DELIM)
-		--end;
 	if (end != path)
 	{
 		while (end != path && *end == PATH_DELIM)
@@ -95,14 +93,18 @@ char	*path_cat(char *dest, const char *a, const char *b)
 		|| ft_strlcpy(tmp, b, sizeof(tmp)) >= PATH_MAX;
 	if (err == 0)
 	{
-		do
-	{
 		member = ft_strtok(tmp, PATH_DELIM_S);
 		if (member == NULL)
 			path_push(dest, tmp);
 		else
+		{
+			do
+			{
 				path_push(dest, member);
-		} while (member != NULL);
+				member = ft_strtok(NULL, PATH_DELIM_S);
+			}
+			while (member != NULL);
+		}
 	}
 	return (dest);
 }
