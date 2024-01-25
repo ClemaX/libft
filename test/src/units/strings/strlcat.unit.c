@@ -1,12 +1,11 @@
-#include <stddef.h>
-
-#include <libft/strings.h>
-
 #include <stdio.h>
+#include <string.h>
+
 #include <unit.h>
 #include <expect.h>
 
-#include <string.h>
+#include <libft/strings.h>
+
 
 struct		args
 {
