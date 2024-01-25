@@ -1,8 +1,8 @@
 NAME = libft.a
 
 # Compiler and linker
-CC = clang
-LD = clang
+CC = cc
+LD = cc
 AR = ar
 
 # Paths
@@ -28,7 +28,7 @@ DEPS = $(OBJS:.o=.d)
 
 # Flags
 DBGFLAGS := -g3 -fsanitize=address
-CFLAGS = -Wall -Wextra -Werror $(INCS:%=-I%)# $(DBGFLAGS)
+CFLAGS = -Wall -Wextra $(INCS:%=-I%)# $(DBGFLAGS)
 DFLAGS = -MT $@ -MMD -MP -MF $(OBJDIR)/$*.d
 LDFLAGS = $(LIBDIRS:%=-L%)# $(DBGFLAGS)
 ARFLAGS = -rcs
