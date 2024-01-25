@@ -16,4 +16,4 @@
 
 #include <libft/printf/line.h>
 
-t_line	*parse_fmt(const char *fmt, va_list ap);
+t_line	*parse_fmt(const char *fmt, va_list *ap);

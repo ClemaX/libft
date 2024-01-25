@@ -66,14 +66,14 @@ static char	parse_flags(const char **fmt)
 **	Parse the field width from the format string
 */
 
-static int	parse_width(const char **fmt, va_list ap, unsigned char *flags)
+static int	parse_width(const char **fmt, va_list *ap, unsigned char *flags)
 {
 	int	width;
 
 	if (**fmt == '*')
 	{
 		(*fmt)++;
-		width = va_arg(ap, int);
+		width = va_arg(*ap, int);
 		if (width < 0 && *flags & ZERO)
 		{
 			width = -width;
@@ -94,7 +94,7 @@ static int	parse_width(const char **fmt, va_list ap, unsigned char *flags)
 **	Note: Negative precision is ignored
 */
 
-static int	parse_precision(const char **fmt, va_list ap)
+static int	parse_precision(const char **fmt, va_list *ap)
 {
 	int precision;
 
@@ -104,7 +104,7 @@ static int	parse_precision(const char **fmt, va_list ap)
 	if (**fmt == '*')
 	{
 		(*fmt)++;
-		precision = va_arg(ap, int);
+		precision = va_arg(*ap, int);
 	}
 	else
 		precision = utoa(fmt);
@@ -120,7 +120,7 @@ static int	parse_precision(const char **fmt, va_list ap)
 **	Parse the format string and initialize a new spec
 */
 
-t_spec		pf_parse_spec(const char **fmt, va_list ap)
+t_spec		pf_parse_spec(const char **fmt, va_list *ap)
 {
 	t_spec	spec;
 
@@ -133,7 +133,7 @@ t_spec		pf_parse_spec(const char **fmt, va_list ap)
 	spec.precision = parse_precision(fmt, ap);
 	spec.size = parse_size(fmt);
 	spec.type = ft_strpos(TYPES, *(*fmt)++);
-	if (spec.type == PTR)
+	if (spec.type == FMT_PTR)
 		spec.flags |= HASH;
 	return (spec);
 }

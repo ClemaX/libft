@@ -23,7 +23,7 @@ int				ft_dprintf(int fd, const char *fmt, ...)
 	int		len;
 
 	va_start(ap, fmt);
-	line = parse_fmt(fmt, ap);
+	line = parse_fmt(fmt, &ap);
 	va_end(ap);
 	if (!line || (len = line_put(&str, &line, 1)) < 0)
 		return (-1);
@@ -41,7 +41,7 @@ int				ft_printf(const char *fmt, ...)
 	int		len;
 
 	va_start(ap, fmt);
-	line = parse_fmt(fmt, ap);
+	line = parse_fmt(fmt, &ap);
 	va_end(ap);
 	if (!line || (len = line_put(&str, &line, 1)) < 0)
 		return (-1);
@@ -57,7 +57,7 @@ int				ft_asprintf(char **ret, char *fmt, ...)
 	int		len;
 
 	va_start(ap, fmt);
-	line = parse_fmt(fmt, ap);
+	line = parse_fmt(fmt, &ap);
 	va_end(ap);
 	if ((!line || (len = line_put(ret, &line, 1)) < 0))
 	{
@@ -74,7 +74,7 @@ int				ft_sprintf(char *str, char *fmt, ...)
 	int		len;
 
 	va_start(ap, fmt);
-	line = parse_fmt(fmt, ap);
+	line = parse_fmt(fmt, &ap);
 	va_end(ap);
 	if ((!line || (len = line_put(&str, &line, 0)) < 0))
 		return (-1);

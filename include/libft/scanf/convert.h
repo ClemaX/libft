@@ -16,4 +16,6 @@
 
 #include <libft/scanf/specs.h>
 
-extern int	(*g_convert[10])(const char **src, t_spec spec, va_list ap);
+typedef int			(*t_sf_cvt_fun)(const char **fmt, t_spec spec, va_list *ap);
+
+extern t_sf_cvt_fun	g_convert[FMT_ENTRY_COUNT];

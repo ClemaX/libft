@@ -28,14 +28,26 @@
 
 typedef unsigned char	t_flags;
 
-typedef enum			e_type
+typedef enum			e_fmt_type
 {
-	ERR = -1, CHAR, STR, PCNT, PTR, DEC, INT, UINT, LHEX, UHEX, OCT, CNT
-}						t_type;
+	FMT_ERR = -1,
+	FMT_CHAR,
+	FMT_STR,
+	FMT_PCNT,
+	FMT_PTR,
+	FMT_DEC,
+	FMT_INT,
+	FMT_UINT,
+	FMT_LHEX,
+	FMT_UHEX,
+	FMT_OCT,
+	FMT_CNT,
+	FMT_ENTRY_COUNT,
+}						t_fmt_type;
 
 typedef enum			e_numsize
 {
-	S_DEF, S_L, S_LL, S_H, S_HH
+	NUMSZ_DEF, NUMSZ_L, NUMSZ_LL, NUMSZ_H, NUMSZ_HH
 }						t_numsize;
 
 typedef struct			s_spec
@@ -43,8 +55,8 @@ typedef struct			s_spec
 	t_flags		flags;
 	int			width;
 	int			precision;
-	t_type		type;
+	t_fmt_type		type;
 	t_numsize	size;
 }						t_spec;
 
-t_spec					sf_parse_spec(const char **fmt, va_list ap);
+t_spec					sf_parse_spec(const char **fmt, va_list *ap);

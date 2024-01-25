@@ -22,33 +22,33 @@ t_numsize	parse_size(const char **fmt)
 		if (*++(*fmt) == 'l')
 		{
 			(*fmt)++;
-			return (S_LL);
+			return (NUMSZ_LL);
 		}
 		else
-			return (S_L);
+			return (NUMSZ_L);
 	}
 	else if (**fmt == 'h')
 	{
 		if (*++(*fmt) == 'h')
 		{
 			(*fmt)++;
-			return (S_HH);
+			return (NUMSZ_HH);
 		}
 		else
-			return (S_H);
+			return (NUMSZ_H);
 	}
 	else if (**fmt == 'z')
 	{
 		(*fmt)++;
-		return (S_Z);
+		return (NUMSZ_Z);
 	}
 	else if (**fmt == 'j')
 	{
 		(*fmt)++;
-		return (S_J);
+		return (NUMSZ_J);
 	}
 	else
-		return (S_DEF);
+		return (NUMSZ_DEF);
 }
 
 t_number	convert_signed(va_list ap, t_spec spec)
@@ -56,17 +56,17 @@ t_number	convert_signed(va_list ap, t_spec spec)
 	t_number	number;
 	int64_t		value;
 
-	if (spec.size == S_HH)
+	if (spec.size == NUMSZ_HH)
 		value = (signed char)va_arg(ap, int);
-	else if (spec.size == S_H)
+	else if (spec.size == NUMSZ_H)
 		value = (short)va_arg(ap, int);
-	else if (spec.size == S_L)
+	else if (spec.size == NUMSZ_L)
 		value = va_arg(ap, long);
-	else if (spec.size == S_LL)
+	else if (spec.size == NUMSZ_LL)
 		value = va_arg(ap, long long);
-	else if (spec.size == S_Z)
+	else if (spec.size == NUMSZ_Z)
 		value = va_arg(ap, ssize_t);
-	else if (spec.size == S_J)
+	else if (spec.size == NUMSZ_J)
 		value = va_arg(ap, uintmax_t);
 	else
 		value = va_arg(ap, int);
@@ -86,21 +86,21 @@ t_number	convert_unsigned(va_list ap, t_spec spec)
 {
 	t_number	number;
 
-	if (spec.type == PTR)
+	if (spec.type == FMT_PTR)
 		number.value = (uintptr_t)va_arg(ap, void*);
-	else if (spec.size == S_HH)
+	else if (spec.size == NUMSZ_HH)
 		number.value = (unsigned char)va_arg(ap, int);
-	else if (spec.size == S_H)
+	else if (spec.size == NUMSZ_H)
 		number.value = (unsigned short)va_arg(ap, int);
-	else if (spec.size == S_L)
+	else if (spec.size == NUMSZ_L)
 		number.value = va_arg(ap, long);
-	else if (spec.size == S_L)
+	else if (spec.size == NUMSZ_L)
 		number.value = va_arg(ap, unsigned long);
-	else if (spec.size == S_LL)
+	else if (spec.size == NUMSZ_LL)
 		number.value = va_arg(ap, unsigned long long);
-	else if (spec.size == S_Z)
+	else if (spec.size == NUMSZ_Z)
 		number.value = va_arg(ap, size_t);
-	else if (spec.size == S_J)
+	else if (spec.size == NUMSZ_J)
 		number.value = va_arg(ap, uintmax_t);
 	else
 		number.value = va_arg(ap, unsigned int);

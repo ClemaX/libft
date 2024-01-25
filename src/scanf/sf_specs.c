@@ -24,23 +24,23 @@ static t_numsize	parse_size(const char **fmt)
 		if (*++(*fmt) == 'l')
 		{
 			(*fmt)++;
-			return (S_LL);
+			return (NUMSZ_LL);
 		}
 		else
-			return (S_L);
+			return (NUMSZ_L);
 	}
 	else if (**fmt == 'h')
 	{
 		if (*++(*fmt) == 'h')
 		{
 			(*fmt)++;
-			return (S_HH);
+			return (NUMSZ_HH);
 		}
 		else
-			return (S_H);
+			return (NUMSZ_H);
 	}
 	else
-		return (S_DEF);
+		return (NUMSZ_DEF);
 }
 
 /*
@@ -92,7 +92,7 @@ static char			parse_flags(const char **fmt)
 **	Note: Negative precision is ignored
 */
 
-static int			parse_precision(const char **fmt, va_list ap)
+static int			parse_precision(const char **fmt, va_list *ap)
 {
 	int precision;
 
@@ -102,7 +102,7 @@ static int			parse_precision(const char **fmt, va_list ap)
 	if (**fmt == '*')
 	{
 		(*fmt)++;
-		precision = va_arg(ap, int);
+		precision = va_arg(*ap, int);
 	}
 	else
 		precision = utoa(fmt);
@@ -118,7 +118,7 @@ static int			parse_precision(const char **fmt, va_list ap)
 **	Parse the format string and initialize a new spec
 */
 
-t_spec				sf_parse_spec(const char **fmt, va_list ap)
+t_spec				sf_parse_spec(const char **fmt, va_list *ap)
 {
 	t_spec	spec;
 
@@ -131,7 +131,7 @@ t_spec				sf_parse_spec(const char **fmt, va_list ap)
 	spec.precision = parse_precision(fmt, ap);
 	spec.size = parse_size(fmt);
 	spec.type = ft_strpos(TYPES, *(*fmt)++);
-	if (spec.type == PTR)
+	if (spec.type == FMT_PTR)
 		spec.flags |= HASH;
 	return (spec);
 }

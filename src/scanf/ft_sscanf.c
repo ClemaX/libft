@@ -31,7 +31,7 @@ static int	parse_txt(const char **src, const char **fmt)
 	return (**fmt == '%');
 }
 
-static int	parse_fmt(const char *src, const char *fmt, va_list ap)
+static int	parse_fmt(const char *src, const char *fmt, va_list *ap)
 {
 	const char	*start = src;
 	int			count;
@@ -40,10 +40,10 @@ static int	parse_fmt(const char *src, const char *fmt, va_list ap)
 	count = 0;
 	while (parse_txt(&src, &fmt) && *fmt)
 	{
-		if ((spec = sf_parse_spec(&fmt, ap)).type == ERR)
+		if ((spec = sf_parse_spec(&fmt, ap)).type == FMT_ERR)
 			return (0);
-		else if (spec.type == CNT)
-			*(va_arg(ap, int*)) = src - start;
+		else if (spec.type == FMT_CNT)
+			*(va_arg(*ap, int*)) = src - start;
 		else if (g_convert[spec.type](&src, spec, ap))
 			count++;
 		else
@@ -58,7 +58,7 @@ int			ft_sscanf(const char *src, const char *fmt, ...)
 	int		count;
 
 	va_start(ap, fmt);
-	count = parse_fmt(src, fmt, ap);
+	count = parse_fmt(src, fmt, &ap);
 	va_end(ap);
 	return (count);
 }

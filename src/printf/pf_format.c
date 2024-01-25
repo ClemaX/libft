@@ -15,14 +15,13 @@
 #include <libft/memory.h>
 #include <libft/strings.h>
 
-#include <libft/printf/specs.h>
-#include <libft/printf/line.h>
+#include <libft/printf/format.h>
 #include <libft/printf/numbers.h>
 
-static int	fmt_char(t_line **line, t_spec spec, va_list ap)
+static int	fmt_char(t_line **line, t_spec spec, va_list *ap)
 {
 	const int	len = (spec.width > 1) ? spec.width : 1;
-	const char	c = (spec.type == PCNT) ? '%' : va_arg(ap, unsigned);
+	const char	c = (spec.type == FMT_PCNT) ? '%' : va_arg(*ap, unsigned);
 	char		*content;
 
 	if (!len)
@@ -34,9 +33,9 @@ static int	fmt_char(t_line **line, t_spec spec, va_list ap)
 	return (line_add(line, content, len) != NULL);
 }
 
-static int	fmt_str(t_line **line, t_spec spec, va_list ap)
+static int	fmt_str(t_line **line, t_spec spec, va_list *ap)
 {
-	const char	*str = va_arg(ap, char*);
+	const char	*str = va_arg(*ap, char*);
 	const char	*src = (str) ? str : "(null)";
 	int			srclen;
 	int			len;
@@ -76,7 +75,7 @@ static void	write_num(char *dest, t_number number)
 		*dest = number.sign;
 }
 
-static int	fmt_num(t_line **line, t_spec s, va_list ap)
+static int	fmt_num(t_line **line, t_spec s, va_list *ap)
 {
 	const t_number	n = parse_number(ap, s);
 	const int		len = n.padding + n.prefix_len + n.len;
@@ -101,7 +100,7 @@ static int	fmt_num(t_line **line, t_spec s, va_list ap)
 **	Note: Types are dispatched in following order: cs%pdiuxXon
 */
 
-int				(*g_format[10])(t_line**, t_spec, va_list) = {
+t_pf_fmt_fun g_format[FMT_ENTRY_COUNT] = {
 	fmt_char,
 	fmt_str,
 	fmt_char,
@@ -111,5 +110,6 @@ int				(*g_format[10])(t_line**, t_spec, va_list) = {
 	fmt_num,
 	fmt_num,
 	fmt_num,
-	fmt_num
+	fmt_num,
+	NULL,
 };

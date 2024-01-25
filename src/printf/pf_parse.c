@@ -49,7 +49,7 @@ static int	parse_txt(const char **fmt, t_line **line)
 **	Parse the format, converting the arguments and building a line
 */
 
-t_line		*parse_fmt(const char *fmt, va_list ap)
+t_line		*parse_fmt(const char *fmt, va_list *ap)
 {
 	t_spec	spec;
 	t_line	*line;
@@ -58,11 +58,12 @@ t_line		*parse_fmt(const char *fmt, va_list ap)
 	line = NULL;
 	while (parse_txt(&fmt, &line) && *fmt)
 	{
-		if ((spec = pf_parse_spec(&fmt, ap)).type == ERR)
+		spec = pf_parse_spec(&fmt, ap);
+		if (spec.type == FMT_ERR)
 			return (line_clr(&line));
-		else if (spec.type == CNT)
+		else if (spec.type == FMT_CNT)
 		{
-			if ((cnt = va_arg(ap, int*)))
+			if ((cnt = va_arg(*ap, int*)))
 				*cnt = line_len(line);
 		}
 		else if (!g_format[spec.type](&line, spec, ap))

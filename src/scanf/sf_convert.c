@@ -16,30 +16,30 @@
 #include <libft/numbers.h>
 #include <libft/strings.h>
 #include <libft/types.h>
-#include <libft/scanf/specs.h>
+#include <libft/scanf/convert.h>
 
 /*
 **	Warning: The WILDCARD/STAR flag does increment the match count!
 */
 
-static int	cvt_char(const char **src, t_spec spec, va_list ap)
+static int	cvt_char(const char **src, t_spec spec, va_list *ap)
 {
 	char	c;
 
 	if (!**src)
 		return (0);
-	if (spec.type == PCNT)
+	if (spec.type == FMT_PCNT)
 		return (*(*src)++ == '%');
-	if (spec.size == S_DEF)
+	if (spec.size == NUMSZ_DEF)
 		c = *(*src)++;
 	else
 		return (0);
 	if (!(spec.flags & STAR))
-		*(va_arg(ap, char*)) = c;
+		*(va_arg(*ap, char*)) = c;
 	return (1);
 }
 
-static int	cvt_str(const char **src, t_spec spec, va_list ap)
+static int	cvt_str(const char **src, t_spec spec, va_list *ap)
 {
 	char	*dest;
 	char	*next;
@@ -55,28 +55,28 @@ static int	cvt_str(const char **src, t_spec spec, va_list ap)
 		{
 			if (!(dest = malloc(sizeof(*dest) * (len + 1))))
 				return (0);
-			*(va_arg(ap, char**)) = dest;
+			*(va_arg(*ap, char**)) = dest;
 		}
 		else
-			dest = va_arg(ap, char*);
+			dest = va_arg(*ap, char*);
 		ft_strlcpy(dest, *src, len + 1);
 	}
 	*src += len;
 	return (1);
 }
 
-static int	cvt_num(const char **src, t_spec spec, va_list ap)
+static int	cvt_num(const char **src, t_spec spec, va_list *ap)
 {
 	int	i;
 
-	if (spec.size == S_DEF && (ft_isdigit(**src) || ft_issign(**src)))
+	if (spec.size == NUMSZ_DEF && (ft_isdigit(**src) || ft_issign(**src)))
 	{
 		i = ft_atoi(*src);
 		*src += ft_numlen(i, 10);
 	}
 	else
 		return (0);
-	*(va_arg(ap, int*)) = i;
+	*(va_arg(*ap, int*)) = i;
 	return (1);
 }
 
@@ -85,7 +85,7 @@ static int	cvt_num(const char **src, t_spec spec, va_list ap)
 **	Note: Types are dispatched in following order: cs%pdiuxXon
 */
 
-int			(*g_convert[11])(const char**, t_spec, va_list) = {
+t_sf_cvt_fun g_convert[FMT_ENTRY_COUNT] = {
 	cvt_char,
 	cvt_str,
 	cvt_char,

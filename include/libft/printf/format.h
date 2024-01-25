@@ -15,4 +15,6 @@
 #include <libft/printf/line.h>
 #include <libft/printf/specs.h>
 
-extern int	(*g_format[10])(t_line **line, t_spec spec, va_list ap);
+typedef int			(*t_pf_fmt_fun)(t_line **line, t_spec spec, va_list *ap);
+
+extern t_pf_fmt_fun	g_format[FMT_ENTRY_COUNT];

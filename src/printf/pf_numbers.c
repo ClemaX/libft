@@ -35,9 +35,9 @@ void		parse_dimensions(t_number *n, t_spec s)
 	n->prefix_len = (n->sign != '\0');
 	if (s.flags & HASH)
 	{
-		if (n->radix == R_HEX && (n->value || s.type == PTR))
+		if (n->radix == R_HEX && (n->value || s.type == FMT_PTR))
 		{
-			n->prefix = (s.type == LHEX || s.type == PTR) ? 'x' : 'X';
+			n->prefix = (s.type == FMT_LHEX || s.type == FMT_PTR) ? 'x' : 'X';
 			n->prefix_len += 2;
 		}
 		else if (n->radix == R_OCT)
@@ -67,13 +67,13 @@ t_number	parse_number(va_list ap, t_spec spec)
 	};
 	t_number	number;
 
-	if (spec.type == DEC || spec.type == INT)
+	if (spec.type == FMT_DEC || spec.type == FMT_INT)
 		number = convert_signed(ap, spec);
 	else
 		number = convert_unsigned(ap, spec);
-	number.radix = radixes[spec.type - PTR];
+	number.radix = radixes[spec.type - FMT_PTR];
 	number.digits = BASE36_CHARSET;
-	number.lowercase = lowercase[spec.type - PTR];
+	number.lowercase = lowercase[spec.type - FMT_PTR];
 	parse_dimensions(&number, spec);
 	return (number);
 }
