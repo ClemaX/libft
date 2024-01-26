@@ -6,20 +6,31 @@
 
 #include <ansi.h>
 
-#define _fmt_diff(specifier) \
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE	1024
+#endif
+
+typedef struct		fd_expectation
+{
+	int			fd;
+	const void *content;
+	size_t		length;
+}					fd_expectation;
+
+#define				_fmt_diff(specifier) \
 	MARKER_FAIL "\n" \
 	"\t%s: " \
 		"expected \"" COLOR_FG(FG_GREEN, specifier) "\" " \
 		"but got \"" COLOR_FG(FG_RED, specifier) "\"\n"
 
-#define print_diff(label, actual, expected) \
-printf(_Generic((actual), \
-	int: 			_fmt_diff("%i"), \
-	size_t:			_fmt_diff("%zu"), \
-	ssize_t:		_fmt_diff("%zi"), \
-	char*:			_fmt_diff("%s"), \
-	const char*:	_fmt_diff("%s") \
-), (label), (expected), (actual))
+#define				print_diff(label, actual, expected) \
+	printf(_Generic((actual), \
+		int: 			_fmt_diff("%i"), \
+		size_t:			_fmt_diff("%zu"), \
+		ssize_t:		_fmt_diff("%zi"), \
+		char*:			_fmt_diff("%s"), \
+		const char*:	_fmt_diff("%s") \
+	), (label), (expected), (actual))
 
 #define expect_n(label, actual, expected) \
 ({ \
@@ -32,16 +43,20 @@ printf(_Generic((actual), \
 	diff; \
 })
 
-#define expect_n_decl(suffix, type) \
-static inline int	expect_##suffix (const char *label, const int actual, const int expected) \
+#define				expect_n_decl(suffix, type) \
+static inline int	expect_##suffix (const char *label, const int actual, const int expected) __attribute__((unused)); \
+static inline int	expect_##suffix (const char *label, const int actual, const int expected)  \
 { \
-	return expect_n(label, actual, expected); \
+	return 			expect_n(label, actual, expected); \
 }
 
 expect_n_decl(i, int);
 expect_n_decl(zu, size_t);
 expect_n_decl(zi, ssize_t);
 
+// static inline int	expect_s(const char *label, const char *actual, const char *expected) __attribute__((unused));
+
+static inline int	expect_s(const char *label, const char *actual, const char *expected) __attribute__((unused));
 static inline int	expect_s(const char *label, const char *actual, const char *expected)
 {
 	int diff;
@@ -54,12 +69,31 @@ static inline int	expect_s(const char *label, const char *actual, const char *ex
 	return diff;
 }
 
-#define expect(actual, expected) \
+int					expect_fds(const fd_expectation *expectations);
+int					expect_fds_done();
+
+#define				expect(actual, expected) \
 _Generic((actual), \
-    int:	expect_i, \
-	size_t:	expect_zu, \
-	ssize_t: expect_zi, \
-	char*:	expect_s \
-)(#actual, actual, expected)
+    int:				expect_i, \
+	size_t:				expect_zu, \
+	ssize_t:			expect_zi, \
+	char*:				expect_s, \
+	fd_expectation*:	expect_fds \
+)((#actual), (actual), (expected))
+
+#define _fd_expect(_fd, _content, _length) \
+	(fd_expectation){ .fd=(_fd), .content=(_content), .length=(_length) }
+
+#define fd_expect_mem(fd, content) \
+	_fd_expect((fd), (content), sizeof(content))
+
+#define fd_expect_s(fd, content) \
+	_fd_expect((fd), (content), sizeof(content) - 1)
+
+#define fd_expect(fd, content) \
+	_Generic((content), \
+		char*:	fd_expect_s((fd), (content)), \
+		void*:	fd_expect_mem((fd), (content)) \
+	)
 
 #define it(name, ...) {name, run, &(struct args){__VA_ARGS__}}
