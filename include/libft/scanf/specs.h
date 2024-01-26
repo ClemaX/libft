@@ -14,6 +14,8 @@
 
 #include <stdarg.h>
 
+#include <libft/scanf/ctx.h>
+
 #define FLAGS	"-+ 0#*m"
 
 #define MINUS	1
@@ -55,8 +57,8 @@ typedef struct			s_spec
 	t_flags		flags;
 	int			width;
 	int			precision;
-	t_fmt_type		type;
+	t_fmt_type	type;
 	t_numsize	size;
 }						t_spec;
 
-t_spec					sf_parse_spec(const char **fmt, va_list *ap);
+t_fmt_type				sf_parse_spec(t_sf_ctx *ctx, t_spec *spec);

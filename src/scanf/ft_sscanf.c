@@ -10,41 +10,41 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/scanf/ctx.h"
 #include <stdarg.h>
 
 #include <libft/types.h>
 
-#include <libft/scanf/specs.h>
 #include <libft/scanf/convert.h>
 
-static int	parse_txt(const char **src, const char **fmt)
+static int	parse_txt(t_sf_ctx *ctx, const char **src)
 {
-	while (**fmt && **fmt != '%' && **fmt == **src)
+	while (*ctx->fmt && *ctx->fmt != '%' && *ctx->fmt == **src)
 	{
-		(*fmt)++;
+		ctx->fmt++;
 		(*src)++;
 	}
 	while (ft_isspace(**src))
 		(*src)++;
-	while (ft_isspace(**fmt))
-		(*fmt)++;
-	return (**fmt == '%');
+	while (ft_isspace(*ctx->fmt))
+		ctx->fmt++;
+	return (*ctx->fmt == '%');
 }
 
-static int	parse_fmt(const char *src, const char *fmt, va_list *ap)
+static int	parse_fmt(t_sf_ctx *ctx, const char *src)
 {
 	const char	*start = src;
 	int			count;
 	t_spec		spec;
 
 	count = 0;
-	while (parse_txt(&src, &fmt) && *fmt)
+	while (parse_txt(ctx, &src) && *ctx->fmt)
 	{
-		if ((spec = sf_parse_spec(&fmt, ap)).type == FMT_ERR)
+		if (sf_parse_spec(ctx, &spec) == FMT_ERR)
 			return (0);
 		else if (spec.type == FMT_CNT)
-			*(va_arg(*ap, int*)) = src - start;
-		else if (g_convert[spec.type](&src, spec, ap))
+			*(va_arg(ctx->ap, int*)) = src - start;
+		else if (g_converters[spec.type](ctx, &src, &spec))
 			count++;
 		else
 			return (count);
@@ -54,11 +54,13 @@ static int	parse_fmt(const char *src, const char *fmt, va_list *ap)
 
 int			ft_sscanf(const char *src, const char *fmt, ...)
 {
-	va_list	ap;
-	int		count;
+	t_sf_ctx	ctx = {
+		.fmt = fmt,
+	};
+	int			count;
 
-	va_start(ap, fmt);
-	count = parse_fmt(src, fmt, &ap);
-	va_end(ap);
+	va_start(ctx.ap, fmt);
+	count = parse_fmt(&ctx, src);
+	va_end(ctx.ap);
 	return (count);
 }

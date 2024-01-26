@@ -17,32 +17,6 @@
 
 #include <libft/scanf/specs.h>
 
-static t_numsize	parse_size(const char **fmt)
-{
-	if (**fmt == 'l')
-	{
-		if (*++(*fmt) == 'l')
-		{
-			(*fmt)++;
-			return (NUMSZ_LL);
-		}
-		else
-			return (NUMSZ_L);
-	}
-	else if (**fmt == 'h')
-	{
-		if (*++(*fmt) == 'h')
-		{
-			(*fmt)++;
-			return (NUMSZ_HH);
-		}
-		else
-			return (NUMSZ_H);
-	}
-	else
-		return (NUMSZ_DEF);
-}
-
 /*
 **	fmt:	The format string
 **
@@ -57,8 +31,34 @@ static int			utoa(const char **fmt)
 	if (**fmt == '-')
 		(*fmt)++;
 	while (ft_isdigit(**fmt))
-		number = 10 * number + *((*fmt)++) - '0';
+		number = 10 * number + *(*fmt)++ - '0';
 	return (number);
+}
+
+static t_numsize	parse_size(t_sf_ctx *ctx)
+{
+	if (*ctx->fmt == 'l')
+	{
+		if (*++ctx->fmt == 'l')
+		{
+			ctx->fmt++;
+			return (NUMSZ_LL);
+		}
+		else
+			return (NUMSZ_L);
+	}
+	else if (*ctx->fmt == 'h')
+	{
+		if (*++ctx->fmt == 'h')
+		{
+			ctx->fmt++;
+			return (NUMSZ_HH);
+		}
+		else
+			return (NUMSZ_H);
+	}
+	else
+		return (NUMSZ_DEF);
 }
 
 /*
@@ -92,46 +92,44 @@ static char			parse_flags(const char **fmt)
 **	Note: Negative precision is ignored
 */
 
-static int			parse_precision(const char **fmt, va_list *ap)
+static int			parse_precision(t_sf_ctx *ctx)
 {
 	int precision;
 
-	if (**fmt != '.')
+	if (*ctx->fmt != '.')
 		return (-1);
-	(*fmt)++;
-	if (**fmt == '*')
+	ctx->fmt++;
+	if (*ctx->fmt == '*')
 	{
-		(*fmt)++;
-		precision = va_arg(*ap, int);
+		ctx->fmt++;
+		precision = va_arg(ctx->ap, int);
 	}
 	else
-		precision = utoa(fmt);
+		precision = utoa(&ctx->fmt);
 	if (precision < 0)
 		return (-1);
 	return (precision);
 }
 
 /*
-**	fmt:		The format string
-**	width:		The argument string
+**	ctx:	The scanf context
+**	spec:	Parsed sepcification destination
 **
 **	Parse the format string and initialize a new spec
 */
 
-t_spec				sf_parse_spec(const char **fmt, va_list *ap)
+t_fmt_type			sf_parse_spec(t_sf_ctx *ctx, t_spec *spec)
 {
-	t_spec	spec;
-
-	(*fmt)++;
-	spec.flags = parse_flags(fmt);
-	if (ft_isdigit(**fmt))
-		spec.width = utoa(fmt);
+	ctx->fmt++;
+	spec->flags = parse_flags(&ctx->fmt);
+	if (ft_isdigit(*ctx->fmt))
+		spec->width = utoa(&ctx->fmt);
 	else
-		spec.width = -1;
-	spec.precision = parse_precision(fmt, ap);
-	spec.size = parse_size(fmt);
-	spec.type = ft_strpos(TYPES, *(*fmt)++);
-	if (spec.type == FMT_PTR)
-		spec.flags |= HASH;
-	return (spec);
+		spec->width = -1;
+	spec->precision = parse_precision(ctx);
+	spec->size = parse_size(ctx);
+	spec->type = ft_strpos(TYPES, *ctx->fmt++);
+	if (spec->type == FMT_PTR)
+		spec->flags |= HASH;
+	return (spec->type);
 }
