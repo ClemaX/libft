@@ -12,17 +12,17 @@
 
 #pragma once
 
-#include <stdarg.h>
+#include <libft/printf/ctx.h>
 
-#define FLAGS	"-+ 0#"
+#define SPEC_FLAGS	"-+ 0#"
 
-#define MINUS	1
-#define PLUS	2
-#define SPACE	4
-#define ZERO	8
-#define HASH	16
+#define FL_MINUS	1
+#define FL_PLUS		2
+#define FL_SPACE	4
+#define FL_ZERO		8
+#define FL_HASH		16
 
-#define TYPES	"cs%pdiuxXon"
+#define SPEC_TYPES	"cs%pdiuxXon"
 
 typedef unsigned char	t_flags;
 
@@ -63,4 +63,4 @@ typedef struct			s_spec
 	t_numsize	size;
 }						t_spec;
 
-t_spec					pf_parse_spec(const char **fmt, va_list *ap);
+t_fmt_type				pf_parse_spec(t_pf_ctx *ctx, t_spec *spec);

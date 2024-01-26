@@ -24,30 +24,30 @@
 **	Note: The prefix_len includes the sign
 */
 
-void		parse_dimensions(t_number *n, t_spec s)
+void		parse_dimensions(t_integer *n, const t_spec *s)
 {
 	int	size;
 
-	n->len = (!n->value && !s.precision) ? 0 : ft_numlen(n->value, n->radix);
-	if (s.precision > n->len)
-		n->len = s.precision;
+	n->len = (!n->value && !s->precision) ? 0 : ft_numlen(n->value, n->radix);
+	if (s->precision > n->len)
+		n->len = s->precision;
 	n->prefix = '\0';
 	n->prefix_len = (n->sign != '\0');
-	if (s.flags & HASH)
+	if (s->flags & FL_HASH)
 	{
-		if (n->radix == R_HEX && (n->value || s.type == FMT_PTR))
+		if (n->radix == R_HEX && (n->value || s->type == FMT_PTR))
 		{
-			n->prefix = (s.type == FMT_LHEX || s.type == FMT_PTR) ? 'x' : 'X';
+			n->prefix = (s->type == FMT_LHEX || s->type == FMT_PTR) ? 'x' : 'X';
 			n->prefix_len += 2;
 		}
 		else if (n->radix == R_OCT)
-			n->prefix_len += !s.precision || (s.precision == -1 && n->value);
+			n->prefix_len += !s->precision || (s->precision == -1 && n->value);
 	}
-	size = s.width - n->prefix_len;
-	if ((s.flags & ZERO) && s.precision == -1 && size > n->len)
+	size = s->width - n->prefix_len;
+	if ((s->flags & FL_ZERO) && s->precision == -1 && size > n->len)
 		n->len = size;
 	size = n->len + n->prefix_len;
-	n->padding = (s.width > size) ? s.width - size : 0;
+	n->padding = (s->width > size) ? s->width - size : 0;
 }
 
 /*
@@ -58,22 +58,22 @@ void		parse_dimensions(t_number *n, t_spec s)
 **	Note: The RADIXES and DIGITS lists must be sorted
 */
 
-t_number	parse_number(va_list ap, t_spec spec)
+t_integer	pf_parse_number(t_pf_ctx *ctx, const t_spec *spec)
 {
 	static const int	radixes[RADIX_N] = {
 		R_HEX, R_DEC, R_DEC, R_DEC, R_HEX, R_HEX, R_OCT};
 	static const char	lowercase[RADIX_N] = {
 		1, 0, 0, 0, 1, 0, 0,
 	};
-	t_number	number;
+	t_integer	number;
 
-	if (spec.type == FMT_DEC || spec.type == FMT_INT)
-		number = convert_signed(ap, spec);
+	if (spec->type == FMT_DEC || spec->type == FMT_INT)
+		number = pf_convert_signed(ctx, spec);
 	else
-		number = convert_unsigned(ap, spec);
-	number.radix = radixes[spec.type - FMT_PTR];
+		number = pf_convert_unsigned(ctx, spec);
+	number.radix = radixes[spec->type - FMT_PTR];
 	number.digits = BASE36_CHARSET;
-	number.lowercase = lowercase[spec.type - FMT_PTR];
+	number.lowercase = lowercase[spec->type - FMT_PTR];
 	parse_dimensions(&number, spec);
 	return (number);
 }

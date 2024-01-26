@@ -61,10 +61,10 @@ t_line	*line_clr(t_line **line)
 **	Get the total length of a line
 */
 
-size_t	line_len(t_line *line)
+size_t	line_len(const t_line *line)
 {
-	t_line	*curr;
-	size_t	len;
+	const t_line	*curr;
+	size_t			len;
 
 	len = 0;
 	curr = line;
@@ -85,7 +85,7 @@ size_t	line_len(t_line *line)
 **	Note: Returns -1 in case of error
 */
 
-int		line_put(char **dest, t_line **line, char alloc)
+size_t	line_put(char **dest, t_line **line, char alloc)
 {
 	const size_t	len = line_len(*line);
 	t_line			*curr;

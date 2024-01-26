@@ -14,6 +14,6 @@
 
 #include <stdarg.h>
 
-#include <libft/printf/line.h>
+#include <libft/printf/ctx.h>
 
-t_line	*parse_fmt(const char *fmt, va_list *ap);
+t_line	*pf_parse_fmt(t_pf_ctx *ctx);

@@ -12,9 +12,8 @@
 
 #pragma once
 
-#include <libft/printf/line.h>
 #include <libft/printf/specs.h>
 
-typedef int			(*t_pf_fmt_fun)(t_line **line, t_spec spec, va_list *ap);
+typedef int			(*t_pf_fmt_fun)(t_pf_ctx *ctx, const t_spec *spec);
 
-extern t_pf_fmt_fun	g_format[FMT_ENTRY_COUNT];
+extern t_pf_fmt_fun	g_formatters[FMT_ENTRY_COUNT];

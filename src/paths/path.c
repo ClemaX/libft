@@ -74,7 +74,7 @@ char	*path_push(char *path, const char *member)
 		else
 		{
 			path_trim(path);
-			if ((*path != '\0'
+			if ((*path != '\0' && *member != '\0'
 				&& ft_strlcat(path, PATH_DELIM_S, PATH_MAX) >= PATH_MAX)
 				|| ft_strlcat(path, member, PATH_MAX) >= PATH_MAX)
 				ret = NULL;

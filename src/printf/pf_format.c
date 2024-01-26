@@ -18,44 +18,44 @@
 #include <libft/printf/format.h>
 #include <libft/printf/numbers.h>
 
-static int	fmt_char(t_line **line, t_spec spec, va_list *ap)
+static int	fmt_char(t_pf_ctx *ctx, const t_spec *spec)
 {
-	const int	len = (spec.width > 1) ? spec.width : 1;
-	const char	c = (spec.type == FMT_PCNT) ? '%' : va_arg(*ap, unsigned);
+	const int	len = (spec->width > 1) ? spec->width : 1;
+	const char	c = (spec->type == FMT_PCNT) ? '%' : va_arg(ctx->ap, unsigned);
 	char		*content;
 
 	if (!len)
 		return (1);
 	if (!(content = malloc(sizeof(*content) * len)))
 		return (0);
-	ft_memset(content, (spec.flags & ZERO) ? '0' : ' ', len);
-	content[spec.flags & MINUS ? 0 : len - 1] = c;
-	return (line_add(line, content, len) != NULL);
+	ft_memset(content, (spec->flags & FL_ZERO) ? '0' : ' ', len);
+	content[spec->flags & FL_MINUS ? 0 : len - 1] = c;
+	return (line_add(&ctx->line, content, len) != NULL);
 }
 
-static int	fmt_str(t_line **line, t_spec spec, va_list *ap)
+static int	fmt_str(t_pf_ctx *ctx, const t_spec *spec)
 {
-	const char	*str = va_arg(*ap, char*);
+	const char	*str = va_arg(ctx->ap, char*);
 	const char	*src = (str) ? str : "(null)";
 	int			srclen;
 	int			len;
 	char		*content;
 
-	if (spec.precision == 0 && spec.width == 0)
-		return (line_add(line, NULL, 0) != NULL);
+	if (spec->precision == 0 && spec->width == 0)
+		return (line_add(&ctx->line, NULL, 0) != NULL);
 	srclen = ft_strlen(src);
-	if (spec.precision >= 0 && spec.precision < srclen)
-		srclen = spec.precision;
-	if (!(len = (spec.width > srclen) ? spec.width : srclen))
+	if (spec->precision >= 0 && spec->precision < srclen)
+		srclen = spec->precision;
+	if (!(len = (spec->width > srclen) ? spec->width : srclen))
 		return (1);
 	if (!(content = malloc(sizeof(*content) * len)))
 		return (0);
-	ft_memset(content, (spec.flags & ZERO) ? '0' : ' ', len);
-	ft_memcpy(content + (len - srclen) * !(spec.flags & MINUS), src, srclen);
-	return (line_add(line, content, len) != NULL);
+	ft_memset(content, (spec->flags & FL_ZERO) ? '0' : ' ', len);
+	ft_memcpy(content + (len - srclen) * !(spec->flags & FL_MINUS), src, srclen);
+	return (line_add(&ctx->line, content, len) != NULL);
 }
 
-static void	write_num(char *dest, t_number number)
+static void	write_num(char *dest, t_integer number)
 {
 	char	digit;
 	dest += number.len + number.prefix_len - 1;
@@ -75,20 +75,20 @@ static void	write_num(char *dest, t_number number)
 		*dest = number.sign;
 }
 
-static int	fmt_num(t_line **line, t_spec s, va_list *ap)
+static int	fmt_num(t_pf_ctx *ctx, const t_spec *s)
 {
-	const t_number	n = parse_number(ap, s);
+	const t_integer	n = pf_parse_number(ctx, s);
 	const int		len = n.padding + n.prefix_len + n.len;
-	const char		p = ((s.flags & ZERO) && s.precision == -1) ? '0' : ' ';
+	const char		p = ((s->flags & FL_ZERO) && s->precision == -1) ? '0' : ' ';
 	char			*content;
 
 	if (!len)
 		return (1);
 	if (!(content = malloc(sizeof(*content) * len)))
 		return (0);
-	ft_memset(&content[(s.flags & MINUS) ? len - n.padding : 0], p, n.padding);
-	write_num(&content[(s.flags & MINUS) ? 0 : n.padding], n);
-	return (line_add(line, content, len) != NULL);
+	ft_memset(&content[(s->flags & FL_MINUS) ? len - n.padding : 0], p, n.padding);
+	write_num(&content[(s->flags & FL_MINUS) ? 0 : n.padding], n);
+	return (line_add(&ctx->line, content, len) != NULL);
 }
 
 /*
@@ -100,7 +100,7 @@ static int	fmt_num(t_line **line, t_spec s, va_list *ap)
 **	Note: Types are dispatched in following order: cs%pdiuxXon
 */
 
-t_pf_fmt_fun g_format[FMT_ENTRY_COUNT] = {
+t_pf_fmt_fun g_formatters[FMT_ENTRY_COUNT] = {
 	fmt_char,
 	fmt_str,
 	fmt_char,

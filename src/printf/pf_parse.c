@@ -22,52 +22,51 @@
 **	Note: Returns 1 as long as there is content left
 */
 
-static int	parse_txt(const char **fmt, t_line **line)
+static int	parse_txt(t_pf_ctx *ctx)
 {
-	char	*next;
+	const char	*next;
 
-	if ((next = ft_strchr(*fmt, '%')))
+	if ((next = ft_strchr(ctx->fmt, '%')))
 	{
-		if (next != *fmt)
-			if (!line_add(line, ft_substr(*fmt, 0, next - *fmt), next - *fmt))
-			{
-				line_clr(line);
-				return (0);
-			}
-		*fmt = next + 1;
+		if (next != ctx->fmt
+			&& !line_add(&ctx->line, ft_substr(ctx->fmt, 0, next - ctx->fmt), next - ctx->fmt))
+		{
+			line_clr(&ctx->line);
+			return (0);
+		}
+		ctx->fmt = next + 1;
 		return (1);
 	}
-	if (!line_add(line, ft_strdup(*fmt), ft_strlen(*fmt)))
-		line_clr(line);
+	if (!line_add(&ctx->line, ft_strdup(ctx->fmt), ft_strlen(ctx->fmt)))
+		line_clr(&ctx->line);
 	return (0);
 }
 
 /*
-**	fmt:	The format string
-**	ap:		The variadic arguments list
+**	ctx:	The printf context
 **
 **	Parse the format, converting the arguments and building a line
+**
+**	Note: The ctx's fmt, ap and line must be initialized
+**	The line can either point to an existing list or to NULL
 */
 
-t_line		*parse_fmt(const char *fmt, va_list *ap)
+t_line		*pf_parse_fmt(t_pf_ctx *ctx)
 {
 	t_spec	spec;
-	t_line	*line;
 	int		*cnt;
 
-	line = NULL;
-	while (parse_txt(&fmt, &line) && *fmt)
+	while (parse_txt(ctx) && *ctx->fmt)
 	{
-		spec = pf_parse_spec(&fmt, ap);
-		if (spec.type == FMT_ERR)
-			return (line_clr(&line));
-		else if (spec.type == FMT_CNT)
+		if (pf_parse_spec(ctx, &spec) == FMT_ERR)
+			return (line_clr(&ctx->line));
+		if (spec.type == FMT_CNT)
 		{
-			if ((cnt = va_arg(*ap, int*)))
-				*cnt = line_len(line);
+			if ((cnt = va_arg(ctx->ap, int*)))
+				*cnt = line_len(ctx->line);
 		}
-		else if (!g_format[spec.type](&line, spec, ap))
-			return (line_clr(&line));
+		else if (!g_formatters[spec.type](ctx, &spec))
+			return (line_clr(&ctx->line));
 	}
-	return (line);
+	return (ctx->line);
 }

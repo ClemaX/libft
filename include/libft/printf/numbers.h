@@ -31,7 +31,7 @@
 ** #define DIGITS	{D_LHEX,	D_DEC,	D_DEC,	D_DEC,	D_LHEX,	D_UHEX,	D_OCT}
 */
 
-typedef struct	s_number
+typedef struct	s_integer
 {
 	uintmax_t	value;
 	const char	*digits;
@@ -42,9 +42,9 @@ typedef struct	s_number
 	char		lowercase;
 	char		sign;
 	char		prefix;
-}				t_number;
+}				t_integer;
 
-t_numsize		parse_size(const char **fmt);
-t_number		parse_number(va_list ap, t_spec spec);
-t_number		convert_signed(va_list ap, t_spec spec);
-t_number		convert_unsigned(va_list ap, t_spec spec);
+t_numsize		pf_parse_size(t_pf_ctx *ctx);
+t_integer		pf_parse_number(t_pf_ctx *ctx, const t_spec *spec);
+t_integer		pf_convert_signed(t_pf_ctx *ctx, const t_spec *spec);
+t_integer		pf_convert_unsigned(t_pf_ctx *ctx, const t_spec *spec);
