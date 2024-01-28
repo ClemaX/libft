@@ -61,7 +61,7 @@ static inline int	expect_s(const char *label, const char *actual, const char *ex
 {
 	int diff;
 
-	diff = actual != expected && (actual == NULL || strcmp(actual, expected));
+	diff = actual != expected && (actual == NULL || expected == NULL || strcmp(actual, expected));
 
 	if (diff)
 		print_diff(label, actual, expected);
