@@ -45,6 +45,7 @@ const unit	unit_strings_strtok = {
 	.name = "strtok",
 	.tests = (test[]){
 		it("should tokenize with single character delims", "a/b/c", "/", (const char*[]){"a", "b", "c", NULL}),
+		it("should tokenize string starting with delim", "/a/b/c", "/", (const char*[]){"a", "b", "c", NULL}),
 		{},
 	},
 };
