@@ -44,8 +44,13 @@ static int	run(const struct args *args)
 const unit	unit_strings_strtok = {
 	.name = "strtok",
 	.tests = (test[]){
-		it("should tokenize with single character delims", "a/b/c", "/", (const char*[]){"a", "b", "c", NULL}),
-		it("should tokenize string starting with delim", "/a/b/c", "/", (const char*[]){"a", "b", "c", NULL}),
+		it("should tokenize with single char delims",		"a/b/c",			"/",	(const char*[]){"a",	"b",	"c", NULL}),
+		it("should tokenize with multi char delims",		"aaa, bbb, ccc",	", ",	(const char*[]){"aaa",	"bbb",	"ccc", NULL}),
+		it("should tokenize string starting with delim",	"/a/b/c",			"/",	(const char*[]){"a",	"b",	"c", NULL}),
+		it("should tokenize string starting with delims", 	"///aaa/bb//c",		"/",	(const char*[]){"aaa",	"bb",	"c", NULL}),
+		it("should tokenize string with partial delim",		"/a", 				"/ab",	(const char*[]){"/a",	NULL}),
+		it("should return NULL on only delims string", 		"/a/a/a/a/a/a/a",	"/a",	(const char*[]){NULL}),
+		it("should return NULL on empty string", 			"",					"xyz",	(const char*[]){NULL}),
 		{},
 	},
 };
