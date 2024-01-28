@@ -10,38 +10,46 @@
 
 #include <libft/io.h>
 
-static int	expect_fds_test()
-{
-	const fd_expectation expectations[] = {
-		fd_expect(STDOUT_FILENO, "TEST"),
-		{},
-	};
-	int	ret;
-	int	err;
+const char *const	null_str = NULL;
 
-	ret = expect_fds(expectations);
-
-	err = ret == -1;
-	if (err)
-		goto expect_fds_error;
-
-	if (ret == 0)
-	{
-		const int	ret = ft_printf("TEST");
-
-		expect_fds_done();
-
-		exit(expect(ret, 3));
-	}
-
-expect_fds_error:
-	return err;
+#define				define(name, expected_content, expected_ret, ...) \
+static int			name() \
+{ \
+	const fd_expectation expectations[] = { \
+		fd_expect(STDOUT_FILENO, expected_content), \
+		{}, \
+	}; \
+	int	ret; \
+	int	err; \
+\
+	ret = expect_fds(expectations); \
+\
+	err = ret == -1; \
+	if (err) \
+		goto expect_fds_error; \
+\
+	if (ret == 0) \
+	{ \
+		const int	ret = ft_printf(__VA_ARGS__); \
+\
+		expect_fds_done(); \
+\
+		exit(expect(ret, expected_ret)); \
+	} \
+\
+expect_fds_error: \
+	return err; \
 }
 
-const unit	unit_io_printf = {
+//				content		ret	fmt		...
+define(none,	"TEST",		4,	"TEST")
+define(s_null, "(null)",	6,	"%s",	null_str)
+
+const unit			unit_io_printf = {
 	"printf",
 	(test[]){
-		{"should print string without conversions", .test=expect_fds_test},
+		{"should print without conversions",		.test=none},
+		{"should print '(null)' for NULL string",	.test=s_null},
 		{},
 	},
 };
