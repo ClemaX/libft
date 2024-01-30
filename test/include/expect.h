@@ -25,18 +25,30 @@ typedef struct		fd_expectation
 
 #define				print_diff(label, actual, expected) \
 	printf(_Generic((actual), \
+		char:			_fmt_diff("%hhd"), \
 		int: 			_fmt_diff("%i"), \
 		size_t:			_fmt_diff("%zu"), \
 		ssize_t:		_fmt_diff("%zi"), \
+		void*:			_fmt_diff("%p"), \
 		char*:			_fmt_diff("%s"), \
 		const char*:	_fmt_diff("%s") \
 	), (label), (expected), (actual))
 
-#define expect_n(label, actual, expected) \
+
+#define				assert(condition) \
 ({ \
-	int	diff; \
+	int	diff = !(condition); \
 \
-	diff = expected != actual; \
+	if (diff) \
+		print_diff(#condition, "false", "true"); \
+\
+	diff; \
+})
+
+#define				expect_n(label, actual, expected) \
+({ \
+	const int	diff = expected != actual; \
+\
 	if (diff) \
 		print_diff(label, actual, expected); \
 \
@@ -44,15 +56,17 @@ typedef struct		fd_expectation
 })
 
 #define				expect_n_decl(suffix, type) \
-static inline int	expect_##suffix (const char *label, const int actual, const int expected) __attribute__((unused)); \
-static inline int	expect_##suffix (const char *label, const int actual, const int expected)  \
+static inline int	expect_##suffix (const char *label, type actual, type expected) __attribute__((unused)); \
+static inline int	expect_##suffix (const char *label, type actual, type expected)  \
 { \
 	return 			expect_n(label, actual, expected); \
 }
 
+expect_n_decl(c, char);
 expect_n_decl(i, int);
 expect_n_decl(zu, size_t);
 expect_n_decl(zi, ssize_t);
+expect_n_decl(ptr, void*);
 
 // static inline int	expect_s(const char *label, const char *actual, const char *expected) __attribute__((unused));
 
@@ -74,11 +88,14 @@ int					expect_fds_done();
 
 #define				expect(actual, expected) \
 _Generic((actual), \
+	char:				expect_c, \
     int:				expect_i, \
 	size_t:				expect_zu, \
 	ssize_t:			expect_zi, \
+	void*:				expect_ptr, \
 	char*:				expect_s, \
-	fd_expectation*:	expect_fds \
+	fd_expectation*:	expect_fds, \
+	default:			expect_ptr \
 )((#actual), (actual), (expected))
 
 #define _fd_expect(_fd, _content, _length) \
