@@ -45,7 +45,7 @@ int	dir_load(t_list **files, const char *filepath,
 				&& (filter == DT_UNKNOWN || filter == ent->d_type)
 				&& ((options & DIR_OBACKREF) || !DIR_ISBACKREF(ent->d_name)))
 			{
-				if ((options & DIR_OBASENAME) || (filepath[0] == '.' && filepath[1] == '\0'))
+				if (options & DIR_OBASENAME)
 					path = ent->d_name;
 				else
 					path = path_cat(full_path, filepath, ent->d_name);
