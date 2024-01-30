@@ -37,8 +37,6 @@ t_hmap_i		*hmap_i_new(size_t size)
 	return (map);
 }
 
-#include <stdio.h>
-
 /**
  * @brief Get a value from a key in a hash map.
  *
