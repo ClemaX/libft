@@ -37,6 +37,8 @@ t_hmap_i		*hmap_i_new(size_t size)
 	return (map);
 }
 
+#include <stdio.h>
+
 /**
  * @brief Get a value from a key in a hash map.
  *
@@ -50,7 +52,7 @@ t_hmap_i_pair		*hmap_i_get(const t_hmap_i *const map, t_hmap_int key)
 	const size_t index = hash_function(key, map->size);
 	t_hmap_i_pair *pair = map->buckets[index];
 
-	if (pair != NULL && pair->next != NULL)
+	if (pair != NULL)
 		while (pair != NULL && pair->key != key)
 			pair = pair->next;
 	return (pair);

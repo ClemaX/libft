@@ -55,7 +55,7 @@ t_hmap_s_pair		*hmap_s_get(const t_hmap_s *const map, const char *key)
 	const size_t index = hash_function(key, map->size);
 	t_hmap_s_pair *pair = map->buckets[index];
 
-	if (pair != NULL && pair->next != NULL)
+	if (pair != NULL)
 		while (pair != NULL && ft_strcmp(pair->key, key) != 0)
 			pair = pair->next;
 	return (pair);
