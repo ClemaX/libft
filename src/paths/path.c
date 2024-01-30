@@ -89,7 +89,7 @@ char	*path_cat(char *dest, const char *a, const char *b)
 	char	*member;
 	int		err;
 
-	err = (dest != a && ft_strlcpy(dest, a, sizeof(tmp)) >= PATH_MAX)
+	err = (dest != a && ft_strlcpy(dest, a, PATH_MAX) >= PATH_MAX)
 		|| ft_strlcpy(tmp, b, sizeof(tmp)) >= PATH_MAX;
 	if (err == 0)
 	{
@@ -97,14 +97,12 @@ char	*path_cat(char *dest, const char *a, const char *b)
 		if (member == NULL)
 			path_push(dest, tmp);
 		else
-		{
 			do
 			{
 				path_push(dest, member);
 				member = ft_strtok(NULL, PATH_DELIM_S);
 			}
 			while (member != NULL);
-		}
 	}
 	return (dest);
 }
