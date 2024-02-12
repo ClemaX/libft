@@ -69,8 +69,9 @@ int	opts_get(const opt_spec *specs, unsigned spec_count,
 
 	opts = 0;
 
-	while (av[*ai] != NULL && av[*ai][0] == OPT_PREFIX)
+	while (av[*ai] != NULL && av[*ai][0] == OPT_PREFIX && av[*ai][1] != '\0')
 	{
+		spec_i = -1;
 		flag_i = 1;
 
 		if (av[*ai][flag_i] == OPT_PREFIX)
@@ -104,6 +105,7 @@ int	opts_get(const opt_spec *specs, unsigned spec_count,
 			}
 			else
 				++(*ai);
+
 			opts |= 1 << spec_i;
 		}
 		else
@@ -132,7 +134,8 @@ int	opts_get(const opt_spec *specs, unsigned spec_count,
 			else
 				++(*ai);
 		}
-		if (specs[spec_i].parser != NULL
+
+		if (spec_i != -1 && specs[spec_i].parser != NULL
 			&& opt_params(specs + spec_i, av, ai, data) == OPT_ERROR)
 			return OPT_ERROR;
 	}
