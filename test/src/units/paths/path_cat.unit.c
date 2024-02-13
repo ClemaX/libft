@@ -36,6 +36,7 @@ const unit	unit_paths_path_cat = {
 		it("should handle empty input as a path",		"a",		"",			"a"),
 		it("should handle empty input as b path",		"",			"b",		"b"),
 		it("should handle absolute paths",				"/a",		"/b",		"/a/b"),
+		it("should handle absolute path with root",		"/",		"/opt",		"/opt"),
 		it("should handle mixed paths",					"/a",		"b",		"/a/b"),
 		it("should handle complex relative paths",		"a/b/c",	"../../d",	"a/d"),
 		{},

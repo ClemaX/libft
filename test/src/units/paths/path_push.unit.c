@@ -33,9 +33,11 @@ const unit	unit_paths_path_push = {
 		//													base		appendage	expected
 		it("should push relative path",						"/a/b",		"c",		"/a/b/c"),
 		it("should push absolute path", 					"/a/b",		"/c",		"/a/b/c"),
+		it("should push absolute path on /", 				"/",		"/opt",		"/opt"),
 		it("should not affect path when pushing nothing", 	"/a/b",		"",			"/a/b"),
 		it("should not affect path when pushing .", 		"/a/b",		".",		"/a/b"),
 		it("should not affect path when pushing . on /",	"/",		".",		"/"),
+		it("should not affect path when pushing / on /", 	"/",		"/",		"/"),
 		it("should pop path when pushing ..", 				"/a/b",		"..",		"/a"),
 		it("should not pop path when pushing .. on /", 		"/",		"..",		"/"),
 		{},
