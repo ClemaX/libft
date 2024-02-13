@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <dirent.h>
+#include <errno.h>
 
 #include <libft/strings.h>
 #include <libft/paths.h>
@@ -59,7 +60,8 @@ int	dir_load(t_list **files, const char *filepath,
 	return (err);
 }
 
-int	dir_list(t_list **list, const char *filepath)
+int	dir_list(t_list **list, const char *filepath, t_dir_err_handler on_error,
+	void *data)
 {
 	t_list	*curr;
 	t_list	*dirs;
@@ -68,18 +70,22 @@ int	dir_list(t_list **list, const char *filepath)
 
 	dirs = NULL;
 	err = dir_load(&dirs, filepath, DT_DIR, 0);
-	if (err == 0)
+
+	if (err != 0 && on_error != NULL)
+		return (on_error(filepath, errno, data));
+
+	subdirs = NULL;
+	curr = dirs;
+	while (err == 0 && curr != NULL)
 	{
-		subdirs = NULL;
-		curr = dirs;
-		while (err == 0 && curr != NULL)
-		{
-			err = dir_list(&subdirs, (const char *)curr->content);
-			curr = curr->next;
-		}
-		if (subdirs != NULL)
-			ft_lstadd_back(&dirs, subdirs);
+		err = dir_list(&subdirs, (const char *)curr->content, on_error,
+			data);
+		curr = curr->next;
 	}
+
+	if (subdirs != NULL)
+		ft_lstadd_back(&dirs, subdirs);
+
 	if (err == 0)
 		ft_lstadd_back(list, dirs);
 	else
