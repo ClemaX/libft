@@ -17,6 +17,7 @@
 #endif
 
 #define OPT_ERROR -1
+#define ARG_END -1
 
 typedef const char *(opt_parser(const char **av, int *ai, void *data));
 
@@ -33,3 +34,6 @@ int				opts_get(const opt_spec *specs, unsigned spec_count,
 
 void			opts_usage(const opt_spec *const specs, unsigned spec_count,
 	const char *prog, const char *suffix);
+
+int				args_next(const opt_spec *const specs, unsigned spec_count,
+	int ai, const char **av);
