@@ -4,6 +4,10 @@
 # define OPT_PREFIX '-'
 #endif
 
+#ifndef OPT_ASSIGN
+# define OPT_ASSIGN '='
+#endif
+
 #ifndef OPT_ILLEGAL
 # define OPT_ILLEGAL "illegal option"
 #endif

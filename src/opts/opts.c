@@ -1,3 +1,4 @@
+#include <stdbool.h>
 #include <unistd.h>
 
 #include <libft/strings.h>
@@ -6,9 +7,13 @@
 #include <libft/opts.h>
 
 static int	opt_params(const opt_spec *spec, const char **av, int *ai,
-	void *data)
+	void *data, size_t param_offset)
 {
-	const char *const	parser_error = spec->parser(av, ai, data);
+	const char *	parser_error;
+
+	av[*ai] += param_offset;
+	parser_error = spec->parser(av, ai, data);
+	av[*ai] -= param_offset;
 
 	if (parser_error != NULL)
 	{
@@ -21,24 +26,26 @@ static int	opt_params(const opt_spec *spec, const char **av, int *ai,
 }
 
 static int	opt_flag_long(const opt_spec *specs, unsigned spec_count,
-	const char *flag, size_t flag_len)
+	const char *flag, size_t *flag_len)
 {
 	unsigned	spec_i;
+
+	*flag_len = ft_strchrnul(flag, OPT_ASSIGN) - flag;
 
 	for
 	(
 		spec_i = 0;
 		spec_i < spec_count
 			&& specs[spec_i].long_flag != NULL
-			&& (ft_strlen(specs[spec_i].long_flag) != flag_len
-				|| ft_strncmp(specs[spec_i].long_flag, flag, flag_len) != 0);
+			&& (ft_strlen(specs[spec_i].long_flag) != *flag_len
+				|| ft_strncmp(specs[spec_i].long_flag, flag, *flag_len) != 0);
 		++spec_i
 	);
 
 	if (spec_i == spec_count)
 		return OPT_ERROR;
 
-	return (spec_i);
+	return spec_i;
 }
 
 static int	opt_flag_short(const opt_spec *specs, unsigned spec_count,
@@ -63,25 +70,34 @@ int	opts_get(const opt_spec *specs, unsigned spec_count,
 	const char **av, int *ai, void *data)
 {
 	size_t	flag_len;
+	size_t	param_offset;
 	int		opts;
 	int		spec_i;
 	int		flag_i;
 
 	opts = 0;
+	spec_i = OPT_ERROR;
 
-	while (av[*ai] != NULL && av[*ai][0] == OPT_PREFIX && av[*ai][1] != '\0')
+	while (av[*ai] != NULL)
 	{
-		spec_i = -1;
+		if (av[*ai][0] != OPT_PREFIX)
+		{
+			++(*ai);
+			continue;
+		}
+
 		flag_i = 1;
+		param_offset = 0;
 
 		if (av[*ai][flag_i] == OPT_PREFIX)
 		{
 			++flag_i;
-			flag_len = ft_strchrnul(av[*ai] + flag_i, '=') - av[*ai] - flag_i;
+
+			if (av[*ai][flag_i] == '\0')
+				break;
 
 			spec_i = opt_flag_long(specs, spec_count,
-				av[*ai] + flag_i, flag_len);
-
+				av[*ai] + flag_i, &flag_len);
 
 			if (spec_i == OPT_ERROR)
 			{
@@ -91,7 +107,7 @@ int	opts_get(const opt_spec *specs, unsigned spec_count,
 				return OPT_ERROR;
 			}
 
-			if (av[*ai][flag_i + flag_len] == '=')
+			if (av[*ai][flag_i + flag_len] == OPT_ASSIGN)
 			{
 				if (specs[spec_i].parser == NULL)
 				{
@@ -101,7 +117,7 @@ int	opts_get(const opt_spec *specs, unsigned spec_count,
 
 					return OPT_ERROR;
 				}
-				av[*ai] += flag_i + flag_len + 1;
+				param_offset = flag_i + flag_len + 1;
 			}
 			else
 				++(*ai);
@@ -130,13 +146,13 @@ int	opts_get(const opt_spec *specs, unsigned spec_count,
 			}
 
 			if (av[*ai][flag_i] != '\0')
-				av[*ai] += flag_i;
+				param_offset = flag_i;
 			else
 				++(*ai);
 		}
-
-		if (spec_i != -1 && specs[spec_i].parser != NULL
-			&& opt_params(specs + spec_i, av, ai, data) == OPT_ERROR)
+		if (spec_i != OPT_ERROR && specs[spec_i].parser != NULL
+			&& opt_params(&specs[spec_i], av, ai, data, param_offset)
+				== OPT_ERROR)
 			return OPT_ERROR;
 	}
 
