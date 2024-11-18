@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stddef.h>
+
 #ifndef OPT_PREFIX
 # define OPT_PREFIX '-'
 #endif
@@ -19,7 +21,8 @@
 #define OPT_ERROR -1
 #define ARG_END -1
 
-typedef const char *(opt_parser(const char **av, int *ai, void *data));
+typedef const char *(opt_parser(const char **av, int *ai, size_t param_offset,
+	void *data));
 
 typedef struct	opt_spec
 {

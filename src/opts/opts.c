@@ -1,4 +1,5 @@
 #include <stdbool.h>
+#include <stdio.h>
 #include <unistd.h>
 
 #include <libft/strings.h>
@@ -11,9 +12,7 @@ static int	opt_params(const opt_spec *spec, const char **av, int *ai,
 {
 	const char *	parser_error;
 
-	av[*ai] += param_offset;
-	parser_error = spec->parser(av, ai, data);
-	av[*ai] -= param_offset;
+	parser_error = spec->parser(av, ai, param_offset, data);
 
 	if (parser_error != NULL)
 	{
@@ -169,7 +168,7 @@ void		opts_usage(const opt_spec *const specs, unsigned spec_count,
 	for (unsigned spec_i = 0; spec_i < spec_count; ++spec_i)
 	{
 		if (specs[spec_i].parser != NULL)
-			params = specs[spec_i].parser(NULL, NULL, NULL);
+			params = specs[spec_i].parser(NULL, NULL, 0, NULL);
 		else
 			params = NULL;
 
@@ -264,7 +263,6 @@ int args_next(const opt_spec *const specs, unsigned spec_count,
 				++flag_i;
 			}
 		}
-
 	}
 
 	if (av[ai] == NULL)
